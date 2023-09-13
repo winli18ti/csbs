@@ -1,6 +1,16 @@
+@section('title')
+Tambah Pelanggan Baru
+@endsection
+
 <div class="container-md mt-3">
   <div class="row justify-content-center">
     <div class="col-lg-9 col-xl-8 col-xxl-7">
+      <button class="btn btn-outline-primary btn-sm"
+        wire:click.prevent="table">
+        Kembali
+      </button>
+
+      <form wire:submit="create" enctype="multipart/form-data">
       <fieldset class="border border-2 border-danger-subtle rounded-3 px-3 pb-3 my-2">
         <legend class="fs-6 float-none w-auto">Data Registrasi</legend>
   
@@ -34,11 +44,11 @@
         
         <div class="row align-items-center">
           <div class="col-5 col-md-4">
-            <label for="nama_pelanggan" class="col-form-label">Nama pelanggan</label>
+            <label for="nama_customer" class="col-form-label">Nama pelanggan</label>
           </div>
           <div class="col-7 col-md-8">
-            <input type="text" id="nama_pelanggan" 
-              class="form-control form-control-sm" wire:model.live="nama">
+            <input type="text" id="nama_customer" 
+              class="form-control form-control-sm" wire:model="nama_customer">
             @error('nama')<span>{{ $message }}</span>@enderror
           </div>
         </div>
@@ -49,7 +59,7 @@
           </div>
           <div class="col-7 col-md-8">
             <input type="text" id="nomor_ktp" 
-              class="form-control form-control-sm" wire:model.live="no_ktp">
+              class="form-control form-control-sm" wire:model="no_ktp">
             @error('no_ktp')<span>{{ $message }}</span>@enderror
           </div>
         </div>
@@ -60,7 +70,7 @@
           </div>
           <div class="col-7 col-md-8">
             <textarea id="alamat" rows="2" class="form-control form-control-sm"
-              wire:model.live="alamat"></textarea>
+              wire:model="alamat"></textarea>
               @error('alamat')<span>{{ $message }}</span>@enderror
           </div>
         </div>
@@ -71,7 +81,7 @@
           </div>
           <div class="col-7 col-md-8">
             <input type="date" id="tanggal_lahir" 
-              class="form-control form-control-sm" wire:model.live="tanggal_lahir">
+              class="form-control form-control-sm" wire:model="tanggal_lahir">
               @error('tanggal_lahir')<span>{{ $message }}</span>@enderror
           </div>
         </div>
@@ -82,7 +92,7 @@
           </div>
           <div class="col-7 col-md-8">
             <input type="text" id="hp" class="form-control form-control-sm"
-              aria-describedby="hp_help" wire:model.live="no_hp">
+              aria-describedby="hp_help" wire:model="no_hp">
             @error('no_hp')<span>{{ $message }}</span>@enderror
             <div id="hp_help" class="form-text">
               <p>
@@ -103,7 +113,7 @@
           </div>
           <div class="col-7 col-md-8">
             <input type="text" id="telepon_rumah" class="form-control form-control-sm"
-              wire:model.live="telepon_rumah">
+              wire:model="telepon_rumah">
             @error('telepon_rumah')<span>{{ $message }}</span>@enderror
           </div>
         </div>
@@ -114,7 +124,7 @@
           </div>
           <div class="col-7 col-md-8">
             <input type="email" name="email" id="email" class="form-control form-control-sm"
-              wire:model.live="email">
+              wire:model="email">
             @error('email')<span>{{ $message }}</span>@enderror
           </div>
         </div>
@@ -186,18 +196,11 @@
       </fieldset>
   
       <fieldset class="border border-2 border-danger-subtle rounded-3 text-center p-3 my-3">
-        @if($mode === 'create')
-        <button class="btn btn-outline-primary btn-sm"
-          wire:click.prevent="create">
+        <button type="submit" class="btn btn-outline-primary btn-sm">
           Tambah
         </button>
-        @elseif($mode === 'edit')
-        <button class="btn btn-outline-primary btn-sm"
-          wire:click.prevent="update">
-          Ubah
-        </button>
-        @endif
       </fieldset>
+      </form>
     </div>
   </div>
 </div>

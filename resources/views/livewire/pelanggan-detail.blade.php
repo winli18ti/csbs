@@ -1,5 +1,8 @@
 <div>
   <div class="container-fluid my-2">
+    <a href="/pelanggan" class="btn btn-outline-primary btn-sm my-2">
+      Kembali
+    </a>
     <nav class="nav nav-tabs">
       <button wire:click.prevent="navigate('profil')" class="nav-link {{ $currentTab === 'profil' ? 'active' : '' }}">Profil</a>
       <button wire:click.prevent="navigate('layanan')" class="nav-link {{ $currentTab === 'layanan' ? 'active' : '' }}">Layanan</a>

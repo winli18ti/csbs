@@ -6,7 +6,7 @@
       </div>
       <div class="col-7 col-sm-5 col-md-4 col-lg-3">
         <input type="text" name="no_pelanggan" id="no_pelanggan" 
-          class="form-control form-control-sm">
+          class="form-control form-control-sm" wire:model="id">
       </div>
     </div>
 
@@ -16,7 +16,7 @@
       </div>
       <div class="col-7 col-sm-5 col-md-4 col-lg-3">
         <input type="text" name="nama_pelanggan" id="nama_pelanggan" 
-          class="form-control form-control-sm">
+          class="form-control form-control-sm" wire:model="nama_customer">
       </div>
     </div>
   </div>

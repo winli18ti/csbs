@@ -7,6 +7,13 @@
   </div>
 
   <div class="container-fluid">
+    
+    @if(session()->has('message'))
+    <div class="alert alert-success my-3">
+      {{ session('message') }}
+    </div>
+    @endif
+
     <div class="table-responsive">
       <table class="table table-sm table-striped table-hover caption-top text-truncate">
         <caption>Halaman 1 dari total 1 halaman</caption>
@@ -27,20 +34,18 @@
           @foreach($dataPelanggan as $data)
           <tr>
             <td>{{$data->id}}</td>
-            <td>{{$data->nama}}</td>
+            <td>{{$data->nama_customer}}</td>
             <td>{{$data->no_ktp}}</td>
             <td>{{$data->alamat}}</td>
             <td>{{$data->tanggal_lahir}}</td>
             <td>{{$data->no_hp}}</td>
             <td>{{$data->telepon_rumah}}</td>
             <td>{{$data->email}}</td>
-            <td>
-              <button wire:click.prevent="edit({{$data->id}})">
-                Edit
-              </button>
-              <button wire:click.prevent="delete({{$data->id}})">
-                Delete
-              </button>
+            <td class="text-center">
+              <a class="btn btn-outline-warning btn-sm" 
+                href="/pelanggan_detail/{{$data->id}}">
+                Ubah
+              </a>
             </td>
           </tr>
           @endforeach

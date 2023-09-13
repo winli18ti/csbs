@@ -18,5 +18,5 @@ use App\Livewire\CustomerDetail;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/pelanggan', Customers::class);
-Route::get('/pelanggan_detail', CustomerDetail::class);
+Route::get('/pelanggan', Customers::class)->name('pelanggan');
+Route::get('/pelanggan_detail/{id}', CustomerDetail::class)->name('pelanggan_detail');

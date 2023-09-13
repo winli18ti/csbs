@@ -1,12 +1,12 @@
 <div class="mt-3">
   <div class="container-fluid">
-    <div class="row align-items-center">
+  <div class="row align-items-center">
       <div class="col-5 col-sm-4 col-md-3 col-xl-2">
         <label for="kode_sales" class="col-form-label">No pelanggan</label>
       </div>
       <div class="col-7 col-sm-5 col-md-4 col-lg-3">
         <input type="text" name="no_pelanggan" id="no_pelanggan" 
-          class="form-control form-control-sm">
+          class="form-control form-control-sm" wire:model="id">
       </div>
     </div>
 
@@ -16,7 +16,7 @@
       </div>
       <div class="col-7 col-sm-5 col-md-4 col-lg-3">
         <input type="text" name="nama_pelanggan" id="nama_pelanggan" 
-          class="form-control form-control-sm">
+          class="form-control form-control-sm" wire:model="nama_customer">
       </div>
     </div>
   </div>
