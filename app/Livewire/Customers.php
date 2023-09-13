@@ -94,4 +94,8 @@ class Customers extends Component
     public function delete($id) {
         Customer::delete($id);
     }
+
+    public function back(){
+        
+    }
 }

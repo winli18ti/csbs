@@ -13,13 +13,17 @@ return new class extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->string('no_ktp');
-            $table->string('alamat');
-            $table->string('tanggal_lahir');
-            $table->string('no_hp');
+            $table->string('nama_customer')->nullable();
+            $table->string('nama_perusahaan')->nullable();
+            $table->string('no_ktp')->nullable();
+            $table->timestamp("tanggal_lahir")->nullable();
+            $table->string('no_hp')->nullable();
             $table->string('telepon_rumah')->nullable();
             $table->string('email')->nullable();
+            $table->timestamp("tanggal_registrasi")->nullable();
+            $table->integer('status_vip')->nullable();
+            $table->bigInteger('id_user')->nullable();
+            $table->bigInteger('id_alamat')->nullable();
             $table->timestamps();
         });
     }

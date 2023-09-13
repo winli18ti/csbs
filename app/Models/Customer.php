@@ -10,6 +10,6 @@ class Customer extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nama', 'no_ktp', 'alamat', 'tanggal_lahir', 'no_hp', 'telepon_rumah', 'email'
+        'id', 'nama_customer', 'nama_perusahaan', 'no_ktp', 'tanggal_lahir', 'no_hp', 'telepon_rumah', 'email', 'tanggal_registrasi', 'status_vip', 'id_user', 'id_alamat',
     ];
 }
