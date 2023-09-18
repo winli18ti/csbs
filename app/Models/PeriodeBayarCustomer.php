@@ -10,6 +10,6 @@ class PeriodeBayarCustomer extends Model
     use HasFactory;
 
     protected $fillable = [
-        'siklus', 'periode', 'cara_pembayaran', 'status', 'id_customer', 'id_alamat',
+        'id', 'siklus', 'periode', 'cara_pembayaran', 'status', 'id_customer', 'id_alamat',
     ];
 }

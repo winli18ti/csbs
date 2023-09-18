@@ -43,10 +43,15 @@
                   data-bs-toggle="dropdown">
                   Customer
                 </button>
-                <ul class="dropdown-menu">
+                <!-- <ul class="dropdown-menu">
                   <li><a href="#" class="dropdown-item">Customer 1</a></li>
                   <li><a href="#" class="dropdown-item">Customer 2</a></li>
-                </ul>
+                </ul> -->
+
+                <button class="btn btn-danger btn-sm mt-1" 
+                  data-bs-toggle="dropdown">
+                  <a href="{{route('pelanggan')}}">Customer</a>
+                </button>
 
                 <button class="btn btn-danger btn-sm mt-1" 
                   data-bs-toggle="dropdown">

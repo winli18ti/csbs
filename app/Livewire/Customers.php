@@ -12,16 +12,20 @@ class Customers extends Component
     use WithPagination;
     public $id, $alamat, $tanggal_lahir, $no_hp, $telepon_rumah, $email;
 
-    #[Rule('required', message: 'Masukkan nama pelanggan')]
+    public $filterTabel;
+
     public $nama_customer;
 
-    #[Rule('required', message: 'Masukkan No KTP')]
     public $no_ktp;
 
     public $mode = 'table';
 
     public function render() {
-        $dataPelanggan = Customer::select('*')->paginate(10);
+        $dataPelanggan = Customer::with('user', 'alamat')->select('*');
+        if(!empty($this->filterTabel)){
+            if($this->filterTabel == 1) $dataPelanggan->where('status_vip', 1);
+        } 
+        $dataPelanggan = $dataPelanggan->paginate(10);
         return view('livewire.pelanggan', compact('dataPelanggan'));
     }
 
@@ -34,22 +38,7 @@ class Customers extends Component
     }
 
     public function create() {
-        $this->validate();
-        /*
-        $this->validate([
-            'nama' => 'required',
-            'no_ktp' => 'required',
-            'alamat' => 'required',
-            'tanggal_lahir' => 'required',
-            'no_hp' => 'required',
-        ], [
-            'nama.required' => 'Nama wajib diisi',
-            'no_ktp.required' => 'No KTP wajib diisi',
-            'alamat.required' => 'Alamat wajib diisi',
-            'tanggal_lahir.required' => 'Tanggal lahir wajib diisi',
-            'no_hp.required' => 'No HP wajib diisi',
-        ]);
-        */
+        $this->validateRule();
         Customer::create([
             'nama_customer' => $this->nama_customer,
             'no_ktp' => $this->no_ktp,
@@ -62,5 +51,21 @@ class Customers extends Component
         session()->flash('message', 'Pelanggan baru berhasil ditambah');
 
         $this->mode = 'table';
+    }
+
+    public function validateRule(){
+        $this->validate([
+            'nama_customer' => 'required',
+            'no_ktp' => 'required',
+            'alamat' => 'required',
+            'tanggal_lahir' => 'required',
+            'no_hp' => 'required',
+        ], [
+            'nama_customer.required' => 'Nama wajib diisi',
+            'no_ktp.required' => 'No KTP wajib diisi',
+            'alamat.required' => 'Alamat wajib diisi',
+            'tanggal_lahir.required' => 'Tanggal lahir wajib diisi',
+            'no_hp.required' => 'No HP wajib diisi',
+        ]);
     }
 }

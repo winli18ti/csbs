@@ -10,6 +10,6 @@ class Keluhan extends Model
     use HasFactory;
 
     protected $fillable = [
-        'kode', 'subyek', 'layanan', 'prioritas', 'diterima', 'durasi', 'status', 'id_customer', 'id_layanan',
+        'id', 'kode', 'subyek', 'layanan', 'prioritas', 'diterima', 'durasi', 'status', 'id_customer', 'id_layanan',
     ];
 }

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('kota')->nullable();
             $table->string('provinsi')->nullable();
             $table->string('kode_pos')->nullable();
+            $table->string('customer_id')->nullable();
             $table->timestamps();
         });
     }

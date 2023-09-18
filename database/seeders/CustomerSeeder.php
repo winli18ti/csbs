@@ -21,5 +21,15 @@ class CustomerSeeder extends Seeder{
                 'id_alamat' => 1,
             ]);
         }
+        Customer::create([
+            'nama_customer' => 'user',
+            'no_ktp' => '2938338',
+            'no_hp' => '02893883',
+            'email' => 'user@gmail.com',
+            'tanggal_registrasi' => Carbon::now(),
+            'status_vip' => 1,
+            'id_user' => 2,
+            'id_alamat' => 51,
+        ]);
     }
 }
