@@ -4,17 +4,36 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
-use App\Models\Alamat;
+use App\Models\Marketer;
 
 class Customer extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'id', 'nama_customer', 'nama_perusahaan', 'no_ktp', 'tanggal_lahir', 'no_hp', 'telepon_rumah', 'email', 'tanggal_registrasi', 'status_vip', 'id_user', 'id_alamat',
+        'id',
+        'member',
+        'name',
+        'company',
+        'identity',
+        'address',
+        'city',
+        'email',
+        'vip',
+        'effectivedate',
+        'homephone',
+        'officephone',
+        'cellphone',
+        'paytype',
+        'billperiod',
+        'subsperiod',
+        'tvcount',
+        'node',
+        'status',
+        'statusdate',
+        'notes',
+        'marketerid',
     ];
-
-    public function user() { return $this->belongsTo(User::class,'id_user'); }
-    public function alamat() { return $this->belongsTo(Alamat::class,'id_alamat'); }
+    
+    public function marketer() { return $this->belongsTo(Marketer::class,'marketerid'); }
 }

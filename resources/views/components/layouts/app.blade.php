@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/bootstrap.min.css') }}">
-        <title>{{ $title ?? 'Page Title' }}</title>
+        <title>Customer Service and Billing System</title>
         @livewireStyles
     </head>
     <body>
@@ -50,11 +50,6 @@
 
                 <button class="btn btn-danger btn-sm mt-1" 
                   data-bs-toggle="dropdown">
-                  <a href="{{route('pelanggan')}}">Customer</a>
-                </button>
-
-                <button class="btn btn-danger btn-sm mt-1" 
-                  data-bs-toggle="dropdown">
                   Installation
                 </button>
 
@@ -87,6 +82,12 @@
                   data-bs-toggle="dropdown">
                   Setup
                 </button>
+
+                <ul class="dropdown-menu">
+                  <li><a href="/collectors" class="dropdown-item">Data kolektor</a></li>
+                  <li><a href="/marketers" class="dropdown-item">Data sales marketing</a></li>
+                  <li><a href="/officers" class="dropdown-item">Data teknisi</a></li>
+                </ul>
               </div>
             </div>
           </div>

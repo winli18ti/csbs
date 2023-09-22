@@ -10,11 +10,7 @@ class CustomerDetail extends Component {
   
   public $currentTab = 'profil';
   public $id, $alamat, $tanggal_lahir, $no_hp, $telepon_rumah, $email;
-
-  #[Rule('required', message: 'Masukkan nama pelanggan')]
   public $nama_customer;
-
-  #[Rule('required', message: 'Masukkan No KTP')]
   public $no_ktp;
 
   public function mount($id) {
