@@ -12,10 +12,15 @@ class Officers extends Component
     public $id, $name, $status;
     public $mode = 'table';
     public $title = 'Teknisi';
+    public $filterStatus = '';
 
     public function render()
     {
-        $table = Officer::select('*')->paginate(20);
+        $table = Officer::select('*');
+        if (!empty($this->filterStatus)) {
+            $table->where(['status' => $this->filterStatus]);
+        }
+        $table = $table->paginate(20);
         return view('livewire.officers', compact('table'));
     }
 

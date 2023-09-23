@@ -12,10 +12,15 @@ class Marketers extends Component
     public $id, $name, $status;
     public $mode = 'table';
     public $title = 'Sales marketing';
+    public $filterStatus = '';
 
     public function render()
     {
-        $table = Marketer::select('*')->paginate(20);
+        $table = Marketer::select('*');
+        if (!empty($this->filterStatus)) {
+            $table->where(['status' => $this->filterStatus]);
+        }
+        $table = $table->paginate(20);
         return view('livewire.marketers', compact('table'));
     }
 

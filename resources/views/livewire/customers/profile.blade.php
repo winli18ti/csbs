@@ -4,70 +4,66 @@
       <div class="col-12 col-md-6">
         <div class="row align-items-center">
           <div class="col-5 col-sm-4 col-lg-5 col-xl-4">
-            <label for="id" class="col-form-label">Customer ID</label>
+            <label for="member" class="col-form-label">Customer ID</label>
           </div>
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
-            <input type="text" name="id" id="id" class="form-control form-control-sm" wire:model="id" readonly>
+            <input type="text" id="member" class="form-control form-control-sm" 
+              wire:model="member" readonly>
           </div>
         </div>
     
         <div class="row align-items-center">
           <div class="col-5 col-sm-4 col-lg-5 col-xl-4">
-            <label for="nama_pelanggan" class="col-form-label">Nama pelanggan</label>
+            <label for="name" class="col-form-label">Nama pelanggan</label>
           </div>
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
-            <input type="text" name="nama_pelanggan" id="nama_pelanggan" class="form-control form-control-sm"
-              wire:model="nama_customer">
+            <input type="text" id="name" class="form-control form-control-sm"
+              wire:model="name">
           </div>
         </div>
         
         <div class="row align-items-center">
           <div class="col-5 col-sm-4 col-lg-5 col-xl-4">
-            <label for="nama_perusahaan" class="col-form-label">Nama perusahaan</label>
+            <label for="company" class="col-form-label">Nama perusahaan</label>
           </div>
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
-            <input type="text" name="nama_perusahaan" id="nama_perusahaan" class="form-control form-control-sm">
+            <input type="text" id="company" class="form-control form-control-sm"
+              wire:model="company">
           </div>
         </div>
         
         <div class="row align-items-center">
           <div class="col-5 col-sm-4 col-lg-5 col-xl-4">
-            <label for="ktp" class="col-form-label">No identitas (KTP)</label>
+            <label for="identity" class="col-form-label">No identitas (KTP)</label>
           </div>
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
-            <input type="text" name="ktp" id="ktp" class="form-control form-control-sm" value="{{$no_ktp}}">
+            <input type="text" id="identity" class="form-control form-control-sm"
+              wire:model="identity">
           </div>
         </div>
         
         <div class="row align-items-center">
           <div class="col-5 col-sm-4 col-lg-5 col-xl-4">
-            <label for="alamat" class="col-form-label">Alamat</label>
+            <label for="address" class="col-form-label">Alamat</label>
           </div>
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
-            <textarea name="alamat" id="alamat" rows="2" class="form-control form-control-sm"></textarea>
+            <textarea id="address" rows="2" class="form-control form-control-sm"
+              wire:model="address"></textarea>
           </div>
         </div>
         
         <div class="row align-items-center">
           <div class="col-5 col-sm-4 col-lg-5 col-xl-4">
-            <label for="kota_provinsi" class="col-form-label">Kota / Provinsi</label>
+            <label for="city" class="col-form-label">Kota / Provinsi</label>
           </div>
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
-            <select name="kota_provinsi" id="kota_provinsi" class="form-select form-select-sm">
-              <option selected>Pekanbaru, Riau</option>
+            <select id="city" class="form-select form-select-sm"
+              wire:model="city">
+              <option value="" selected>Pekanbaru, Riau</option>
               <option value="1">One</option>
               <option value="2">Two</option>
               <option value="3">Three</option>
             </select>
-          </div>
-        </div>
-        
-        <div class="row align-items-center">
-          <div class="col-5 col-sm-4 col-lg-5 col-xl-4">
-            <label for="kode_pos" class="col-form-label">Kode Pos</label>
-          </div>
-          <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
-            <input type="text" name="kode_pos" id="kode_pos" class="form-control form-control-sm">
           </div>
         </div>
         
@@ -87,42 +83,46 @@
           </div>
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
             <div class="form-check">
-              <input type="checkbox" class="form-check-input" value="vip" id="vip">
+              <input type="checkbox" class="form-check-input" value="1" id="vip"
+                wire:model="vip">
             </div>
           </div>
         </div>
         
         <div class="row align-items-center">
           <div class="col-5 col-sm-4 col-lg-5 col-xl-4">
-            <label for="tanggal_efektif" class="col-form-label">Tanggal efektif</label>
+            <label for="effectivedate" class="col-form-label">Tanggal efektif</label>
           </div>
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
-            <input type="date" name="tanggal_efektif" id="tanggal_efektif" 
-              class="form-control form-control-sm" value="2023-08-31" min="2023-08-31">
+            <input type="date" id="effectivedate" class="form-control form-control-sm" 
+              value="2023-08-31" min="2023-08-31"
+              wire:model="effectivedate">
           </div>
         </div>
-        
+
         <div class="row align-items-center">
           <div class="col-5 col-sm-4 col-lg-5 col-xl-4">
-            <label for="kewarganegaraan" class="col-form-label">Kewarganegaraan</label>
+            <label for="node" class="col-form-label">Lokasi node</label>
           </div>
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
-            <select name="kewarganegaraan" id="kewarganegaraan" class="form-select form-select-sm">
-              <option selected>WNI</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+            <select id="node" class="form-select form-select-sm"
+              wire:model="node">
+              <option value="NUL" selected>NUL</option>
+              <option value="FN1">FN 1</option>
             </select>
           </div>
         </div>
-        
+
         <div class="row align-items-center">
           <div class="col-5 col-sm-4 col-lg-5 col-xl-4">
-            <label for="tanggal_lahir" class="col-form-label">Tanggal lahir</label>
+            <label for="marketerid" class="col-form-label">Sales marketing</label>
           </div>
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
-            <input type="date" name="tanggal_lahir" id="tanggal_lahir" 
-              class="form-control form-control-sm" wire:model="tanggal_lahir">
+            <select id="marketerid" class="form-select form-select-sm"
+              wire:model="marketerid">
+              <option value="" selected>Pilih</option>
+              <option value="1">One</option>
+            </select>
           </div>
         </div>
       </div>
@@ -130,30 +130,31 @@
       <div class="col-12 col-md-6">
         <div class="row align-items-center">
           <div class="col-5 col-sm-4 col-lg-5 col-xl-4">
-            <label for="telepon_rumah" class="col-form-label">Telepon rumah</label>
+            <label for="homephone" class="col-form-label">Telepon rumah</label>
           </div>
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
-            <input type="text" name="telepon_rumah" id="telepon_rumah" class="form-control form-control-sm"
-              wire:model="telepon_rumah">
+            <input type="text" id="homephone" class="form-control form-control-sm"
+              wire:model="homephone">
           </div>
         </div>
         
         <div class="row align-items-center">
           <div class="col-5 col-sm-4 col-lg-5 col-xl-4">
-            <label for="telepon_kantor" class="col-form-label">Telepon kantor</label>
+            <label for="officephone" class="col-form-label">Telepon kantor</label>
           </div>
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
-            <input type="text" name="telepon_kantor" id="telepon_kantor" class="form-control form-control-sm">
+            <input type="text" id="officephone" class="form-control form-control-sm"
+              wire:model="officephone">
           </div>
         </div>
         
         <div class="row">
           <div class="col-5 col-sm-4 col-lg-5 col-xl-4">
-            <label for="telepon_seluler" class="col-form-label">Telepon seluler</label>
+            <label for="cellphone" class="col-form-label">Telepon seluler</label>
           </div>
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
-            <input type="text" name="telepon_seluler" id="telepon_seluler" class="form-control form-control-sm"
-              wire:model="no_hp">
+            <input type="text" id="cellphone" class="form-control form-control-sm"
+              wire:model="cellphone">
             <div class="form-text">
               <a href="#">Kirim SMS</a>
             </div>
@@ -162,45 +163,17 @@
         
         <div class="row align-items-center">
           <div class="col-5 col-sm-4 col-lg-5 col-xl-4">
-            <label for="jenis_rumah" class="col-form-label">Jenis rumah</label>
-          </div>
-          <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
-            <select name="jenis_rumah" id="jenis_rumah" class="form-select form-select-sm">
-              <option selected>Lainnya</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-          </div>
-        </div>
-    
-        <div class="row align-items-center">
-          <div class="col-5 col-sm-4 col-lg-5 col-xl-4">
-            <label for="status_rumah" class="col-form-label">Status rumah</label>
-          </div>
-          <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
-            <select name="status_rumah" id="status_rumah" class="form-select form-select-sm">
-              <option selected>Lainnya</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-          </div>
-        </div>
-        
-        <div class="row align-items-center">
-          <div class="col-5 col-sm-4 col-lg-5 col-xl-4">
-            <label for="tipe_layanan" class="col-form-label">Tipe layanan</label>
+            <label for="servicetype" class="col-form-label">Tipe layanan</label>
           </div>
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
             <div class="d-flex">
               <div class="form-check form-check-inline">
-                <input type="radio" name="layanan" id="layanan_reguler" class="form-check-input" checked>
-                <label for="layanan_reguler" class="form-check-label">Layanan reguler</label>
+                <input type="radio" name="servicetype" id="servicetype1" value="reguler" class="form-check-input" checked>
+                <label for="servicetype1" class="form-check-label">Layanan reguler</label>
               </div>
               <div class="form-check form-check-inline">
-                <input type="radio" name="layanan" id="layanan_non_reguler" class="form-check-input">
-                <label for="layanan_non_reguler" class="form-check-label">Pembayaran non reguler</label>
+                <input type="radio" name="servicetype" id="servicetype2" value="special" class="form-check-input">
+                <label for="servicetype2" class="form-check-label">Pembayaran non reguler</label>
               </div>
             </div>
           </div>
@@ -208,35 +181,37 @@
     
         <div class="row align-items-center">
           <div class="col-5 col-sm-4 col-lg-5 col-xl-4">
-            <label for="tarif" class="col-form-label">Tarif per bulan</label>
+            <label for="specialprice" class="col-form-label">Tarif per bulan</label>
           </div>
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
-            <input type="number" name="tarif" id="tarif" class="form-control form-control-sm" min="0">
+            <input type="number" id="specialprice" class="form-control form-control-sm" min="0"
+              wire:model="specialprice">
           </div>
         </div>
         
         <div class="row align-items-center">
           <div class="col-5 col-sm-4 col-lg-5 col-xl-4">
-            <label for="invoice" class="col-form-label">Info invoice non reguler</label>
+            <label for="specialinfo" class="col-form-label">Info invoice non reguler</label>
           </div>
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
-            <input type="text" name="invoice" id="invoice" class="form-control form-control-sm">
+            <input type="text" id="specialinfo" class="form-control form-control-sm"
+              wire:model="specialinfo">
           </div>
         </div>
         
         <div class="row align-items-center">
           <div class="col-5 col-sm-4 col-lg-5 col-xl-4">
-            <label for="pembayaran" class="col-form-label">Cara pembayaran</label>
+            <label for="paytype" class="col-form-label">Cara pembayaran</label>
           </div>
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
             <div class="d-flex">
               <div class="form-check form-check-inline">
-                <input type="radio" name="pembayaran" id="pembayaran_rumah" class="form-check-input">
-                <label for="pembayaran_rumah" class="form-check-label">Penagihan ke pelanggan</label>
+                <input type="radio" name="paytype" id="paytype1" value="penagihan ke pelanggan" class="form-check-input">
+                <label for="paytype1" class="form-check-label">Penagihan ke pelanggan</label>
               </div>
               <div class="form-check form-check-inline">
-                <input type="radio" name="pembayaran" id="pembayaran_kantor" class="form-check-input">
-                <label for="pembayaran_kantor" class="form-check-label">Pembayaran ke kantor</label>
+                <input type="radio" name="paytype" id="paytype2" value="pembayaran ke kantor" class="form-check-input">
+                <label for="paytype2" class="form-check-label">Pembayaran ke kantor</label>
               </div>
             </div>
           </div>
@@ -244,38 +219,39 @@
         
         <div class="row align-items-center">
           <div class="col-5 col-sm-4 col-lg-5 col-xl-4">
-            <label for="periode_tagihan" class="col-form-label">Periode tagihan</label>
+            <label for="billperiod" class="col-form-label">Periode tagihan</label>
           </div>
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
-            <select name="periode_tagihan" id="periode_tagihan" class="form-select form-select-sm">
-              <option selected>15</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+            <select id="billperiod" class="form-select form-select-sm"
+              wire:model="billperiod">
+              <option value="1" selected>1</option>
+              <option value="15">15</option>
             </select>
           </div>
         </div>
     
         <div class="row align-items-center">
           <div class="col-5 col-sm-4 col-lg-5 col-xl-4">
-            <label for="periode_berlangganan" class="col-form-label">Periode berlangganan</label>
+            <label for="subsperiod" class="col-form-label">Periode berlangganan</label>
           </div>
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
-            <select name="periode_berlangganan" id="periode_berlangganan" class="form-select form-select-sm">
-              <option selected>Per 1 Bulan</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+            <select id="subsperiod" class="form-select form-select-sm"
+              wire:model="subsperiod">
+              <option value="1" selected>Per 1 bulan</option>
+              <option value="3">Per 3 bulan</option>
+              <option value="6">Per 6 bulan</option>
+              <option value="12">Per 12 bulan</option>
             </select>
           </div>
         </div>
     
         <div class="row align-items-center">
           <div class="col-5 col-sm-4 col-lg-5 col-xl-4">
-            <label for="jumlah_tv" class="col-form-label">Jumlah TV</label>
+            <label for="tvcount" class="col-form-label">Jumlah TV</label>
           </div>
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
-            <input type="number" name="jumlah_tv" id="jumlah_tv" min="0" class="form-control form-control-sm">
+            <input type="number" id="tvcount" min="0" class="form-control form-control-sm"
+              wire:model="tvcount">
           </div>
         </div>
       </div>
@@ -283,10 +259,11 @@
     
     <div class="row">
       <div class="col-5 col-sm-2 col-lg-2">
-        <label for="catatan_admin" class="col-form-label">Catatan admin</label>
+        <label for="notes" class="col-form-label">Catatan admin</label>
       </div>
       <div class="col-7 col-sm-10 col-lg-10">
-        <textarea name="catatan_admin" id="catatan_admin" rows="2" class="form-control form-control-sm"></textarea>
+        <textarea id="notes" rows="2" class="form-control form-control-sm"
+          wire:model="notes"></textarea>
       </div>
     </div>
 

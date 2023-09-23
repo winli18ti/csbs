@@ -12,10 +12,15 @@ class Collectors extends Component
     public $id, $name, $status;
     public $mode = 'table';
     public $title = 'Kolektor';
+    public $filterStatus = '';
 
     public function render()
     {
-        $table = Collector::select('*')->paginate(20);
+        $table = Collector::select('*');
+        if (!empty($this->filterStatus)) {
+            $table->where(['status' => $this->filterStatus]);
+        }
+        $table = $table->paginate(20);
         return view('livewire.collectors', compact('table'));
     }
 

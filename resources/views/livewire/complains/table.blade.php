@@ -1,6 +1,6 @@
 <div>
-  <div class="container-fluid">
-    <span class="lead">Data Kolektor</span>
+  <div class="container-fluid mb-2">
+    <span class="lead">Data Pengaduan</span>
   </div>
 
   <div class="container-fluid my-2">
@@ -12,18 +12,12 @@
         <select id="filterStatus" class="form-select form-select-sm"
           wire:model.live="filterStatus">
           <option value="">Semua</option>
-          <option value="aktif">Aktif</option>
-          <option value="nonaktif">Nonaktif</option>
+          <option value="tunggu">Belum diproses</option>
+          <option value="proses">Sedang diproses</option>
+          <option value="selesai">Telah selesai</option>
         </select>
       </div>
     </div>
-  </div>
-  
-  <div class="container-fluid d-flex gap-1 justify-content-end my-2">
-    <button class="btn btn-outline-primary btn-sm"
-      wire:click.prevent="add">
-      Tambah Kolektor
-    </button>
   </div>
 
   <div class="container-fluid">
@@ -38,7 +32,13 @@
         <thead>
           <tr class="table-danger text-center">
             <th class="col">#</th>
-            <th class="col">Nama Kolektor</th>
+            <th class="col">Kode</th>
+            <th class="col">Cust ID</th>
+            <th class="col">Alamat</th>
+            <th class="col">Subjek</th>
+            <th class="col">Layanan</th>
+            <th class="col">Prioritas</th>
+            <th class="col">Diterima</th>
             <th class="col">Status</th>
             <th class="col">Opsi</th>
           </tr>
@@ -47,12 +47,19 @@
           @foreach($table as $data)
           <tr>
             <td class="text-center">{{$data->id}}</td>
-            <td>{{$data->name}}</td>
+            <td class="text-center">{{$data->code}}</td>
+            <td class="text-center"><a href="#">{{$data->customerid}}</a></td>
+            <td>{{$data->address}}</td>
+            <td>{{$data->servicetype}}</td>
+            <td>{{$data->priority}}</td>
+            <td>{{$data->acceptedby}}</td>
             <td class="text-center text-uppercase">
-              @if($data->status === 'aktif')
+              @if($data->status === 'tunggu')
+                <span class="badge text-bg-danger">{{$data->status}}</span>
+              @elseif($data->status === 'proses')
+                <span class="badge text-bg-warning">{{$data->status}}</span>
+              @elseif($data->status === 'selesai')
                 <span class="badge text-bg-success">{{$data->status}}</span>
-              @elseif($data->status === 'nonaktif')
-                <span class="badge text-bg-secondary">{{$data->status}}</span>
               @endif
             </td>
             <td class="text-center">
@@ -68,7 +75,7 @@
       {{ $table->links() }}
     </div>
     @if(!$table->count())
-    <p class="text-center fst-italic">Data kolektor kosong</p>
+    <p class="text-center fst-italic">Data pengaduan kosong</p>
     @endif
   </div>
 </div>

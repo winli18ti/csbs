@@ -2,6 +2,22 @@
   <div class="container-fluid">
     <span class="lead">Data Teknisi</span>
   </div>
+
+  <div class="container-fluid my-2">
+    <div class="row align-items-center">
+      <div class="col-5 col-sm-4 col-md-3 col-xl-2">
+        <label for="filterStatus" class="col-form-label">Status</label>
+      </div>
+      <div class="col-7 col-sm-5 col-md-4 col-lg-3">
+        <select id="filterStatus" class="form-select form-select-sm"
+          wire:model.live="filterStatus">
+          <option value="">Semua</option>
+          <option value="aktif">Aktif</option>
+          <option value="nonaktif">Nonaktif</option>
+        </select>
+      </div>
+    </div>
+  </div>
   
   <div class="container-fluid d-flex gap-1 justify-content-end my-2">
     <button class="btn btn-outline-primary btn-sm"
@@ -51,7 +67,7 @@
       </table>
       {{ $table->links() }}
     </div>
-    @if(empty($table))
+    @if(!$table->count())
     <p class="text-center fst-italic">Data teknisi kosong</p>
     @endif
   </div>
