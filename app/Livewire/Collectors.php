@@ -39,6 +39,7 @@ class Collectors extends Component
         $this->validateRule();
         Collector::create([
             'name' => $this->name,
+            'status' => $this->status,
         ]);
         session()->flash('message', $this->title.' baru berhasil ditambahkan');
         $this->navigate('table');

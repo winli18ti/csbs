@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('username');
             $table->string('password');
             $table->string('role');
-            $table->string('notes');
+            $table->text('notes')->nullable();
+            $table->string('status');
             $table->timestamps();
         });
     }

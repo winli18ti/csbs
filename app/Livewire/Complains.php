@@ -2,8 +2,9 @@
 
 namespace App\Livewire;
 
-use App\Models\Complain;
 use Livewire\Component;
+use App\Models\Complain;
+use App\Models\Marketer;
 use Livewire\WithPagination;
 
 class Complains extends Component

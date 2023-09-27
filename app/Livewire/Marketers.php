@@ -39,6 +39,7 @@ class Marketers extends Component
         $this->validateRule();
         Marketer::create([
             'name' => $this->name,
+            'status' => $this->status,
         ]);
         session()->flash('message', $this->title.' baru berhasil ditambahkan');
         $this->navigate('table');
