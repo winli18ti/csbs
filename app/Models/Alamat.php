@@ -17,3 +17,4 @@ class Alamat extends Model
 
     public function customer() { return $this->hasMany(Customer::class,'id_user','id'); }
 }
+

@@ -1,0 +1,299 @@
+Ambon, Maluku
+Amuntai, Kalimantan Selatan
+Arca Makmur, Bengkulu
+Atambua, Nusa Tenggara
+Bajawa, Nusa Tenggara
+Balaraja, Jawa Barat
+Balikpapan, Kalimantan Timur
+Banda Aceh, DI Aceh
+Bandar Lampung, Lampung
+Bandung, Jawa Barat
+Bangkalan, Jawa Timur
+Bangko, JAMBI
+Bangli, BALI
+Banjar Baru, Kalimantan Selatan
+Banjarmasin, Kalimantan Selatan
+Banjarnegara, Jawa Tengah
+Bantaeng, Sulawesi Selatan
+Bantul, DI Yogyakarta
+Banyuwangi, Jawa Timur
+Barabai, Kalimantan Selatan
+Barru, Sulawesi Selatan
+Batam, Riau
+Batu Hijau, Nusa Tenggara
+Batu Raja, Sumatera Selatan
+Batu Sangkar, Sumatera Barat
+Bau-bau, Sulawesi Tenggara
+Bekasi, Jawa Barat
+Belawan, Sumatera Barat
+Bengkalis, Riau
+Bengkinang, Riau
+Bengkulu, Bengkulu
+Biak, Papua
+Bima Raba, Nusa Tenggara
+Binjai, Sumatera Utara
+Bitung, Sulawesi Utara
+Blora, Jawa Tengah
+Bogor, Jawa Barat
+Bojonegoro, Jawa Timur
+Bondowoso, Jawa Timur
+Bontang, Kalimantan Timur
+Bontosungu, Sulawesi Selatan
+Boyolali, Jawa Tengah
+Brebes, Jawa Tengah
+Bukit Tinggi, Sumatera Barat
+Buleleng, BALI
+Bulukumba, Sulawesi Selatan
+Buntok, Kalimantan Tengah
+Ciamis, Jawa Barat
+Cianjur, Jawa Barat
+Cikampek, Jawa Barat
+Cikarang, Jawa Barat
+Cilacap, Jawa Tengah
+Cilegon, Jawa Barat
+Cimahi, Jawa Barat
+Cirebon, Jawa Barat
+Curup, Bengkulu
+Demak, Jawa Tengah
+Denpasar, BALI
+Dompu, Nusa Tenggara
+Dumai, Riau
+Duri, Riau
+Ende, Nusa Tenggara
+Fak-fak, Papua
+Garut, Jawa Barat
+Gianyar, BALI
+Gorontalo, Sulawesi Utara
+Gresik, Jawa Timur
+Grobogan, Jawa Tengah
+Indramayu, Jawa Barat
+Jakarta
+Jambi, JAMBI
+Jayapura, Papua
+Jember, Jawa Timur
+Jepara, Jawa Tengah
+Jombang, Jawa Timur
+Kafemenahu, Nusa Tenggara
+Kalabahi, Nusa Tenggara
+Kandangan, Kalimantan Selatan
+Karang Asem, BALI
+Karanganyar, Jawa Tengah
+Karawang, Jawa Barat
+Kayu Agung, Sumatera Selatan
+Kebumen, Jawa Tengah
+Kediri, Jawa Timur
+Kendal, Jawa Tengah
+Kendari, Sulawesi Tenggara
+Ketapang, Kalimantan Barat
+Klaten, Jawa Tengah
+Kodya, DI Yogyakarta
+Kolaka, Sulawesi Tenggara
+Kota Baru, Kalimantan Selatan
+Kota Bumi, Lampung
+Kotamobagu, Sulawesi Utara
+Kuala Kapuas, Kalimantan Tengah
+Kuala Tungkal, JAMBI
+Kudus, Jawa Tengah
+Kulon Progo, Jawa Tengah
+Kuningan, Jawa Barat
+Kupang, Nusa Tenggara
+Kuta Sanur, BALI
+Lagoi, Riau
+Lahat, Sumatera Selatan
+Lamongan, Jawa Timur
+Langsa, DI Aceh
+Lantho, DI Aceh
+Larantuka, Nusa Tenggara
+Lhoksumawe, DI Aceh
+Liwa, Lampung
+Lubuk Linggau, Sumatera Selatan
+Lubuk Pakam, Sumatera Utara
+Lubuk Sikaping, Sumatera Barat
+Lumajang, Jawa Timur
+Luwuk, Sulawesi Tengah
+Madiun, Jawa Timur
+Magelang, Jawa Tengah
+Magetan, Jawa Timur
+Majalengka, Jawa Barat
+Makasar, Sulawesi Selatan
+Malang, Jawa Timur
+Mamuju, Sulawesi Selatan
+Manado, Sulawesi Utara
+Manna, Bengkulu
+Manokwari, Papua
+Marabahan, Kalimantan Selatan
+Maros, Sulawesi Selatan
+Martapura, Kalimantan Selatan
+Masomi, Maluku
+Mataram, Nusa Tenggara
+Maumere, Nusa Tenggara
+Medan, Sumatera Utara
+Mempawah, Kalimantan Barat
+Merauke, Papua
+Metro, Lampung
+Meulaboh, DI Aceh
+Mojokerto, Jawa Timur
+Muara Bulian, JAMBI
+Muara Bungo, JAMBI
+Muara Enim, Sumatera Selatan
+Muara Teweh, Kalimantan Tengah
+Muaro, Sumatera Barat
+Nabire, Papua
+Negara, BALI
+Nganjuk, Jawa Timur
+Ngawi, Jawa Timur
+Nusa Dua Jimbaran, BALI
+Pacitan, Jawa Timur
+Padang Panjang, Sumatera Barat
+Padang Sidempuan, Sumatera Utara
+Padang, Sumatera Barat
+Painan, Sumatera Barat
+Palangkaraya, Kalimantan Tengah
+Palembang, Sumatera Selatan
+Palopo, Sulawesi Selatan
+Palu, Sulawesi Tengah
+Pamekasan, Jawa Timur
+Pandeglang, Jawa Barat
+Pangkal Pinang, Sumatera Selatan
+Pangkalan Bun, Kalimantan Tengah
+Pare-pare, Sulawesi Selatan
+Pariaman, Sumatera Barat
+Pasuruan, Jawa Timur
+Pati, Jawa Tengah
+Payakumbuh, Sumatera Barat
+Pekalongan, Jawa Tengah
+Pekanbaru, Riau
+Peleihari, Kalimantan Selatan
+Pemalang, Jawa Tengah
+Pematang Siantar, Sumatera Utara
+Pinrang, Sulawesi Selatan
+Plaju, Sumatera Selatan
+Polewari, Sulawesi Selatan
+Ponorogo, Jawa Timur
+Pontianak, Kalimantan Barat
+Poso, Sulawesi Tengah
+Praya, Nusa Tenggara
+Probolinggo, Jawa Timur
+Prop. BALI
+Prop. Bengkulu
+Prop. DI Aceh
+Prop. DI Yogyakarta
+Prop. JAMBI
+Prop. Jawa Barat
+Prop. Jawa Tengah
+Prop. Jawa Timur
+Prop. Kalimantan Barat
+Prop. Kalimantan Selatan
+Prop. Kalimantan Tengah
+Prop. Kalimantan Timur
+Prop. Lampung
+Prop. Maluku
+Prop. Nusa Tenggara
+Prop. Papua
+Prop. Riau
+Prop. Sulawesi Selatan
+Prop. Sulawesi Tengah
+Prop. Sulawesi Tenggara
+Prop. Sulawesi Utara
+Prop. Sumatera Barat
+Prop. Sumatera Selatan
+Prop. Sumatera Utara
+Purbalingga, Jawa Tengah
+Purwakarta, Jawa Barat
+Purwodadi, Jawa Tengah
+Purwokerto, Jawa Tengah
+Purworejo, Jawa Tengah
+Putus Sibau, Kalimantan Barat
+Raha, Sulawesi Tenggara
+Rangkasbitung, Jawa Barat
+Rantau Prapat, Sumatera Utara
+Rantau, Kalimantan Selatan
+Rembang, Jawa Tengah
+Rengat, Riau
+Ruteng, Nusa Tenggara
+Sabang, DI Aceh
+Salatiga, Jawa Tengah
+Samara Pura, BALI
+Samarinda, Kalimantan Timur
+Sampang, Jawa Timur
+Sampit, Kalimantan Tengah
+Sangata, Kalimantan Timur
+Sanggau, Kalimantan Barat
+Sawah Lunto, Sumatera Barat
+Sekayu, Sumatera Selatan
+Selayar, Sulawesi Selatan
+Selong, Nusa Tenggara
+Semarang, Jawa Tengah
+Sengkang, Sulawesi Selatan
+Serang, Jawa Barat
+Serui, Papua
+Sibolga, Sumatera Utara
+Sidenreng, Sulawesi Selatan
+Sidikalang, Sumatera Utara
+Sidoarjo, Jawa Timur
+Sigli, DI Aceh
+Singaraja, BALI
+Singkawang, Kalimantan Barat
+Sinjai, Sulawesi Selatan
+Sintang, Kalimantan Barat
+Situbondo, Jawa Timur
+Slawi, Jawa Tengah
+Sleman, DI Yogyakarta
+Soastu, Maluku
+Soe, Nusa Tenggara
+Solo, Jawa Tengah
+Solok, Sumatera Barat
+Soreang, Jawa Barat
+Soroaku, Sulawesi Selatan
+Sorong, Papua
+Sragen, Jawa Tengah
+Subang, Jawa Barat
+Sukabumi, Jawa Barat
+Sukoharjo, Jawa Tengah
+Sumbawa Besar, Nusa Tenggara
+Sumber, Jawa Barat
+Sumedang, Jawa Barat
+Sumenep, Jawa Timur
+Sungai Liat, Sumatera Selatan
+Sungai Penuh, JAMBI
+Sungguminasa, Sulawesi Selatan
+Surabaya, Jawa Timur
+Tabanan, BALI
+Takalar, Sulawesi Selatan
+Takengon, DI Aceh
+Tanah Grogot, Kalimantan Timur
+Tangerang, Jawa Barat
+Tanjung Enim, Sumatera Selatan
+Tanjung Pandan, Sumatera Selatan
+Tanjung Pinang, Sumatera Selatan
+Tanjung Redeb, Kalimantan Timur
+Tanjung Selor, Kalimantan Timur
+Tanjung, Kalimantan Selatan
+Tapaktuan, DI Aceh
+Tarakan, Kalimantan Timur
+Tarutung, Sumatera Utara
+Tasikmalaya, Jawa Barat
+Tebing Tinggi, Sumatera Utara
+Tegal, Jawa Tengah
+Temanggung, Jawa Tengah
+Tembilahan, Riau
+Tenggarong, Kalimantan Timur
+Ternate, Maluku
+Tj. Balai Asahan, Sumatera Utara
+Tj. Balai Karimun, Riau
+Tj. Pinang, Riau
+Tolitoli, Sulawesi Tengah
+Tondano, Sulawesi Utara
+Trenggalek, Jawa Timur
+Tual, Maluku
+Tuban, Jawa Timur
+Tulungagung, Jawa Timur
+Ungaran, Jawa Tengah
+Waikabubak, Nusa Tenggara
+Waingapu, Nusa Tenggara
+Wamena, Papua
+Watampone, Sulawesi Selatan
+Watansoppeng, Sulawesi Selatan
+Wonogiri, Jawa Tengah
+Wonosari, DI Yogyakarta
+Wonosobo, Jawa Tengah

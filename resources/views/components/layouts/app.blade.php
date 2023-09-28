@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/bootstrap.min.css') }}">
-        <title>{{ $title ?? 'Page Title' }}</title>
+        <title>Customer Service and Billing System</title>
         @livewireStyles
     </head>
     <body>
@@ -27,14 +27,20 @@
           <div class="col-sm-9 col-lg-8">
             <div class="row">
               <div class="col">
-                <span class="text-warning fw-bold">79</span>
-                <span>Pending Orders</span>
+                <a href="/spks" class="text-decoration-none">
+                  <span class="text-warning fw-bold">79</span>
+                  <span class="text-light">Pending Orders</span>
+                </a>
                 <span>|</span>
-                <span class="text-warning fw-bold">1311</span>
-                <span>Overdue Invoices</span>
+                <a href="/invoices" class="text-decoration-none">
+                  <span class="text-warning fw-bold">1311</span>
+                  <span class="text-light">Overdue Invoices</span>
+                </a>
                 <span>|</span>
-                <span class="text-warning fw-bold">20</span>
-                <span>Ticket(s) Awaiting Reply</span>
+                <a href="/complains" class="text-decoration-none">
+                  <span class="text-warning fw-bold">20</span>
+                  <span class="text-light">Ticket(s) Awaiting Reply</span>
+                </a>
               </div>
             </div>
             <div class="row mt-2">
@@ -43,50 +49,31 @@
                   data-bs-toggle="dropdown">
                   Customer
                 </button>
-                <!-- <ul class="dropdown-menu">
-                  <li><a href="#" class="dropdown-item">Customer 1</a></li>
-                  <li><a href="#" class="dropdown-item">Customer 2</a></li>
-                </ul> -->
-
-                <button class="btn btn-danger btn-sm mt-1" 
-                  data-bs-toggle="dropdown">
-                  <a href="{{route('pelanggan')}}">Customer</a>
-                </button>
+                <ul class="dropdown-menu">
+                  <li><a href="/customers" class="dropdown-item">Data pelanggan</a></li>
+                </ul>
 
                 <button class="btn btn-danger btn-sm mt-1" 
                   data-bs-toggle="dropdown">
                   Installation
                 </button>
 
-                <button class="btn btn-danger btn-sm mt-1" 
-                  data-bs-toggle="dropdown">
-                  Billing
-                </button>
-
-                <button class="btn btn-danger btn-sm mt-1" 
-                  data-bs-toggle="dropdown">
-                  Finance
-                </button>
-
-                <button class="btn btn-danger btn-sm mt-1" 
-                  data-bs-toggle="dropdown">
-                  Report
-                </button>
-
-                <button class="btn btn-danger btn-sm mt-1" 
-                  data-bs-toggle="dropdown">
-                  IT NOC
-                </button>
-
-                <button class="btn btn-danger btn-sm mt-1" 
-                  data-bs-toggle="dropdown">
-                  SMS Center
-                </button>
+                <ul class="dropdown-menu">
+                  <li><a href="/complains" class="dropdown-item">Data pengaduan</a></li>
+                  <li><a href="/spks" class="dropdown-item">Data SPK</a></li>
+                </ul>
 
                 <button class="btn btn-danger btn-sm mt-1" 
                   data-bs-toggle="dropdown">
                   Setup
                 </button>
+
+                <ul class="dropdown-menu">
+                  <li><a href="/collectors" class="dropdown-item">Data kolektor</a></li>
+                  <li><a href="/marketers" class="dropdown-item">Data sales marketing</a></li>
+                  <li><a href="/officers" class="dropdown-item">Data teknisi</a></li>
+                  <li><a href="/users" class="dropdown-item">Data user</a></li>
+                </ul>
               </div>
             </div>
           </div>

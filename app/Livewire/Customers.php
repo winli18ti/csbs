@@ -10,62 +10,76 @@ use Livewire\Attributes\Rule;
 class Customers extends Component
 {
     use WithPagination;
-    public $id, $alamat, $tanggal_lahir, $no_hp, $telepon_rumah, $email;
-
-    public $filterTabel;
-
-    public $nama_customer;
-
-    public $no_ktp;
+    public $marketerid, $statusdate, $name, $identity, $address, 
+    $cellphone, $homephone, $email, $paytype, $service, 
+    $servicename, $subsperiod, $notes;
 
     public $mode = 'table';
+    public $title = 'Pelanggan';
+    public $filterStatus = '';
+    public $filterPaytype = '';
+    public $filterBillperiod = '';
+    public $filterSubsperiod = '';
+    public $filterVip = '';
 
     public function render() {
-        $dataPelanggan = Customer::with('user', 'alamat')->select('*');
-        if(!empty($this->filterTabel)){
-            if($this->filterTabel == 1) $dataPelanggan->where('status_vip', 1);
-        } 
-        $dataPelanggan = $dataPelanggan->paginate(10);
-        return view('livewire.pelanggan', compact('dataPelanggan'));
+        $table = Customer::select('*');
+        if (!empty($this->filterStatus)) {
+            $table->where(['status' => $this->filterStatus]);
+        }
+        if (!empty($this->filterPaytype)) {
+            $table->where(['paytype' => $this->filterPaytype]);
+        }
+        if (!empty($this->filterBillperiod)) {
+            $table->where(['billperiod' => $this->filterBillperiod]);
+        }
+        if (!empty($this->filterSubsperiod)) {
+            $table->where(['subsperiod' => $this->filterSubsperiod]);
+        }
+        if (!empty($this->filterVip)) {
+            $table->where(['vip' => $this->filterVip]);
+        }
+        $table = $table->paginate(20);
+        return view('livewire.customers', compact('table'));
     }
 
-    public function form() {
-        $this->mode = 'create';
+    public function navigate($mode) {
+        $this->mode = $mode;
     }
 
-    public function table() {
-        $this->mode = 'table';
+    public function add() {
+        $this->navigate('add');
+
+        $this->marketerid = null;
+        $this->statusdate = null;
+        $this->name = null;
+        $this->identity = null;
+        $this->address = null;
+        $this->cellphone = null;
+        $this->homephone = null;
+        $this->email = null;
+        $this->paytype = null;
+        $this->service = null;
+        $this->servicename = null;
+        $this->subsperiod = null;
+        $this->notes = null;
     }
 
     public function create() {
         $this->validateRule();
         Customer::create([
-            'nama_customer' => $this->nama_customer,
-            'no_ktp' => $this->no_ktp,
-            'tanggal_lahir' => $this->tanggal_lahir,
-            'no_hp' => $this->no_hp,
-            'telepon_rumah' => $this->telepon_rumah,
-            'email' => $this->email
+            'name' => $this->name,
         ]);
         
-        session()->flash('message', 'Pelanggan baru berhasil ditambah');
-
-        $this->mode = 'table';
+        session()->flash('message', $this->title.' baru berhasil ditambah');
+        $this->navigate('table');
     }
 
     public function validateRule(){
         $this->validate([
-            'nama_customer' => 'required',
-            'no_ktp' => 'required',
-            'alamat' => 'required',
-            'tanggal_lahir' => 'required',
-            'no_hp' => 'required',
+            'name' => 'required',
         ], [
-            'nama_customer.required' => 'Nama wajib diisi',
-            'no_ktp.required' => 'No KTP wajib diisi',
-            'alamat.required' => 'Alamat wajib diisi',
-            'tanggal_lahir.required' => 'Tanggal lahir wajib diisi',
-            'no_hp.required' => 'No HP wajib diisi',
+            'name.required' => 'Nama wajib diisi',
         ]);
     }
 }
