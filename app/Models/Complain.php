@@ -6,8 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Customer;
 
-class Complain extends Model
-{
+class Complain extends Model{
     use HasFactory;
 
     protected $fillable = [

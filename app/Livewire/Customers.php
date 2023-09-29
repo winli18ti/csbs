@@ -4,22 +4,17 @@ namespace App\Livewire;
 
 use App\Models\Customer;
 use Livewire\Component;
-use Livewire\WithPagination;
 use Livewire\Attributes\Rule;
+use Carbon\Carbon;
 
-class Customers extends Component
-{
-    use WithPagination;
+class Customers extends Component{
     public $marketerid, $statusdate, $name, $identity, $address, 
     $cellphone, $homephone, $email, $paytype, $service, 
-    $servicename, $subsperiod, $notes;
+    $servicename, $subsperiod, $notes, $customerId, $member;
 
-    public $mode = 'table';
-    public $title = 'Pelanggan';
-    public $filterStatus = '';
-    public $filterPaytype = '';
-    public $filterBillperiod = '';
-    public $filterSubsperiod = '';
+    public $mode = 'table'; public $title = 'Pelanggan';
+    public $filterStatus = ''; public $filterPaytype = '';
+    public $filterBillperiod = ''; public $filterSubsperiod = '';
     public $filterVip = '';
 
     public function render() {
@@ -39,7 +34,7 @@ class Customers extends Component
         if (!empty($this->filterVip)) {
             $table->where(['vip' => $this->filterVip]);
         }
-        $table = $table->paginate(20);
+        $table = $table->paginate(10);
         return view('livewire.customers', compact('table'));
     }
 
@@ -47,39 +42,114 @@ class Customers extends Component
         $this->mode = $mode;
     }
 
-    public function add() {
-        $this->navigate('add');
-
-        $this->marketerid = null;
-        $this->statusdate = null;
-        $this->name = null;
-        $this->identity = null;
-        $this->address = null;
-        $this->cellphone = null;
-        $this->homephone = null;
-        $this->email = null;
-        $this->paytype = null;
-        $this->service = null;
-        $this->servicename = null;
-        $this->subsperiod = null;
+    public function emptyValue(){
+        $this->marketerid = null; $this->statusdate = null; $this->name = null;
+        $this->identity = null; $this->address = null; $this->cellphone = null;
+        $this->homephone = null; $this->email = null; $this->paytype = null;
+        $this->service = null; $this->servicename = null; $this->subsperiod = null;
         $this->notes = null;
     }
 
     public function create() {
-        $this->validateRule();
+        $this->validateRule('create');
+        $date = Carbon::create($this->statusdate)->now();
         Customer::create([
-            'name' => $this->name,
+            'member' => substr(str_replace('-', '',$date->toDateString()), 2, 4),
+            'marketerid' => $this->marketerid , 'statusdate' => $this->statusdate, 'name' => $this->name,
+            'identity' => $this->identity, 'address' => $this->address, 'cellphone' => $this->cellphone,
+            'homephone' => $this->homephone, 'email' => $this->email, 'paytype' => $this->paytype,
+            'service' => $this->service, 'servicename' => $this->servicename, 'subsperiod' => $this->subsperiod,
+            'notes' => $this->notes, 'node' => 'NUL',
         ]);
-        
         session()->flash('message', $this->title.' baru berhasil ditambah');
+        $this->emptyValue();
         $this->navigate('table');
     }
 
-    public function validateRule(){
-        $this->validate([
-            'name' => 'required',
-        ], [
-            'name.required' => 'Nama wajib diisi',
+    public function edit($slug){
+        $data = Customer::find($slug);
+        $this->customerId = $data->id; $this->marketerid = $data->marketerid;
+        $this->name = $data->name;  $this->identity = $data->identity; 
+        $this->address = $data->address; $this->cellphone = $data->cellphone; 
+        $this->homephone = $data->homephone; $this->email = $data->email;
+        $this->paytype = $data->paytype; $this->service = $data->service; 
+        $this->servicename = $data->servicename; $this->subsperiod = $data->subsperiod;
+        $this->notes = $data->notes; $this->member = $data->member;
+        $this->navigate('edit');
+    }
+
+    public function update(){
+        $this->validateRule();
+        Customer::find($this->customerId)->where([
+            'marketerid' => $this->marketerid, 'name' => $this->name,
+            'identity' => $this->identity, 'address' => $this->address,
+            'cellphone' => $this->cellphone, 'homephone' => $this->homephone,
+            'email' => $this->email, 'paytype' => $this->paytype,
+            'service' => $this->service, 'servicename' => $this->servicename,
+            'subsperiod' => $this->subsperiod, 'notes' => $this->notes,
         ]);
+        $this->emptyValue();
+    }
+
+    public function validateRule(){
+        if($this->mode === 'add'){
+            $this->validate([
+                'marketerid' => 'required',
+                'statusdate' => 'required',
+                'name' => 'required',
+                'identity' => 'required',
+                'address' => 'required',
+                'cellphone' => 'required',
+                'homephone' => 'required',
+                'email' => 'required',
+                'paytype' => 'required',
+                'service' => 'required',
+                'servicename' => 'required',
+                'subsperiod' => 'required',
+                'notes' => 'required',
+            ], [
+                'marketerid.required' => 'Sales wajib dipilih',
+                'statusdate.required' => 'Tanggal wajib dipilih',
+                'name.required' => 'Nama wajib diisi',
+                'identity.required' => 'Nomor KTP wajib diisikan',
+                'address.required' => 'Alamat wajib diisikan',
+                'cellphone.required' => 'Nomor telepon wajib diisikan',
+                'homephone.required' => 'Nomor telepon rumah wajib diisikan',
+                'email.required' => 'Email wajib diisikan',
+                'paytype.required' => 'Data pembayaran wajib dipilih',
+                'service.required' => 'Data layanan wajib dipilih',
+                'servicename.required' => 'Paket layanan wajib dipilih',
+                'subsperiod.required' => 'Frekuensi layanan wajib dipilih',
+                'notes.required' => 'Keterangan wajib diisikan'
+            ]);
+        }else if($this->mode === 'edit'){
+            $this->validate([
+                'marketerid' => 'required',
+                'name' => 'required',
+                'identity' => 'required',
+                'address' => 'required',
+                'cellphone' => 'required',
+                'homephone' => 'required',
+                'email' => 'required',
+                'paytype' => 'required',
+                'service' => 'required',
+                'servicename' => 'required',
+                'subsperiod' => 'required',
+                'notes' => 'required',
+            ], [
+                'marketerid.required' => 'Sales wajib dipilih',
+                'name.required' => 'Nama wajib diisi',
+                'identity.required' => 'Nomor KTP wajib diisikan',
+                'address.required' => 'Alamat wajib diisikan',
+                'cellphone.required' => 'Nomor telepon wajib diisikan',
+                'homephone.required' => 'Nomor telepon rumah wajib diisikan',
+                'email.required' => 'Email wajib diisikan',
+                'paytype.required' => 'Data pembayaran wajib dipilih',
+                'service.required' => 'Data layanan wajib dipilih',
+                'servicename.required' => 'Paket layanan wajib dipilih',
+                'subsperiod.required' => 'Frekuensi layanan wajib dipilih',
+                'notes.required' => 'Keterangan wajib diisikan'
+            ]);
+        }
     }
 }

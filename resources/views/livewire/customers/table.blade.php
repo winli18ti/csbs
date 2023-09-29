@@ -85,8 +85,8 @@
 
   <div class="container-fluid d-flex gap-1 justify-content-end mt-4 mb-2">
     <button class="btn btn-outline-primary btn-sm"
-      wire:click.prevent="add">
-      Tambah Pelanggan
+      wire:click.prevent="navigate('add')">
+        Tambah Pelanggan
     </button>
   </div>
 
@@ -127,7 +127,7 @@
             @if(!($filterStatus === '' || $filterStatus === 'active'))
             <td class="text-center">{{$data->statusdate}}</td>
             @endif
-            <td><a href="#">{{$data->member}}</a></td>
+            <td><button wire:click.prevent="edit({{$data->id}})">{{$data->member}}</button></td>
             <td>{{$data->name}}</td>
             <td>{{$data->marketerid}}</td>
             <td>Paket Layanan</td>
