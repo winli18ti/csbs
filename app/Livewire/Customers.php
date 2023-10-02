@@ -4,18 +4,27 @@ namespace App\Livewire;
 
 use App\Models\Customer;
 use Livewire\Component;
-use Livewire\Attributes\Rule;
+use App\Models\CustomerService;
+use App\Models\Service;
+use App\Models\User;
 use Carbon\Carbon;
 
 class Customers extends Component{
     public $marketerid, $statusdate, $name, $identity, $address, 
-    $cellphone, $homephone, $email, $paytype, $service, 
-    $servicename, $subsperiod, $notes, $customerId, $member;
+    $cellphone, $homephone, $email, $paytype, $service = 'layanan reguler', 
+    $servicename, $subsperiod, $notes, $customerId, $member, $specialname, $specialprice, $specialinfo;
+
+    public $serviceData, $userData;
 
     public $mode = 'table'; public $title = 'Pelanggan';
     public $filterStatus = ''; public $filterPaytype = '';
     public $filterBillperiod = ''; public $filterSubsperiod = '';
     public $filterVip = '';
+
+    public function mount(){
+        $this->serviceData = Service::get();
+        $this->userData = User::get();
+    }
 
     public function render() {
         $table = Customer::select('*');
@@ -81,7 +90,7 @@ class Customers extends Component{
     public function update(){
         $this->validateRule();
         Customer::find($this->customerId)->where([
-            'marketerid' => $this->marketerid, 'name' => $this->name,
+            'name' => $this->name,
             'identity' => $this->identity, 'address' => $this->address,
             'cellphone' => $this->cellphone, 'homephone' => $this->homephone,
             'email' => $this->email, 'paytype' => $this->paytype,

@@ -24,10 +24,10 @@
               <div class="col-7 col-md-8">
                 <select id="marketerid" class="form-select form-select-sm"
                   wire:model.live="marketerid">
-                  <option value="" selected>Pilih</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+                  <option value="" selected>-- Pilih Sales --</option>
+                  @foreach($userData as $data)
+                    <option value="{{$data->id}}">{{$data->name}}</option>
+                  @endforeach
                 </select>
                 @error('marketerid') <span>{{$message}}</span> @enderror
               </div>
@@ -146,56 +146,88 @@
       
             <div class="d-flex justify-content-evenly mb-3">
               <div class="form-check form-check-inline">
-                <input type="radio" id="service1" wire:model.live="service" value="layanan requler" class="form-check-input">
+                <input type="radio" id="service1" wire:model.live="service" value="layanan reguler" class="form-check-input" {{ $service === 'layanan reguler' ? 'checked' : ''}}>
                 <label for="service1" class="form-check-label">Layanan reguler</label>
               </div>
               <div class="form-check form-check-inline">
-                <input type="radio" id="service2" wire:model.live="service" value="pembayaran non requler" class="form-check-input">
+                <input type="radio" id="service2" wire:model.live="service" value="pembayaran non reguler" class="form-check-input" {{ $service === 'pembayaran non reguler' ? 'checked' : ''}}>
                 <label for="service2" class="form-check-label">Pembayaran non reguler</label>
               </div>
               @error('service') <span>{{$message}}</span> @enderror
             </div>
-      
-            <div class="row align-items-center">
-              <div class="col-5 col-md-4">
-                <label for="servicename" class="col-form-label">Paket layanan</label>
+
+            @if($service === 'layanan reguler')
+              <div class="row align-items-center">
+                <div class="col-5 col-md-4">
+                  <label for="servicename" class="col-form-label">Paket layanan</label>
+                </div>
+                <div class="col-7 col-md-8">
+                  <select id="servicename" class="form-select form-select-sm" wire:model.live="servicename">
+                    <option value="" selected>-- Pilih Paket layanan --</option>
+                    @foreach($serviceData as $data)
+                      <option value="{{$data->id}}">{{$data->name}}</option>
+                    @endforeach
+                  </select>
+                  @error('servicename') <span>{{$message}}</span> @enderror
+                </div>
               </div>
-              <div class="col-7 col-md-8">
-                <select id="servicename" class="form-select form-select-sm" wire:model.live="servicename">
-                  <option value="asm_internet_50_mbps" selected>ASM Internet 50 MBPS</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
-                </select>
-                @error('servicename') <span>{{$message}}</span> @enderror
+        
+              <div class="row align-items-center">
+                <div class="col-5 col-md-4">
+                  <label for="subsperiod" class="col-form-label">Frekuensi layanan</label>
+                </div>
+                <div class="col-7 col-md-8">
+                  <select id="subsperiod" class="form-select form-select-sm" wire:model.live="subsperiod">
+                    <option value="" selected>Pilih</option>
+                    <option value="1">Per 1 bulan</option>
+                    <option value="3">Per 3 bulan</option>
+                    <option value="6">Per 6 bulan</option>
+                    <option value="12">Per 12 bulan</option>
+                  </select>
+                  @error('subsperiod') <span>{{$message}}</span> @endif
+                </div>
               </div>
-            </div>
-      
-            <div class="row align-items-center">
-              <div class="col-5 col-md-4">
-                <label for="subsperiod" class="col-form-label">Frekuensi layanan</label>
+        
+              <div class="row">
+                <div class="col-5 col-md-4">
+                  <label for="notes" class="col-form-label">Keterangan lain</label>
+                </div>
+                <div class="col-7 col-md-8">
+                  <textarea id="notes" wire:model.live="notes" rows="2" class="form-control form-control-sm"></textarea>
+                  @error('notes') <span>{{$message}}</span> @enderror
+                </div>
               </div>
-              <div class="col-7 col-md-8">
-                <select id="subsperiod" class="form-select form-select-sm" wire:model.live="subsperiod">
-                  <option value="" selected>Pilih</option>
-                  <option value="1">Per 1 bulan</option>
-                  <option value="3">Per 3 bulan</option>
-                  <option value="6">Per 6 bulan</option>
-                  <option value="12">Per 12 bulan</option>
-                </select>
-                @error('subsperiod') <span>{{$message}}</span> @endif
+            @elseif($service === 'pembayaran non reguler')
+              <div class="row">
+                <div class="col-5 col-md-4">
+                  <label for="specialname" class="col-form-label">Nama Paket</label>
+                </div>
+                <div class="col-7 col-md-8">
+                  <input type="text" id="specialname" class="form-control form-control-sm"
+                  wire:model.live="specialname">
+                  @error('specialname') <span>{{$message}}</span> @enderror
+                </div>
               </div>
-            </div>
-      
-            <div class="row">
-              <div class="col-5 col-md-4">
-                <label for="notes" class="col-form-label">Keterangan lain</label>
+              <div class="row">
+                <div class="col-5 col-md-4">
+                  <label for="specialprice" class="col-form-label">Total harga perbulan</label>
+                </div>
+                <div class="col-7 col-md-8">
+                  <input type="text" id="specialprice" class="form-control form-control-sm"
+                  wire:model.live="specialprice">
+                  @error('specialprice') <span>{{$message}}</span> @enderror
+                </div>
               </div>
-              <div class="col-7 col-md-8">
-                <textarea id="notes" wire:model.live="notes" rows="2" class="form-control form-control-sm"></textarea>
-                @error('notes') <span>{{$message}}</span> @enderror
+              <div class="row">
+                <div class="col-5 col-md-4">
+                  <label for="specialinfo" class="col-form-label">Keterangan lain</label>
+                </div>
+                <div class="col-7 col-md-8">
+                  <textarea id="specialinfo" wire:model.live="specialinfo" rows="2" class="form-control form-control-sm"></textarea>
+                  @error('specialinfo') <span>{{$message}}</span> @enderror
+                </div>
               </div>
-            </div>
+            @endif
           </fieldset>
       
           <fieldset class="border border-2 border-danger-subtle rounded-3 text-center p-3 my-3">

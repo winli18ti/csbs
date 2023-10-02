@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('customer_services', function (Blueprint $table) {
             $table->id();
+            $table->string('servicetype')->nullable();
             $table->string('specialname')->nullable();
             $table->integer('specialprice')->nullable();
             $table->string('specialinfo')->nullable();

@@ -17,7 +17,7 @@
           </div>
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
             <input type="text" name="nama_pelanggan" id="nama_pelanggan" class="form-control form-control-sm"
-              wire:model="nama_customer">
+              wire:model.live="name">
           </div>
         </div>
         
@@ -35,7 +35,7 @@
             <label for="ktp" class="col-form-label">No identitas (KTP)</label>
           </div>
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
-            <input type="text" name="ktp" id="ktp" class="form-control form-control-sm" value="{{$no_ktp}}">
+            <input type="text" name="ktp" id="ktp" class="form-control form-control-sm" wire:model.live="identity">
           </div>
         </div>
         
@@ -44,7 +44,7 @@
             <label for="alamat" class="col-form-label">Alamat</label>
           </div>
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
-            <textarea name="alamat" id="alamat" rows="2" class="form-control form-control-sm"></textarea>
+            <textarea name="alamat" id="alamat" rows="2" class="form-control form-control-sm" wire:model.live="address"></textarea>
           </div>
         </div>
         
@@ -77,7 +77,7 @@
           </div>
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
             <input type="email" name="email" id="email" class="form-control form-control-sm"
-              wire:model="email">
+              wire:model.live="email">
           </div>
         </div>
         
@@ -134,7 +134,7 @@
           </div>
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
             <input type="text" name="telepon_rumah" id="telepon_rumah" class="form-control form-control-sm"
-              wire:model="telepon_rumah">
+              wire:model.live="homephone">
           </div>
         </div>
         
@@ -153,7 +153,7 @@
           </div>
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
             <input type="text" name="telepon_seluler" id="telepon_seluler" class="form-control form-control-sm"
-              wire:model="no_hp">
+              wire:model.live="cellphone">
             <div class="form-text">
               <a href="#">Kirim SMS</a>
             </div>
@@ -231,11 +231,11 @@
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
             <div class="d-flex">
               <div class="form-check form-check-inline">
-                <input type="radio" name="pembayaran" id="pembayaran_rumah" class="form-check-input">
+                <input type="radio" name="pembayaran" id="pembayaran_rumah" class="form-check-input" {{ $paytype === 'penagihan ke pelanggan' ? 'checked' : ''}}>
                 <label for="pembayaran_rumah" class="form-check-label">Penagihan ke pelanggan</label>
               </div>
               <div class="form-check form-check-inline">
-                <input type="radio" name="pembayaran" id="pembayaran_kantor" class="form-check-input">
+                <input type="radio" name="pembayaran" id="pembayaran_kantor" class="form-check-input" {{ $paytype === 'pembayaran ke kantor' ? 'checked' : ''}}>
                 <label for="pembayaran_kantor" class="form-check-label">Pembayaran ke kantor</label>
               </div>
             </div>

@@ -13,6 +13,7 @@ class CustomerService extends Model
 
     protected $fillable = [
         'id',
+        'servicetype',
         'specialname',
         'specialprice',
         'specialinfo',
