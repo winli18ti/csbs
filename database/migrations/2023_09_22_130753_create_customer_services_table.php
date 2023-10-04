@@ -17,9 +17,11 @@ return new class extends Migration
             $table->string('specialname')->nullable();
             $table->integer('specialprice')->nullable();
             $table->string('specialinfo')->nullable();
-            $table->string('status');
-            $table->timestamp('sincedate');
+            $table->string('status')->nullable();
+            $table->timestamp('sincedate')->nullable();
             $table->integer('serviceid')->nullable();
+            $table->integer('subsperiod')->nullable();
+            $table->text('notes')->nullable();
             $table->integer('customerid')->nullable();
             $table->timestamps();
         });

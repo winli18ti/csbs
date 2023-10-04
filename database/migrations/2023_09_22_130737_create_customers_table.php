@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
-            $table->string('member');
-            $table->string('name');
+            $table->string('member')->nullable();
+            $table->string('name')->nullable();
             $table->string('company')->nullable();
             $table->string('identity')->nullable();
             $table->string('address')->nullable();
@@ -27,12 +27,10 @@ return new class extends Migration
             $table->string('cellphone')->nullable();
             $table->string('paytype')->nullable();
             $table->integer('billperiod')->nullable();
-            $table->integer('subsperiod')->nullable();
             $table->integer('tvcount')->nullable();
-            $table->string('node');
+            $table->string('node')->nullable();
             $table->string('status')->nullable();
             $table->timestamp('statusdate')->nullable();
-            $table->text('notes')->nullable();
             $table->integer('marketerid')->nullable();
             $table->timestamps();
         });

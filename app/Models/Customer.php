@@ -26,12 +26,10 @@ class Customer extends Model
         'cellphone',
         'paytype',
         'billperiod',
-        'subsperiod',
         'tvcount',
         'node',
         'status',
         'statusdate',
-        'notes',
         'marketerid',
     ];
     

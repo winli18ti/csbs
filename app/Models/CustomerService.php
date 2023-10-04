@@ -20,6 +20,8 @@ class CustomerService extends Model
         'status',
         'sincedate',
         'serviceid',
+        'subsperiod',
+        'notes',
         'customerid',
     ];
     

@@ -146,11 +146,11 @@
       
             <div class="d-flex justify-content-evenly mb-3">
               <div class="form-check form-check-inline">
-                <input type="radio" id="service1" wire:model.live="service" value="layanan reguler" class="form-check-input" {{ $service === 'layanan reguler' ? 'checked' : ''}}>
+                <input type="radio" id="service1" wire:model.live="service" value="layanan reguler" class="form-check-input">
                 <label for="service1" class="form-check-label">Layanan reguler</label>
               </div>
               <div class="form-check form-check-inline">
-                <input type="radio" id="service2" wire:model.live="service" value="pembayaran non reguler" class="form-check-input" {{ $service === 'pembayaran non reguler' ? 'checked' : ''}}>
+                <input type="radio" id="service2" wire:model.live="service" value="pembayaran non reguler" class="form-check-input">
                 <label for="service2" class="form-check-label">Pembayaran non reguler</label>
               </div>
               @error('service') <span>{{$message}}</span> @enderror
