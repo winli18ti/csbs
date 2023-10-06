@@ -3,8 +3,8 @@
 namespace App\Livewire;
 
 use App\Models\Customer;
+use App\Models\Marketer;
 use Livewire\Component;
-use Livewire\Attributes\Rule;
 
 class CustomerDetail extends Component {
 
@@ -12,40 +12,69 @@ class CustomerDetail extends Component {
   $address, $city, $email, $vip, $effectivedate,
   $node, $marketerid, $homephone, $officephone, $cellphone,
   $servicetype, $specialprice, $specialinfo, $paytype,
-  $billperiod, $subsperiod, $tvcount, $notes;
+  $billperiod, $subsperiod, $tvcount, $notes, $status;
   
-  public $currentTab = 'profil';
+  public $currentTab = 'profile';
+
+  public $marketerData;
 
   public function mount($id) {
-    $data = Customer::find($id);
-
-    $this->id = $data->id;
-    $this->member = $data->member;
-    $this->name = $data->name;
-    $this->company = $data->company;
-    $this->identity = $data->identity;
-    $this->address = $data->address;
-    $this->city = $data->city;
-    $this->email = $data->email;
-    $this->vip = $data->vip;
-    $this->effectivedate = $data->effectivedate;
-    $this->node = $data->node;
-    $this->marketerid = $data->marketerid;
-    $this->homephone = $data->homephone;
-    $this->officephone = $data->officephone;
-    $this->cellphone = $data->cellphone;
-    $this->servicetype = $data->servicetype;
-    $this->specialprice = $data->specialprice;
-    $this->specialinfo = $data->specialinfo;
-    $this->paytype = $data->paytype;
-    $this->billperiod = $data->billperiod;
-    $this->subsperiod = $data->subsperiod;
-    $this->tvcount = $data->tvcount;
-    $this->notes = $data->notes;
+    $this->id = $id;
+    $this->marketerData = Marketer::get();
   }
 
   public function render() {
-    return view('livewire.pelanggan-detail');
+    if ($this->currentTab === 'profile') {
+      $data = Customer::find($this->id);
+      $this->member = $data->member;
+      $this->name = $data->name;
+      $this->company = $data->company;
+      $this->identity = $data->identity;
+      $this->address = $data->address;
+      $this->city = $data->city;
+      $this->email = $data->email;
+      $this->vip = $data->vip;
+      $this->effectivedate = $data->effectivedate;
+      $this->node = $data->node;
+      $this->marketerid = $data->marketerid;
+      $this->homephone = $data->homephone;
+      $this->officephone = $data->officephone;
+      $this->cellphone = $data->cellphone;
+      $this->servicetype = $data->servicetype;
+      $this->specialprice = $data->specialprice;
+      $this->specialinfo = $data->specialinfo;
+      $this->paytype = $data->paytype;
+      $this->billperiod = $data->billperiod;
+      $this->subsperiod = $data->subsperiod;
+      $this->tvcount = $data->tvcount;
+      $this->notes = $data->notes;
+    }
+    else if ($this->currentTab === 'service') {
+      $data = Customer::find($this->id);
+      $this->member = $data->member;
+      $this->name = $data->name;
+      $this->status = $data->status;
+      $this->address = $data->address;
+    }
+    else if ($this->currentTab === 'invoice') {
+      $data = Customer::find($this->id);
+      $this->member = $data->member;
+      $this->name = $data->name;
+      
+    }
+    else if ($this->currentTab === 'spk') {
+      $data = Customer::find($this->id);
+      $this->member = $data->member;
+      $this->name = $data->name;
+      
+    }
+    else if ($this->currentTab === 'complain') {
+      $data = Customer::find($this->id);
+      $this->member = $data->member;
+      $this->name = $data->name;
+      
+    }
+    return view('livewire.customer-detail');
   }
 
   public function navigate($tab) {
@@ -80,6 +109,12 @@ class CustomerDetail extends Component {
 
     session()->flash('message', 'Pelanggan berhasil diubah');
     return redirect()->route('customers');
+  }
+
+  public function cancel() {
+    Customer::where('id', $this->id)->update([
+      'status' => 'cancel'
+    ]);
   }
 }
 ?>

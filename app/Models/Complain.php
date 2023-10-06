@@ -19,7 +19,7 @@ class Complain extends Model{
         'source',
         'submittedby',
         'subject',
-        'complain',
+        'description',
         'solution',
         'acceptedby',
         'updatedby',

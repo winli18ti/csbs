@@ -14,4 +14,8 @@ class Marketer extends Model
         'name',
         'status',
     ];
+
+    public function users() {
+        return $this->hasMany(Customer::class, 'marketerid');
+    }
 }

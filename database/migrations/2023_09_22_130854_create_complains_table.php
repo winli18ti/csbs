@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('source');
             $table->string('submittedby');
             $table->string('subject');
-            $table->string('complain');
-            $table->string('solution')->nullable();
+            $table->text('description');
+            $table->text('solution')->nullable();
             $table->string('acceptedby')->nullable();
             $table->string('updatedby')->nullable();
             $table->integer('customerid');

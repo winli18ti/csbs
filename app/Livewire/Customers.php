@@ -5,8 +5,9 @@ namespace App\Livewire;
 use App\Models\Customer;
 use Livewire\Component;
 use App\Models\CustomerService;
+use App\Models\Marketer;
 use App\Models\Service;
-use App\Models\User;
+use App\Models\Spk;
 use Carbon\Carbon;
 
 class Customers extends Component{
@@ -14,7 +15,7 @@ class Customers extends Component{
     $cellphone, $homephone, $email, $paytype = 'penagihan ke pelanggan', $service = 'layanan reguler', 
     $servicename, $subsperiod, $notes, $customerId, $member, $specialname, $specialprice, $specialinfo;
 
-    public $serviceData, $userData;
+    public $serviceData, $marketerData;
 
     public $mode = 'table'; public $title = 'Pelanggan';
     public $filterStatus = ''; public $filterPaytype = '';
@@ -23,7 +24,7 @@ class Customers extends Component{
 
     public function mount(){
         $this->serviceData = Service::get();
-        $this->userData = User::get();
+        $this->marketerData = Marketer::get();
     }
 
     public function render() {
@@ -61,28 +62,39 @@ class Customers extends Component{
     }
 
     public function create() {
-        $this->validateRule('create');
+        $this->validateRule();
         $date = Carbon::create($this->statusdate)->now();
+        $member = substr(str_replace('-', '',$date->toDateString()), 2, 4);
         $custData = Customer::create([
-            'member' => substr(str_replace('-', '',$date->toDateString()), 2, 4),
+            'member' => $member,
             'marketerid' => $this->marketerid , 'statusdate' => $this->statusdate, 'name' => $this->name,
             'identity' => $this->identity, 'address' => $this->address, 'cellphone' => $this->cellphone,
             'homephone' => $this->homephone, 'email' => $this->email, 'paytype' => $this->paytype, 'node' => 'NUL',
+            'status' => 'registration',
         ]);
         if($this->service === 'layanan reguler'){
             CustomerService::create([
                 'servicetype' => $this->service, 'serviceid' => $this->servicename, 'subsperiod' => $this->subsperiod,
-                'notes' => $this->notes, 'customerid' => $custData->id
+                'notes' => $this->notes, 'customerid' => $custData->id,
+                'status' => 'tidak aktif',
             ]);
         }else if($this->service === 'pembayaran non reguler'){
             CustomerService::create([
                 'servicetype' => $this->service, 'specialname' => $this->specialname, 'specialprice' => $this->specialprice,
-                'specialinfo' => $this->specialinfo, 'customerid' => $custData->id
+                'specialinfo' => $this->specialinfo, 'customerid' => $custData->id,
+                'status' => 'tidak aktif',
             ]);
         }
+        Spk::create([
+            'category' => 'registrasi',
+            'spknumber' => substr(str_replace('-', '', $date->toDateString()), 0, 6),
+            'service' => '???',
+            'servicetype' => 'tv & internet',
+            'status' => 'blm proses',
+        ]);
         session()->flash('message', $this->title.' baru berhasil ditambah');
         $this->emptyValue();
-        $this->navigate('table');
+        return redirect('/customer_detail/'.$custData->id);
     }
 
     public function edit($slug){
@@ -97,110 +109,46 @@ class Customers extends Component{
         $this->navigate('edit');
     }
 
-    public function update(){
-        $this->validateRule();
-        Customer::find($this->customerId)->where([
-            'name' => $this->name,
-            'identity' => $this->identity, 'address' => $this->address,
-            'cellphone' => $this->cellphone, 'homephone' => $this->homephone,
-            'email' => $this->email, 'paytype' => $this->paytype,
-            'service' => $this->service, 'servicename' => $this->servicename,
-            'subsperiod' => $this->subsperiod, 'notes' => $this->notes,
-        ]);
-        $this->emptyValue();
-    }
-
     public function validateRule(){
         if($this->mode === 'add'){
             if($this->service === 'layanan reguler'){
                 $this->validate([
-                    'marketerid' => 'required',
                     'statusdate' => 'required',
                     'name' => 'required',
-                    'identity' => 'required',
                     'address' => 'required',
-                    'cellphone' => 'required',
-                    'homephone' => 'required',
-                    'email' => 'required',
                     'paytype' => 'required',
                     'service' => 'required',
                     'servicename' => 'required',
                     'subsperiod' => 'required',
-                    'notes' => 'required',
                 ], [
-                    'marketerid.required' => 'Sales wajib dipilih',
-                    'statusdate.required' => 'Tanggal wajib dipilih',
+                    'statusdate.required' => 'Tanggal registrasi wajib dipilih',
                     'name.required' => 'Nama wajib diisi',
-                    'identity.required' => 'Nomor KTP wajib diisikan',
                     'address.required' => 'Alamat wajib diisikan',
-                    'cellphone.required' => 'Nomor telepon wajib diisikan',
-                    'homephone.required' => 'Nomor telepon rumah wajib diisikan',
-                    'email.required' => 'Email wajib diisikan',
                     'paytype.required' => 'Data pembayaran wajib dipilih',
                     'service.required' => 'Data layanan wajib dipilih',
                     'servicename.required' => 'Paket layanan wajib dipilih',
                     'subsperiod.required' => 'Frekuensi layanan wajib dipilih',
-                    'notes.required' => 'Keterangan wajib diisikan'
                 ]);
             }else if($this->service === 'pembayaran non reguler'){
                 $this->validate([
-                    'marketerid' => 'required',
                     'statusdate' => 'required',
                     'name' => 'required',
-                    'identity' => 'required',
                     'address' => 'required',
-                    'cellphone' => 'required',
-                    'homephone' => 'required',
-                    'email' => 'required',
                     'paytype' => 'required',
                     'service' => 'required',
                     'specialname' => 'required',
                     'specialprice' => 'required',
                     'specialinfo' => 'required',
                 ], [
-                    'marketerid.required' => 'Sales wajib dipilih',
-                    'statusdate.required' => 'Tanggal wajib dipilih',
+                    'statusdate.required' => 'Tanggal registrasi wajib dipilih',
                     'name.required' => 'Nama wajib diisi',
-                    'identity.required' => 'Nomor KTP wajib diisikan',
                     'address.required' => 'Alamat wajib diisikan',
-                    'cellphone.required' => 'Nomor telepon wajib diisikan',
-                    'homephone.required' => 'Nomor telepon rumah wajib diisikan',
-                    'email.required' => 'Email wajib diisikan',
                     'paytype.required' => 'Data pembayaran wajib dipilih',
                     'service.required' => 'Data layanan wajib dipilih',
                     'specialname.required' => 'Nama paket spesial wajib diisikan',
                     'specialprice.required' => 'Harga paket spesial wajib diisikan',
-                    'specialinfo.required' => 'Keterangan paket spesial wajib diisikan'
                 ]);
             }
-        }else if($this->mode === 'edit'){
-            $this->validate([
-                'marketerid' => 'required',
-                'name' => 'required',
-                'identity' => 'required',
-                'address' => 'required',
-                'cellphone' => 'required',
-                'homephone' => 'required',
-                'email' => 'required',
-                'paytype' => 'required',
-                'service' => 'required',
-                'servicename' => 'required',
-                'subsperiod' => 'required',
-                'notes' => 'required',
-            ], [
-                'marketerid.required' => 'Sales wajib dipilih',
-                'name.required' => 'Nama wajib diisi',
-                'identity.required' => 'Nomor KTP wajib diisikan',
-                'address.required' => 'Alamat wajib diisikan',
-                'cellphone.required' => 'Nomor telepon wajib diisikan',
-                'homephone.required' => 'Nomor telepon rumah wajib diisikan',
-                'email.required' => 'Email wajib diisikan',
-                'paytype.required' => 'Data pembayaran wajib dipilih',
-                'service.required' => 'Data layanan wajib dipilih',
-                'servicename.required' => 'Paket layanan wajib dipilih',
-                'subsperiod.required' => 'Frekuensi layanan wajib dipilih',
-                'notes.required' => 'Keterangan wajib diisikan'
-            ]);
         }
     }
 }

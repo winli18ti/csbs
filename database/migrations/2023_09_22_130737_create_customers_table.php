@@ -32,6 +32,7 @@ return new class extends Migration
             $table->string('status')->nullable();
             $table->timestamp('statusdate')->nullable();
             $table->integer('marketerid')->nullable();
+            $table->longText('notes')->nullable();
             $table->timestamps();
         });
     }

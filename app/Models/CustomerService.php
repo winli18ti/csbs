@@ -27,4 +27,20 @@ class CustomerService extends Model
     
     public function service() { return $this->belongsTo(Service::class,'serviceid'); }
     public function customer() { return $this->belongsTo(Customer::class,'customerid'); }
+
+    public function installations() {
+        return $this->hasMany(Installation::class, 'customerserviceid');
+    }
+
+    public function internets() {
+        return $this->hasMany(Internet::class, 'customerserviceid');
+    }
+
+    public function tvanalogs() {
+        return $this->hasMany(TvAnalog::class, 'customerserviceid');
+    }
+
+    public function tvdigitals() {
+        return $this->hasMany(TvDigital::class, 'customerserviceid');
+    }
 }

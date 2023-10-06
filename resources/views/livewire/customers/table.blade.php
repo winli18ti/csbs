@@ -14,7 +14,7 @@
           <option value="">Semua</option>
           <option value="active">Aktif</option>
           <option value="suspend">Nonaktif</option>
-          <option value="register">Registrasi</option>
+          <option value="registration">Registrasi</option>
           <option value="req dismantle">Request Dismantle</option>
           <option value="dismantle">Berhenti</option>
           <option value="cancel">Batal</option>
@@ -127,7 +127,7 @@
             @if(!($filterStatus === '' || $filterStatus === 'active'))
             <td class="text-center">{{$data->statusdate}}</td>
             @endif
-            <td><button wire:click.prevent="edit({{$data->id}})">{{$data->member}}</button></td>
+            <td><a class="text-danger-emphasis" href="/customer_detail/{{$data->id}}">{{$data->member}}</a></td>
             <td>{{$data->name}}</td>
             <td>{{$data->marketerid}}</td>
             <td>Paket Layanan</td>
@@ -149,7 +149,7 @@
               <span class="badge text-bg-success">{{$data->node}}</span>
               @elseif($data->status === 'suspend')
               <span class="badge text-bg-primary">{{$data->node}}</span>
-              @elseif($data->status === 'register')
+              @elseif($data->status === 'registration')
               <span class="badge text-bg-info">{{$data->node}}</span>
               @elseif($data->status === 'req dismantle')
               <span class="badge text-bg-warning">{{$data->node}}</span>
@@ -161,7 +161,7 @@
             </td>
             <td class="text-center">
               <a class="btn btn-outline-warning btn-sm" 
-                href="/pelanggan_detail/{{$data->id}}">
+                href="/customer_detail/{{$data->id}}">
                 Ubah
               </a>
             </td>

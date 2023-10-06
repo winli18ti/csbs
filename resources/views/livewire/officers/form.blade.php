@@ -34,9 +34,9 @@
       </div>
       <div class="col-7 col-sm-5 col-md-4 col-lg-3">
         @error('name')
-        <div class="alert alert-danger my-3">
+        <span class="text-danger fw-light">
           {{ $message }}
-        </div>
+        </span>
         @enderror
       </div>
     </div>

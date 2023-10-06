@@ -8,7 +8,7 @@
           </div>
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
             <input type="text" id="member" class="form-control form-control-sm" 
-              wire:model.live="member" readonly>
+              wire:model="member" readonly>
           </div>
         </div>
 
@@ -18,7 +18,7 @@
           </div>
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
             <input type="text" id="name" class="form-control form-control-sm"
-              wire:model.live="name">
+              wire:model="name">
           </div>
         </div>
         
@@ -28,7 +28,7 @@
           </div>
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
             <input type="text" id="company" class="form-control form-control-sm"
-              wire:model.live="company">
+              wire:model="company">
           </div>
         </div>
         
@@ -38,7 +38,7 @@
           </div>
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
             <input type="text" id="identity" class="form-control form-control-sm"
-              wire:model.live="identity">
+              wire:model="identity">
           </div>
         </div>
         
@@ -48,7 +48,7 @@
           </div>
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
             <textarea id="address" rows="2" class="form-control form-control-sm"
-              wire:model.live="address"></textarea>
+              wire:model="address"></textarea>
           </div>
         </div>
         
@@ -58,7 +58,7 @@
           </div>
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
             <select id="city" class="form-select form-select-sm"
-              wire:model.live="city">
+              wire:model="city">
               <option value="" selected>Pekanbaru, Riau</option>
               <option value="1">One</option>
               <option value="2">Two</option>
@@ -73,7 +73,7 @@
           </div>
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
             <input type="email" name="email" id="email" class="form-control form-control-sm"
-              wire:model.live="email">
+              wire:model="email">
           </div>
         </div>
         
@@ -84,7 +84,7 @@
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
             <div class="form-check">
               <input type="checkbox" class="form-check-input" value="1" id="vip"
-                wire:model.live="vip">
+                wire:model="vip">
             </div>
           </div>
         </div>
@@ -95,8 +95,7 @@
           </div>
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
             <input type="date" id="effectivedate" class="form-control form-control-sm" 
-              value="2023-08-31" min="2023-08-31"
-              wire:model.live="effectivedate">
+              wire:model="effectivedate">
           </div>
         </div>
 
@@ -106,7 +105,7 @@
           </div>
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
             <select id="node" class="form-select form-select-sm"
-              wire:model.live="node">
+              wire:model="node">
               <option value="NUL" selected>NUL</option>
               <option value="FN1">FN 1</option>
             </select>
@@ -119,9 +118,11 @@
           </div>
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
             <select id="marketerid" class="form-select form-select-sm"
-              wire:model.live="marketerid">
-              <option value="" selected>Pilih</option>
-              <option value="1">One</option>
+              wire:model="marketerid">
+              <option value="" selected>-- Pilih Sales --</option>
+              @foreach($marketerData as $data)
+                <option value="{{$data->id}}">{{$data->name}}</option>
+              @endforeach
             </select>
           </div>
         </div>
@@ -134,7 +135,7 @@
           </div>
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
             <input type="text" id="homephone" class="form-control form-control-sm"
-              wire:model.live="homephone">
+              wire:model="homephone">
           </div>
         </div>
         
@@ -144,7 +145,7 @@
           </div>
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
             <input type="text" id="officephone" class="form-control form-control-sm"
-              wire:model.live="officephone">
+              wire:model="officephone">
           </div>
         </div>
         
@@ -154,7 +155,7 @@
           </div>
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
             <input type="text" id="cellphone" class="form-control form-control-sm"
-              wire:model.live="cellphone">
+              wire:model="cellphone">
             <div class="form-text">
               <a href="#">Kirim SMS</a>
             </div>
@@ -168,11 +169,11 @@
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
             <div class="d-flex">
               <div class="form-check form-check-inline">
-                <input type="radio" name="servicetype" id="servicetype1" value="reguler" class="form-check-input" checked>
+                <input type="radio" name="servicetype" id="servicetype1" value="reguler" class="form-check-input" wire:model="servicetype">
                 <label for="servicetype1" class="form-check-label">Layanan reguler</label>
               </div>
               <div class="form-check form-check-inline">
-                <input type="radio" name="servicetype" id="servicetype2" value="special" class="form-check-input">
+                <input type="radio" name="servicetype" id="servicetype2" value="special" class="form-check-input" wire:model="servicetype">
                 <label for="servicetype2" class="form-check-label">Pembayaran non reguler</label>
               </div>
             </div>
@@ -185,7 +186,7 @@
           </div>
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
             <input type="number" id="specialprice" class="form-control form-control-sm" min="0"
-              wire:model.live="specialprice">
+              wire:model="specialprice">
           </div>
         </div>
         
@@ -195,7 +196,7 @@
           </div>
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
             <input type="text" id="specialinfo" class="form-control form-control-sm"
-              wire:model.live="specialinfo">
+              wire:model="specialinfo">
           </div>
         </div>
         
@@ -206,11 +207,11 @@
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
             <div class="d-flex">
               <div class="form-check form-check-inline">
-                <input type="radio" name="paytype" id="paytype1" value="penagihan ke pelanggan" class="form-check-input">
+                <input type="radio" name="paytype" id="paytype1" value="penagihan ke pelanggan" class="form-check-input" wire:model="paytype">
                 <label for="paytype1" class="form-check-label">Penagihan ke pelanggan</label>
               </div>
               <div class="form-check form-check-inline">
-                <input type="radio" name="paytype" id="paytype2" value="pembayaran ke kantor" class="form-check-input">
+                <input type="radio" name="paytype" id="paytype2" value="pembayaran ke kantor" class="form-check-input" wire:model="paytype">
                 <label for="paytype2" class="form-check-label">Pembayaran ke kantor</label>
               </div>
             </div>
@@ -223,7 +224,7 @@
           </div>
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
             <select id="billperiod" class="form-select form-select-sm"
-              wire:model.live="billperiod">
+              wire:model="billperiod">
               <option value="1" selected>1</option>
               <option value="15">15</option>
             </select>
@@ -236,8 +237,8 @@
           </div>
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
             <select id="subsperiod" class="form-select form-select-sm"
-              wire:model.live="subsperiod">
-              <option value="1" selected>Per 1 bulan</option>
+              wire:model="subsperiod">
+              <option value="1">Per 1 bulan</option>
               <option value="3">Per 3 bulan</option>
               <option value="6">Per 6 bulan</option>
               <option value="12">Per 12 bulan</option>
@@ -251,7 +252,7 @@
           </div>
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
             <input type="number" id="tvcount" min="0" class="form-control form-control-sm"
-              wire:model.live="tvcount">
+              wire:model="tvcount">
           </div>
         </div>
       </div>
@@ -263,7 +264,7 @@
       </div>
       <div class="col-7 col-sm-10 col-lg-10">
         <textarea id="notes" rows="2" class="form-control form-control-sm"
-          wire:model.live="notes"></textarea>
+          wire:model="notes"></textarea>
       </div>
     </div>
 

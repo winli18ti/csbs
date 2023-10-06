@@ -14,4 +14,8 @@ class Collector extends Model
         'name',
         'status',
     ];
+
+    public function invoices() {
+        return $this->hasMany(Invoice::class, 'collectorid');
+    }
 }

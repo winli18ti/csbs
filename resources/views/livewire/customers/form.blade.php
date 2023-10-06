@@ -25,11 +25,10 @@
                 <select id="marketerid" class="form-select form-select-sm"
                   wire:model.live="marketerid">
                   <option value="" selected>-- Pilih Sales --</option>
-                  @foreach($userData as $data)
+                  @foreach($marketerData as $data)
                     <option value="{{$data->id}}">{{$data->name}}</option>
                   @endforeach
                 </select>
-                @error('marketerid') <span>{{$message}}</span> @enderror
               </div>
             </div>
       
@@ -41,7 +40,7 @@
                 <input type="date" id="statusdate" class="form-control form-control-sm" 
                   value="2023-08-31" min="2023-08-31"
                   wire:model.live="statusdate">
-                @error('statusdate') <span>{{$message}}</span> @enderror
+                @error('statusdate') <span class="text-danger fw-light">{{$message}}</span> @enderror
               </div>
             </div>
           </fieldset>
@@ -56,7 +55,7 @@
               <div class="col-7 col-md-8">
                 <input type="text" id="name" class="form-control form-control-sm" 
                   wire:model.live="name">
-                @error('name')<span>{{ $message }}</span>@enderror
+                @error('name')<span class="text-danger fw-light">{{ $message }}</span>@enderror
               </div>
             </div>
       
@@ -67,7 +66,6 @@
               <div class="col-7 col-md-8">
                 <input type="text" id="identity" class="form-control form-control-sm" 
                 wire:model.live="identity">
-                @error('identity') <span>{{$message}}</span> @enderror
               </div>
             </div>
       
@@ -78,7 +76,7 @@
               <div class="col-7 col-md-8">
                 <textarea id="address" rows="2" class="form-control form-control-sm"
                   wire:model.live="address"></textarea>
-                  @error('address')<span>{{ $message }}</span>@enderror
+                  @error('address')<span class="text-danger fw-light">{{ $message }}</span>@enderror
               </div>
             </div>
       
@@ -90,7 +88,6 @@
                 <input type="text" id="cellphone" class="form-control form-control-sm"
                   aria-describedby="cellphone_help" 
                   wire:model.live="cellphone">
-                  @error('cellphone') <span>{{$message}}</span> @enderror
                 <div id="cellphone_help" class="form-text">
                   <p>
                     Mohon diisi <span class="fw-bold text-uppercase">hanya nomor hp saja</span>
@@ -111,7 +108,6 @@
               <div class="col-7 col-md-8">
                 <input type="text" id="homephone" class="form-control form-control-sm"
                   wire:model.live="homephone">
-                @error('homephone') <span>{{$message}}</span> @enderror
               </div>
             </div>
       
@@ -122,7 +118,6 @@
               <div class="col-7 col-md-8">
                 <input type="email" name="email" id="email" class="form-control form-control-sm"
                   wire:model.live="email">
-                @error('email') <span>{{$message}}</span> @enderror
               </div>
             </div>
           </fieldset>
@@ -138,7 +133,7 @@
               <input type="radio" id="paytype2" wire:model.live="paytype" value="pembayaran ke kantor" class="form-check-input">
               <label for="paytype2" class="form-check-label">Pembayaran langsung ke kantor</label>
             </div>
-            @error('paytype') <span>{{$message}}</span> @enderror
+            @error('paytype') <span class="text-danger fw-light">{{$message}}</span> @enderror
           </fieldset>
       
           <fieldset class="border border-2 border-danger-subtle rounded-3 px-3 pb-3 my-2">
@@ -153,7 +148,7 @@
                 <input type="radio" id="service2" wire:model.live="service" value="pembayaran non reguler" class="form-check-input">
                 <label for="service2" class="form-check-label">Pembayaran non reguler</label>
               </div>
-              @error('service') <span>{{$message}}</span> @enderror
+              @error('service') <span class="text-danger fw-light">{{$message}}</span> @enderror
             </div>
 
             @if($service === 'layanan reguler')
@@ -168,7 +163,7 @@
                       <option value="{{$data->id}}">{{$data->name}}</option>
                     @endforeach
                   </select>
-                  @error('servicename') <span>{{$message}}</span> @enderror
+                  @error('servicename') <span class="text-danger fw-light">{{$message}}</span> @enderror
                 </div>
               </div>
         
@@ -178,13 +173,13 @@
                 </div>
                 <div class="col-7 col-md-8">
                   <select id="subsperiod" class="form-select form-select-sm" wire:model.live="subsperiod">
-                    <option value="" selected>Pilih</option>
+                    <option value="" selected>-- Pilih --</option>
                     <option value="1">Per 1 bulan</option>
                     <option value="3">Per 3 bulan</option>
                     <option value="6">Per 6 bulan</option>
                     <option value="12">Per 12 bulan</option>
                   </select>
-                  @error('subsperiod') <span>{{$message}}</span> @endif
+                  @error('subsperiod') <span class="text-danger fw-light">{{$message}}</span> @endif
                 </div>
               </div>
         
@@ -194,7 +189,6 @@
                 </div>
                 <div class="col-7 col-md-8">
                   <textarea id="notes" wire:model.live="notes" rows="2" class="form-control form-control-sm"></textarea>
-                  @error('notes') <span>{{$message}}</span> @enderror
                 </div>
               </div>
             @elseif($service === 'pembayaran non reguler')
@@ -205,7 +199,7 @@
                 <div class="col-7 col-md-8">
                   <input type="text" id="specialname" class="form-control form-control-sm"
                   wire:model.live="specialname">
-                  @error('specialname') <span>{{$message}}</span> @enderror
+                  @error('specialname') <span class="text-danger fw-light">{{$message}}</span> @enderror
                 </div>
               </div>
               <div class="row">
@@ -215,7 +209,7 @@
                 <div class="col-7 col-md-8">
                   <input type="text" id="specialprice" class="form-control form-control-sm"
                   wire:model.live="specialprice">
-                  @error('specialprice') <span>{{$message}}</span> @enderror
+                  @error('specialprice') <span class="text-danger fw-light">{{$message}}</span> @enderror
                 </div>
               </div>
               <div class="row">
@@ -224,7 +218,6 @@
                 </div>
                 <div class="col-7 col-md-8">
                   <textarea id="specialinfo" wire:model.live="specialinfo" rows="2" class="form-control form-control-sm"></textarea>
-                  @error('specialinfo') <span>{{$message}}</span> @enderror
                 </div>
               </div>
             @endif

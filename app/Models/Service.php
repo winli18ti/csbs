@@ -15,4 +15,12 @@ class Service extends Model
         'info',
         'price',
     ];
+
+    public function customerServices() {
+        return $this->hasMany(CustomerService::class, 'serviceid');
+    }
+
+    public function invoices() {
+        return $this->hasMany(Invoice::class, 'serviceid');
+    }
 }

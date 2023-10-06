@@ -2,39 +2,51 @@
   <div class="container-fluid">
     <div class="row align-items-center">
       <div class="col-5 col-sm-4 col-md-3 col-xl-2">
-        <label for="kode_sales" class="col-form-label">No pelanggan</label>
+        <label for="member" class="col-form-label">No pelanggan</label>
       </div>
       <div class="col-7 col-sm-5 col-md-4 col-lg-3">
-        <input type="text" name="no_pelanggan" id="no_pelanggan" 
-          class="form-control form-control-sm" wire:model="id">
+        <input type="text" id="member" 
+          class="form-control form-control-sm" wire:model="member" readonly>
       </div>
     </div>
 
     <div class="row align-items-center">
       <div class="col-5 col-sm-4 col-md-3 col-xl-2">
-        <label for="nama_pelanggan" class="col-form-label">Nama pelanggan</label>
+        <label for="name" class="col-form-label">Nama pelanggan</label>
       </div>
       <div class="col-7 col-sm-5 col-md-4 col-lg-3">
-        <input type="text" name="nama_pelanggan" id="nama_pelanggan" 
-          class="form-control form-control-sm" wire:model="nama_customer">
+        <input type="text" id="name" 
+          class="form-control form-control-sm" wire:model="name" readonly>
       </div>
     </div>
 
     <div class="row align-items-center">
       <div class="col-5 col-sm-4 col-md-3 col-xl-2">
-        <label for="status_layanan" class="col-form-label">Status Layanan</label>
+        <label for="status" class="col-form-label">Status Layanan</label>
       </div>
       <div class="col-7 col-sm-5 col-md-4 col-lg-3">
-        <span id="status_layanan" class="badge text-bg-success">Active</span>
+        @if($status === 'active')
+        <span class="badge text-bg-success text-uppercase">{{$status}}</span>
+        @elseif($status === 'suspend')
+        <span class="badge text-bg-primary text-uppercase">{{$status}}</span>
+        @elseif($status === 'registration')
+        <span class="badge text-bg-info text-uppercase">{{$status}}</span>
+        @elseif($status === 'req dismantle')
+        <span class="badge text-bg-warning text-uppercase">{{$status}}</span>
+        @elseif($status === 'dismantle')
+        <span class="badge text-bg-danger text-uppercase">{{$status}}</span>
+        @elseif($status === 'cancel')
+        <span class="badge text-bg-secondary text-uppercase">{{$status}}</span>
+        @endif
       </div>
     </div>
 
     <div class="row align-items-center">
       <div class="col-5 col-sm-4 col-md-3 col-xl-2">
-        <label for="alamat" class="col-form-label">Alamat Pemasangan</label>
+        <label for="address" class="col-form-label">Alamat Pemasangan</label>
       </div>
       <div class="col-7 col-sm-5 col-md-4 col-lg-3">
-        <textarea readonly name="alamat" id="alamat" rows="2" class="form-control form-control-sm"></textarea>
+        <textarea readonly id="address" rows="2" class="form-control form-control-sm" wire:model="address" readonly></textarea>
       </div>
     </div>
   </div>

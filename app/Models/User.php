@@ -18,4 +18,8 @@ class User extends Model
         'notes',
         'status'
     ];
+
+    public function invoices() {
+        return $this->hasMany(Invoice::class, 'userid');
+    }
 }

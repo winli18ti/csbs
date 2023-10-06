@@ -20,7 +20,7 @@
           <div class="col-7 col-md-8">
             <input type="text" id="name" class="form-control form-control-sm" 
               wire:model="name">
-            @error('name')<span>{{ $message }}</span>@enderror
+            @error('name')<span class="text-danger fw-light">{{ $message }}</span>@enderror
           </div>
         </div>
 
@@ -31,7 +31,7 @@
           <div class="col-7 col-md-8">
             <input type="text" id="username" class="form-control form-control-sm" 
               wire:model="username">
-            @error('username')<span>{{ $message }}</span>@enderror
+            @error('username')<span class="text-danger fw-light">{{ $message }}</span>@enderror
           </div>
         </div>
 
@@ -43,7 +43,7 @@
           <div class="col-7 col-md-8">
             <input type="password" id="password" class="form-control form-control-sm" 
               wire:model="password">
-            @error('password')<span>{{ $message }}</span>@enderror
+            @error('password')<span class="text-danger fw-light">{{ $message }}</span>@enderror
           </div>
         </div>
 

@@ -25,12 +25,11 @@ use App\Livewire\Users;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/pelanggan', Customers::class)->name('pelanggan');
-Route::get('/pelanggan_detail/{id}', CustomerDetail::class)->name('pelanggan_detail');
 
 Route::get('/home', Home::class)->name('home');
 Route::get('/login', [Users::class, 'login'])->name('login');
 Route::get('/customers', Customers::class)->name('customers');
+Route::get('/customer_detail/{id}', CustomerDetail::class)->name('pelanggan_detail');
 Route::get('/complains', Complains::class)->name('complains');
 Route::get('/spks', Spks::class)->name('spks');
 Route::get('/collectors', Collectors::class)->name('collectors');
