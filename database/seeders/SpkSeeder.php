@@ -24,11 +24,7 @@ class SpkSeeder extends Seeder
         );
 
         foreach($arr as $data) {
-          foreach($data as $key => $value) {
-            Spk::create([
-              $key => $value
-            ]);
-          }
+          Spk::create($data);
         }
     }
 }

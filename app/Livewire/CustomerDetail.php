@@ -3,7 +3,11 @@
 namespace App\Livewire;
 
 use App\Models\Customer;
+use App\Models\CustomerService;
+use App\Models\Internet;
 use App\Models\Marketer;
+use App\Models\TvAnalog;
+use App\Models\TvDigital;
 use Livewire\Component;
 
 class CustomerDetail extends Component {
@@ -16,7 +20,7 @@ class CustomerDetail extends Component {
   
   public $currentTab = 'profile';
 
-  public $marketerData;
+  public $marketerData, $customerServiceData, $tvAnalogData, $tvDigitalData, $internetData;
 
   public $nodes = [
     'NUL',
@@ -91,7 +95,6 @@ class CustomerDetail extends Component {
 
   public function mount($id) {
     $this->id = $id;
-    $this->marketerData = Marketer::get();
   }
 
   public function render() {
@@ -100,6 +103,7 @@ class CustomerDetail extends Component {
     $this->name = $data->name;
 
     if ($this->currentTab === 'profile') {
+      $this->marketerData = Marketer::get();
       $this->company = $data->company;
       $this->identity = $data->identity;
       $this->address = $data->address;
@@ -123,6 +127,11 @@ class CustomerDetail extends Component {
     else if ($this->currentTab === 'service') {
       $this->status = $data->status;
       $this->address = $data->address;
+      $this->customerServiceData = CustomerService::where('customerid', $this->id)->get();
+      $this->tvAnalogData = TvAnalog::where('customerid', $this->id)->get();
+      $this->tvDigitalData = TvDigital::where('customerid', $this->id)->get();
+      $this->internetData = Internet::where('customerid', $this->id)->get();
+      
     }
     else if ($this->currentTab === 'invoice') {
       
@@ -170,9 +179,9 @@ class CustomerDetail extends Component {
     return redirect()->route('customers');
   }
 
-  public function cancel() {
+  public function updateStatus($status) {
     Customer::where('id', $this->id)->update([
-      'status' => 'cancel'
+      'status' => $status
     ]);
   }
 }

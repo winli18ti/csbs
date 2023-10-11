@@ -13,15 +13,10 @@ class CustomerService extends Model
 
     protected $fillable = [
         'id',
-        'servicetype',
-        'specialname',
-        'specialprice',
-        'specialinfo',
+        'name',
+        'info',
         'status',
-        'sincedate',
-        'serviceid',
-        'subsperiod',
-        'notes',
+        'since',
         'customerid',
     ];
     
@@ -30,17 +25,5 @@ class CustomerService extends Model
 
     public function installations() {
         return $this->hasMany(Installation::class, 'customerserviceid');
-    }
-
-    public function internets() {
-        return $this->hasMany(Internet::class, 'customerserviceid');
-    }
-
-    public function tvanalogs() {
-        return $this->hasMany(TvAnalog::class, 'customerserviceid');
-    }
-
-    public function tvdigitals() {
-        return $this->hasMany(TvDigital::class, 'customerserviceid');
     }
 }

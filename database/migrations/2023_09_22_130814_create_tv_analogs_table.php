@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->integer('count');
             $table->integer('customerid');
-            $table->integer('customerserviceid');
             $table->timestamps();
         });
     }

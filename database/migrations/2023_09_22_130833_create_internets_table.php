@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('cpeip');
             $table->string('cpemac');
             $table->integer('customerid');
-            $table->integer('customerserviceid');
             $table->timestamps();
         });
     }

@@ -33,11 +33,7 @@ class ComplainSeeder extends Seeder
         );
 
         foreach($arr as $data) {
-          foreach($data as $key => $value) {
-            Complain::create([
-              $key => $value
-            ]);
-          }
+          Complain::create($data);
         }
     }
 }

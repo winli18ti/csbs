@@ -13,15 +13,10 @@ return new class extends Migration
     {
         Schema::create('customer_services', function (Blueprint $table) {
             $table->id();
-            $table->string('servicetype')->nullable();
-            $table->string('specialname')->nullable();
-            $table->integer('specialprice')->nullable();
-            $table->string('specialinfo')->nullable();
+            $table->string('name')->nullable();
+            $table->string('info')->nullable();
             $table->string('status')->nullable();
-            $table->timestamp('sincedate')->nullable();
-            $table->integer('serviceid')->nullable();
-            $table->integer('subsperiod')->nullable();
-            $table->text('notes')->nullable();
+            $table->string('since')->nullable();
             $table->integer('customerid')->nullable();
             $table->timestamps();
         });

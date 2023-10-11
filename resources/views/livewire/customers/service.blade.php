@@ -52,21 +52,39 @@
   </div>
 
   <div class="container-fluid d-flex gap-1 mt-4">
-    <button class="btn btn-outline-primary btn-sm">
-      Nonaktifkan Layanan
+    @if($status === 'registration')
+    <button class="btn btn-outline-primary btn-sm" wire:click.prevent="updateStatus('cancel')">
+      Pembatalan Layanan
     </button>
-    <button class="btn btn-outline-primary btn-sm">
+    @elseif($status === 'cancel' || $status === 'dismantle')
+    <button class="btn btn-outline-primary btn-sm" wire:click.prevent="">
+      Permintaan Aktivasi Ulang
+    </button>
+    @elseif($status === 'suspend' || $status === 'active')
+      @if($status === 'suspend')
+      <button class="btn btn-outline-primary btn-sm" wire:click.prevent="updateStatus('active')">
+        Aktifkan Layanan
+      </button>
+      @elseif($status === 'active')
+      <button class="btn btn-outline-primary btn-sm" wire:click.prevent="updateStatus('suspend')">
+        Nonaktifkan Layanan
+      </button>
+      @endif
+    <button class="btn btn-outline-primary btn-sm" wire:click.prevent="">
       Ubah Paket
     </button>
-    <button class="btn btn-outline-primary btn-sm">
+    <button class="btn btn-outline-primary btn-sm" wire:click.prevent="">
       Ubah STB/TV
     </button>
-    <button class="btn btn-outline-primary btn-sm">
+    <button class="btn btn-outline-primary btn-sm" wire:click.prevent="updateStatus('req dismantle')">
       Request Dismantle
     </button>
+    @endif
   </div>
 
+  @if($customerServiceData->count())
   <div class="container-fluid">
+    <span class="lead">Layanan</span>
     <div class="table-responsive">
       <table class="table table-sm table-striped table-hover caption-top text-truncate">
         <thead>
@@ -79,22 +97,33 @@
           </tr>
         </thead>
         <tbody>
-
+          @foreach($customerServiceData as $data)
           <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{$data->id}}</td>
+            <td>{{$data->name}}</td>
+            <td>{{$data->info}}</td>
+            <td class="text-center text-uppercase">{{$data->status}}</td>
+            <td class="text-center">{{$data->since}}</td>
           </tr>
-
+          @endforeach
         </tbody>
       </table>
     </div>
-    <p class="text-center fst-italic">Data tidak ditemukan</p>
   </div>
+  @endif
 
+  
+  @if($tvAnalogData->count())
   <div class="container-fluid">
+    @foreach($tvAnalogData as $data)
+    <span class="lead">TV Analog : {{$data->count}}</span>
+    @endforeach
+  </div>
+  @endif
+
+  @if($tvDigitalData->count())
+  <div class="container-fluid">
+    <span class="lead">TV Digital</span>
     <div class="table-responsive">
       <table class="table table-sm table-striped table-hover caption-top text-truncate">
         <thead>
@@ -106,17 +135,53 @@
           </tr>
         </thead>
         <tbody>
-
+          @foreach($tvDigitalData as $data)
           <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{$data->id}}</td>
+            <td class="text-center">{{$data->serialnumber}}</td>
+            <td class="text-center">{{$data->smartcard}}</td>
+            <td class="text-center">O</td>
           </tr>
-
+          @endforeach
         </tbody>
       </table>
     </div>
-    <p class="text-center fst-italic">Data tidak ditemukan</p>
   </div>
+  @endif
+
+  @if($internetData->count())
+  <div class="container-fluid">
+    <span class="lead">Internet</span>
+    <div class="table-responsive">
+      <table class="table table-sm table-striped table-hover caption-top text-truncate">
+        <thead>
+          <tr class="table-danger text-center">
+            <th class="col">#</th>
+            <th class="col">No Seri Modem</th>
+            <th class="col">IP Modem</th>
+            <th class="col">MAC Modem</th>
+            <th class="col">IP CPE</th>
+            <th class="col">MAC CPE</th>
+            <th class="col">S</th>
+            <th class="col">Opsi</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach($internetData as $data)
+          <tr>
+            <td>{{$data->id}}</td>
+            <td class="text-center">{{$data->modemnumber}}</td>
+            <td class="text-center">{{$data->modemip}}</td>
+            <td class="text-center">{{$data->modemmac}}</td>
+            <td class="text-center">{{$data->cpeip}}</td>
+            <td class="text-center">{{$data->cpemac}}</td>
+            <td class="text-center">O</td>
+            <td class="text-center">Opsi</td>
+          </tr>
+          @endforeach
+        </tbody>
+      </table>
+    </div>
+  </div>
+  @endif
 </div>

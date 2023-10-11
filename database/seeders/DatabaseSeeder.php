@@ -17,5 +17,8 @@ class DatabaseSeeder extends Seeder
         $this->call(ServiceSeeder::class);
         $this->call(UserSeed::class);
         $this->call(CustomerSeeder::class);
+        $this->call(CustomerServiceSeeder::class);
+        $this->call(TvAnalogSeeder::class);
+        $this->call(InternetSeeder::class);
     }
 }

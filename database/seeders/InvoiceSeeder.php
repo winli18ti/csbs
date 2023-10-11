@@ -25,11 +25,7 @@ class InvoiceSeeder extends Seeder
         );
 
         foreach($arr as $data) {
-          foreach($data as $key => $value) {
-            Invoice::create([
-              $key => $value
-            ]);
-          }
+          Invoice::create($data);
         }
     }
 }

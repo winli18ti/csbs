@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('serialnumber');
             $table->string('smartcard');
             $table->integer('customerid');
-            $table->integer('customerserviceid');
             $table->timestamps();
         });
     }
