@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('status');
             $table->timestamp('statusdate');
             $table->integer('customerid');
+            //status dan petugas lapangan
             $table->timestamps();
         });
     }

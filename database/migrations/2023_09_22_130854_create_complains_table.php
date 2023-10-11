@@ -24,7 +24,9 @@ return new class extends Migration
             $table->text('description');
             $table->text('solution')->nullable();
             $table->string('acceptedby')->nullable();
+            $table->timestamp('acceptedbydate')->nullable();
             $table->string('updatedby')->nullable();
+            $table->timestamp('updatedbydate')->nullable();
             $table->integer('customerid');
             $table->timestamps();
         });

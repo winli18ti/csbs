@@ -141,17 +141,17 @@
       
             <div class="d-flex justify-content-evenly mb-3">
               <div class="form-check form-check-inline">
-                <input type="radio" id="service1" wire:model.live="service" value="layanan reguler" class="form-check-input">
+                <input type="radio" id="service1" wire:model.live="servicetype" value="reguler" class="form-check-input">
                 <label for="service1" class="form-check-label">Layanan reguler</label>
               </div>
               <div class="form-check form-check-inline">
-                <input type="radio" id="service2" wire:model.live="service" value="pembayaran non reguler" class="form-check-input">
+                <input type="radio" id="service2" wire:model.live="servicetype" value="special" class="form-check-input">
                 <label for="service2" class="form-check-label">Pembayaran non reguler</label>
               </div>
               @error('service') <span class="text-danger fw-light">{{$message}}</span> @enderror
             </div>
 
-            @if($service === 'layanan reguler')
+            @if($servicetype === 'reguler')
               <div class="row align-items-center">
                 <div class="col-5 col-md-4">
                   <label for="servicename" class="col-form-label">Paket layanan</label>
@@ -191,7 +191,7 @@
                   <textarea id="notes" wire:model.live="notes" rows="2" class="form-control form-control-sm"></textarea>
                 </div>
               </div>
-            @elseif($service === 'pembayaran non reguler')
+            @elseif($servicetype === 'special')
               <div class="row">
                 <div class="col-5 col-md-4">
                   <label for="specialname" class="col-form-label">Nama Paket</label>

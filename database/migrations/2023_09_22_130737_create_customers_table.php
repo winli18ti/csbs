@@ -25,8 +25,12 @@ return new class extends Migration
             $table->string('homephone')->nullable();
             $table->string('officephone')->nullable();
             $table->string('cellphone')->nullable();
+            $table->string('servicetype')->nullable();
+            $table->integer('specialprice')->nullable();
+            $table->string('specialinfo')->nullable();
             $table->string('paytype')->nullable();
             $table->integer('billperiod')->nullable();
+            $table->integer('subsperiod')->nullable();
             $table->integer('tvcount')->nullable();
             $table->string('node')->nullable();
             $table->string('status')->nullable();

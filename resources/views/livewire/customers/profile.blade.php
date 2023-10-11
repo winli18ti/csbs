@@ -54,21 +54,6 @@
         
         <div class="row align-items-center">
           <div class="col-5 col-sm-4 col-lg-5 col-xl-4">
-            <label for="city" class="col-form-label">Kota / Provinsi</label>
-          </div>
-          <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
-            <select id="city" class="form-select form-select-sm"
-              wire:model="city">
-              <option value="" selected>Pekanbaru, Riau</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-          </div>
-        </div>
-        
-        <div class="row align-items-center">
-          <div class="col-5 col-sm-4 col-lg-5 col-xl-4">
             <label for="email" class="col-form-label">Email</label>
           </div>
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
@@ -106,8 +91,9 @@
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
             <select id="node" class="form-select form-select-sm"
               wire:model="node">
-              <option value="NUL" selected>NUL</option>
-              <option value="FN1">FN 1</option>
+              @foreach($nodes as $node)
+              <option value="{{$node}}">{{$node}}</option>
+              @endforeach
             </select>
           </div>
         </div>
@@ -119,7 +105,6 @@
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
             <select id="marketerid" class="form-select form-select-sm"
               wire:model="marketerid">
-              <option value="" selected>-- Pilih Sales --</option>
               @foreach($marketerData as $data)
                 <option value="{{$data->id}}">{{$data->name}}</option>
               @endforeach

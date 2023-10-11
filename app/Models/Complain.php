@@ -22,7 +22,9 @@ class Complain extends Model{
         'description',
         'solution',
         'acceptedby',
+        'acceptedbydate',
         'updatedby',
+        'updatedbydate',
         'customerid',
     ];
 

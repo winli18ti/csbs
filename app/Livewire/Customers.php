@@ -12,8 +12,8 @@ use Carbon\Carbon;
 
 class Customers extends Component{
     public $marketerid, $statusdate, $name, $identity, $address, 
-    $cellphone, $homephone, $email, $paytype = 'penagihan ke pelanggan', $service = 'layanan reguler', 
-    $servicename, $subsperiod, $notes, $customerId, $member, $specialname, $specialprice, $specialinfo;
+    $cellphone, $homephone, $email, $paytype = 'penagihan ke pelanggan', $servicetype = 'layanan reguler', 
+    $servicename, $subsperiod, $notes, $specialname, $specialprice, $specialinfo;
 
     public $serviceData, $marketerData;
 
@@ -56,9 +56,9 @@ class Customers extends Component{
         $this->marketerid = null; $this->statusdate = null; $this->name = null;
         $this->identity = null; $this->address = null; $this->cellphone = null;
         $this->homephone = null; $this->email = null; $this->paytype = 'penagihan ke pelanggan';
-        $this->service = 'layanan reguler'; $this->servicename = null; $this->subsperiod = null;
-        $this->notes = null; $this->specialname = NULL; $this->specialprice = NULL; 
-        $this->specialinfo = NULL; $this->member = null;
+        $this->servicetype = 'layanan reguler'; $this->servicename = null; $this->subsperiod = null;
+        $this->notes = null; $this->specialname = null; $this->specialprice = null; 
+        $this->specialinfo = null;
     }
 
     public function create() {
@@ -69,16 +69,21 @@ class Customers extends Component{
             'member' => $member,
             'marketerid' => $this->marketerid , 'statusdate' => $this->statusdate, 'name' => $this->name,
             'identity' => $this->identity, 'address' => $this->address, 'cellphone' => $this->cellphone,
-            'homephone' => $this->homephone, 'email' => $this->email, 'paytype' => $this->paytype, 'node' => 'NUL',
+            'homephone' => $this->homephone, 'email' => $this->email, 
+            'paytype' => $this->paytype,
+            'servicetype' => $this->servicetype, 'servicename' => $this->servicename,
+            'subsperiod' => $this->subsperiod, 'notes' => $this->notes,
+            'specialname' => $this->specialname, 'specialprice' => $this->specialprice, 'specialinfo' => $this->specialinfo,
+            'node' => 'NUL', 'billperiod' => 1, 'tvcount' => 0,
             'status' => 'registration',
         ]);
-        if($this->service === 'layanan reguler'){
+        if($this->servicetype === 'layanan reguler'){
             CustomerService::create([
                 'servicetype' => $this->service, 'serviceid' => $this->servicename, 'subsperiod' => $this->subsperiod,
                 'notes' => $this->notes, 'customerid' => $custData->id,
                 'status' => 'tidak aktif',
             ]);
-        }else if($this->service === 'pembayaran non reguler'){
+        }else if($this->servicetype === 'pembayaran non reguler'){
             CustomerService::create([
                 'servicetype' => $this->service, 'specialname' => $this->specialname, 'specialprice' => $this->specialprice,
                 'specialinfo' => $this->specialinfo, 'customerid' => $custData->id,
@@ -95,18 +100,6 @@ class Customers extends Component{
         session()->flash('message', $this->title.' baru berhasil ditambah');
         $this->emptyValue();
         return redirect('/customer_detail/'.$custData->id);
-    }
-
-    public function edit($slug){
-        $data = Customer::find($slug);
-        $this->customerId = $data->id; $this->marketerid = $data->marketerid;
-        $this->name = $data->name;  $this->identity = $data->identity; 
-        $this->address = $data->address; $this->cellphone = $data->cellphone; 
-        $this->homephone = $data->homephone; $this->email = $data->email;
-        $this->paytype = $data->paytype; $this->service = $data->service; 
-        $this->servicename = $data->servicename; $this->subsperiod = $data->subsperiod;
-        $this->notes = $data->notes; $this->member = $data->member;
-        $this->navigate('edit');
     }
 
     public function validateRule(){

@@ -144,19 +144,19 @@
               <span class="badge text-bg-success">{{$data->node}}</span>
               @endif
             </td>
-            <td>
+            <td class="text-uppercase">
               @if($data->status === 'active')
-              <span class="badge text-bg-success">{{$data->node}}</span>
+              <span class="badge text-bg-success">{{$data->status}}</span>
               @elseif($data->status === 'suspend')
-              <span class="badge text-bg-primary">{{$data->node}}</span>
+              <span class="badge text-bg-primary">{{$data->status}}</span>
               @elseif($data->status === 'registration')
-              <span class="badge text-bg-info">{{$data->node}}</span>
+              <span class="badge text-bg-info">{{$data->status}}</span>
               @elseif($data->status === 'req dismantle')
-              <span class="badge text-bg-warning">{{$data->node}}</span>
+              <span class="badge text-bg-warning">{{$data->status}}</span>
               @elseif($data->status === 'dismantle')
-              <span class="badge text-bg-danger">{{$data->node}}</span>
+              <span class="badge text-bg-danger">{{$data->status}}</span>
               @elseif($data->status === 'cancel')
-              <span class="badge text-bg-secondary">{{$data->node}}</span>
+              <span class="badge text-bg-secondary">{{$data->status}}</span>
               @endif
             </td>
             <td class="text-center">
