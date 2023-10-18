@@ -8,7 +8,7 @@
       <button wire:click.prevent="navigate('service')" class="nav-link {{ $currentTab === 'service' ? 'active' : '' }}">Layanan</a>
       <button wire:click.prevent="navigate('invoice')" class="nav-link {{ $currentTab === 'invoice' ? 'active' : '' }}">Tagihan</a>
       <button wire:click.prevent="navigate('spk')" class="nav-link {{ $currentTab === 'spk' ? 'active' : '' }}">SPK</a>
-      <button wire:click.prevent="navigate('complain')" class="nav-link {{ $currentTab === 'complain' ? 'active' : '' }}">Keluhan</a>
+      <button wire:click.prevent="openComplain" class="nav-link {{ $currentTab === 'complain' || $currentTab === 'complainform' || $currentTab === 'complainviewform' || $currentTab === 'complaineditform' ? 'active' : '' }}">Keluhan</a>
     </nav>
   </div>
 
@@ -26,6 +26,9 @@
 
   @elseif($currentTab === 'complain')
     @include('livewire.customers.complain')
+
+  @elseif($currentTab === 'complainform' || $currentTab === 'complainviewform' || $currentTab === 'complaineditform' )
+    @include('livewire.customers.complainform')
 
   @endif
 </div>
