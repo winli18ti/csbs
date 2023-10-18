@@ -22,7 +22,7 @@
   </div>
 
   <div class="container-fluid d-flex gap-1 justify-content-end">
-    <button class="btn btn-outline-primary btn-sm">
+    <button class="btn btn-outline-primary btn-sm" wire:click.prevent="navigate('complainform')">
       Tambah Pengaduan
     </button>
   </div>
@@ -44,22 +44,30 @@
           </tr>
         </thead>
         <tbody>
-
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-
+          @if($complainData->count())
+            @foreach($complainData as $data)
+              <tr>
+                <td></td>
+                <td>{{ $data->code  }}</td>
+                <td>{{ $data->subject  }}</td>
+                <td>{{ $data->servicetype  }}</td>
+                <td>{{ $data->priority  }}</td>
+                <td>{{ $data->submittedby  }}</td>
+                <td>{{ Carbon\Carbon::create($data->acceptedbydate)->diffForHumans(Carbon\Carbon::now())  }}</td>
+                <td>{{ $data->status  }}</td>
+                <td>
+                  <button wire:click.prevent="complainView({{$data->id}}, 'view')">View</button>
+                  <button wire:click.prevent="complainView({{$data->id}}, 'edit')">Edit</button>
+                </td>
+              </tr>
+            @endforeach
+          @else
+            <tr>
+              <td class="text-center fst-italic" colspan="9">Data tidak ditemukan</td>
+            </tr>
+          @endif
         </tbody>
       </table>
     </div>
-    <p class="text-center fst-italic">Data tidak ditemukan</p>
   </div>
 </div>

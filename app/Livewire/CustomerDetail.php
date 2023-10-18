@@ -8,6 +8,8 @@ use App\Models\Internet;
 use App\Models\Marketer;
 use App\Models\TvAnalog;
 use App\Models\TvDigital;
+use App\Models\Complain;
+use Carbon\Carbon;
 use Livewire\Component;
 
 class CustomerDetail extends Component {
@@ -21,6 +23,10 @@ class CustomerDetail extends Component {
   public $currentTab = 'profile';
 
   public $marketerData, $customerServiceData, $tvAnalogData, $tvDigitalData, $internetData;
+  // Public var yang digunakan untuk form komplain
+  public $complain_status, $complain_priority, $service_type, $report, $source, $reporter, $report_subject, $customer_complain, $completion, $complain_id;
+  // Public var yang digunakan untuk mengisikan data db dalam bentuk eloquent model
+  public $complainData;
 
   public $nodes = [
     'NUL',
@@ -146,6 +152,7 @@ class CustomerDetail extends Component {
   }
 
   public function navigate($tab) {
+    if($tab === 'complain') { $this->varEmpty(); }
     $this->currentTab = $tab;
   }
 
@@ -183,6 +190,102 @@ class CustomerDetail extends Component {
     Customer::where('id', $this->id)->update([
       'status' => $status
     ]);
+  }
+
+  public function openComplain(){
+    $this->complainData = Complain::where('customerid', $this->id)->get();
+    $this->navigate('complain');
+  }
+
+  public function complainCreate(){
+    $this->validationChecker('form-create');
+    Complain::create([
+      'code' => rand(10000,99999),
+      'status' => $this->complain_status,
+      'priority' =>  $this->complain_priority,
+      'servicetype' => $this->service_type,
+      'via' => $this->report,
+      'source' => $this->source,
+      'submittedby' => $this->reporter,
+      'subject' => $this->report_subject,
+      'description' => $this->customer_complain,
+      'solution' => '-',
+      'acceptedby' => 'Admin', //perlu diganti dengan session admin yang melakukan edit
+      'acceptedbydate' => Carbon::now(),
+      'customerid' => $this->id,
+    ]);
+    $this->openComplain();
+  }
+
+  public function complainView($slug, $changer){
+    $data = Complain::findOrFail($slug);
+    $this->complain_id = $data->id;
+    $this->complain_status = $data->status;
+    $this->complain_priority = $data->priority;
+    $this->service_type = $data->servicetype;
+    $this->report = $data->via;
+    $this->source = $data->source;
+    $this->reporter = $data->submittedby;
+    $this->report_subject = $data->subject;
+    $this->customer_complain = $data->description;
+    $this->completion = $data->solution;
+    if($changer === 'view'){
+      $this->navigate('complainviewform');
+    }else if($changer === 'edit'){
+      $this->navigate('complaineditform');
+    }
+  }
+
+  public function complainUpdate(){
+    $this->validationChecker('form-update');
+    Complain::where('id', $this->complain_id)->update([
+      'status' => $this->complain_status,
+      'priority' =>  $this->complain_priority,
+      'servicetype' => $this->service_type,
+      'via' => $this->report,
+      'source' => $this->source,
+      'submittedby' => $this->reporter,
+      'subject' => $this->report_subject,
+      'description' => $this->customer_complain,
+      'solution' => $this->completion,
+      'updatedby' => 'Admin 2', //Akan di ganti ketika login sudah dibuat
+      'updatedbydate' => Carbon::now(),
+    ]);
+    $this->openComplain();
+  }
+
+  public function varEmpty(){
+    $this->complain_status = NULL; $this->complain_priority = null; 
+    $this->service_type = null; $this->report = null; $this->source = null; 
+    $this->reporter = null; $this->report_subject = null; $this->customer_complain = null;
+    $this->completion = null; $this->complain_id = null;
+  }
+
+  public function validationChecker($check){
+    if($check === 'form-create'){
+      $this->validate([
+        'complain_status' => 'required', 
+        'complain_priority' => 'required', 
+        'service_type' => 'required', 
+        'report' => 'required', 
+        'source' => 'required', 
+        'reporter' => 'required', 
+        'report_subject' => 'required', 
+        'customer_complain' => 'required',
+      ]);
+    }else if($check === 'form-update'){
+      $this->validate([
+        'complain_status' => 'required', 
+        'complain_priority' => 'required', 
+        'service_type' => 'required', 
+        'report' => 'required', 
+        'source' => 'required', 
+        'reporter' => 'required', 
+        'report_subject' => 'required', 
+        'customer_complain' => 'required',
+        'completion' => 'required',
+      ]);
+    }
   }
 }
 ?>
