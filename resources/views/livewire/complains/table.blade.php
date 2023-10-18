@@ -48,8 +48,9 @@
           <tr>
             <td class="text-center">{{$data->id}}</td>
             <td class="text-center">{{$data->code}}</td>
-            <td class="text-center"><a href="#">{{$data->customerid}}</a></td>
+            <td class="text-center"><a href="/customer_detail/{{$data->customerid}}">{{$data->customerid}}</a></td>
             <td>{{$data->address}}</td>
+            <td>{{$data->subject}}</td>
             <td>{{$data->servicetype}}</td>
             <td>{{$data->priority}}</td>
             <td>{{$data->acceptedby}}</td>

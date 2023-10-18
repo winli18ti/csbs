@@ -141,12 +141,12 @@
 
     <div class="row align-items-center">
       <div class="col-5 col-sm-4 col-md-3 col-xl-2">
-        <label for="complain" class="col-form-label">Keluhan pelanggan</label>
+        <label for="description" class="col-form-label">Keluhan pelanggan</label>
       </div>
       <div class="col-7 col-sm-5 col-md-4 col-lg-3">
-        <textarea type="text" id="complain" 
+        <textarea type="text" id="description" 
           class="form-control form-control-sm"
-          wire:model="complain"></textarea>
+          wire:model="description"></textarea>
       </div>
     </div>
 
@@ -166,9 +166,7 @@
         <label for="acceptedby" class="col-form-label">Diterima oleh</label>
       </div>
       <div class="col-7 col-sm-5 col-md-4 col-lg-3">
-        <input type="text" id="acceptedby" 
-          class="form-control form-control-sm"
-          wire:model="acceptedby" readonly>
+        {{$acceptedby}} - {{$acceptedbydate}}
       </div>
     </div>
 
@@ -177,9 +175,7 @@
         <label for="updatedby" class="col-form-label">Diubah oleh</label>
       </div>
       <div class="col-7 col-sm-5 col-md-4 col-lg-3">
-        <input type="text" id="updatedby" 
-          class="form-control form-control-sm"
-          wire:model="updatedby" readonly>
+        {{$updatedby}} - {{$updatedbydate}}
       </div>
     </div>
 

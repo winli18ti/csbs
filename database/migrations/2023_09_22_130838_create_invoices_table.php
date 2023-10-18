@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('billnumber');
             $table->string('servicetype');
-            $table->string('period');
             $table->string('paytype');
             $table->integer('subsperiod');
             $table->integer('bill');

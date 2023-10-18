@@ -12,8 +12,8 @@ class Complains extends Component
     use WithPagination;
     public $id, $code, $customerid, $member, $name, 
     $status, $priority, $servicetype, $via, $source, 
-    $submittedby, $subject, $complain, $solution, $acceptedby,
-    $updatedby;
+    $submittedby, $subject, $description, $solution, $acceptedby, $acceptedbydate,
+    $updatedby, $updatedbydate;
     public $mode = 'table';
     public $title = 'Pengaduan pelanggan';
     public $filterStatus = '';
@@ -45,10 +45,12 @@ class Complains extends Component
         $this->source = $data->source;
         $this->submittedby = $data->submittedby;
         $this->subject = $data->subject;
-        $this->complain = $data->complain;
+        $this->description = $data->description;
         $this->solution = $data->solution;
         $this->acceptedby = $data->acceptedby;
+        $this->acceptedbydate = $data->acceptedbydate;
         $this->updatedby = $data->updatedby;
+        $this->updatedbydate = $data->updatedbydate;
     }
 
     public function update() {
