@@ -79,8 +79,10 @@
             <label for="effectivedate" class="col-form-label">Tanggal efektif</label>
           </div>
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
+            @if($status === 'active' || $status === 'suspend')
             <input type="date" id="effectivedate" class="form-control form-control-sm" 
               wire:model="effectivedate">
+            @endif
           </div>
         </div>
 
@@ -154,17 +156,18 @@
           <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
             <div class="d-flex">
               <div class="form-check form-check-inline">
-                <input type="radio" name="servicetype" id="servicetype1" value="reguler" class="form-check-input" wire:model="servicetype">
+                <input type="radio" name="servicetype" id="servicetype1" value="reguler" class="form-check-input" wire:model="servicetype" disabled>
                 <label for="servicetype1" class="form-check-label">Layanan reguler</label>
               </div>
               <div class="form-check form-check-inline">
-                <input type="radio" name="servicetype" id="servicetype2" value="special" class="form-check-input" wire:model="servicetype">
+                <input type="radio" name="servicetype" id="servicetype2" value="special" class="form-check-input" wire:model="servicetype" disabled>
                 <label for="servicetype2" class="form-check-label">Pembayaran non reguler</label>
               </div>
             </div>
           </div>
         </div>
     
+        @if($servicetype === 'special')
         <div class="row align-items-center">
           <div class="col-5 col-sm-4 col-lg-5 col-xl-4">
             <label for="specialprice" class="col-form-label">Tarif per bulan</label>
@@ -184,6 +187,7 @@
               wire:model="specialinfo">
           </div>
         </div>
+        @endif
         
         <div class="row align-items-center">
           <div class="col-5 col-sm-4 col-lg-5 col-xl-4">

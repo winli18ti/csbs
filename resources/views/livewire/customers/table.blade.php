@@ -81,6 +81,16 @@
         </select>
       </div>
     </div>
+
+    <div class="row align-items-center">
+      <div class="col-5 col-sm-4 col-md-3 col-xl-2">
+        <label for="searchTerm" class="col-form-label">Cari</label>
+      </div>
+      <div class="col-7 col-sm-5 col-md-4 col-lg-3">
+        <input type="text" id="searchTerm" class="form-control form-control-sm"
+          wire:model.live="searchTerm">
+      </div>
+    </div>
   </div>
 
   <div class="container-fluid d-flex gap-1 justify-content-end mt-4 mb-2">
@@ -123,14 +133,14 @@
         <tbody>
           @foreach($table as $data)
           <tr>
-            <td class="text-center">{{$data->id}}</td>
+            <td class="text-center">{{ $table->firstItem() + $loop->index }}</td>
             @if(!($filterStatus === '' || $filterStatus === 'active'))
             <td class="text-center">{{$data->statusdate}}</td>
             @endif
             <td><a class="text-danger-emphasis" href="/customer_detail/{{$data->id}}">{{$data->member}}</a></td>
             <td>{{$data->name}}</td>
-            <td>{{$data->marketerid}}</td>
-            <td>Paket Layanan</td>
+            <td>{{$data->marketer->name}}</td>
+            <td>{{App\Models\CustomerService::orderby('created_at', 'desc')->where('customerid', $data->id)->get()->first()->name}}</td>
             <td>{{$data->address}}</td>
             <td>{{$data->homephone}}</td>
             <td>{{$data->cellphone}}</td>

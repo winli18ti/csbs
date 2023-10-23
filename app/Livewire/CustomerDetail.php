@@ -115,7 +115,7 @@ class CustomerDetail extends Component {
       $this->address = $data->address;
       $this->email = $data->email;
       $this->vip = $data->vip;
-      $this->effectivedate = $data->effectivedate;
+      $this->effectivedate = Carbon::create($data->effectivedate)->format('Y-m-d');
       $this->node = $data->node;
       $this->marketerid = $data->marketerid;
       $this->homephone = $data->homephone;
@@ -129,6 +129,7 @@ class CustomerDetail extends Component {
       $this->subsperiod = $data->subsperiod;
       $this->tvcount = $data->tvcount;
       $this->notes = $data->notes;
+      $this->status = $data->status;
     }
     else if ($this->currentTab === 'service') {
       $this->status = $data->status;
@@ -157,6 +158,7 @@ class CustomerDetail extends Component {
   }
 
   public function update() {
+    if ($this->vip != 1) $this->vip = 0;
     Customer::where('id', $this->id)->update([
       'member' => $this->member,
       'name' => $this->name,

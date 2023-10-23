@@ -6,7 +6,7 @@
       </div>
       <div class="col-7 col-sm-5 col-md-4 col-lg-3">
         <input type="text" id="member" 
-          class="form-control form-control-sm" wire:model="member">
+          class="form-control form-control-sm" wire:model="member" readonly>
       </div>
     </div>
 
@@ -16,7 +16,7 @@
       </div>
       <div class="col-7 col-sm-5 col-md-4 col-lg-3">
         <input type="text" id="name" 
-          class="form-control form-control-sm" wire:model="name">
+          class="form-control form-control-sm" wire:model="name" readonly>
       </div>
     </div>
   </div>

@@ -12,7 +12,7 @@ use Carbon\Carbon;
 
 class Customers extends Component{
     public $marketerid, $statusdate, $name, $identity, $address, 
-    $cellphone, $homephone, $email, $paytype = 'penagihan ke pelanggan', $servicetype = 'layanan reguler', 
+    $cellphone, $homephone, $email, $paytype = 'penagihan ke pelanggan', $servicetype = 'reguler', 
     $servicename, $subsperiod, $notes, $specialname, $specialprice, $specialinfo;
 
     public $serviceData, $marketerData;
@@ -20,7 +20,7 @@ class Customers extends Component{
     public $mode = 'table'; public $title = 'Pelanggan';
     public $filterStatus = ''; public $filterPaytype = '';
     public $filterBillperiod = ''; public $filterSubsperiod = '';
-    public $filterVip = '';
+    public $filterVip = ''; public $searchTerm;
 
     public function mount(){
         $this->serviceData = Service::get();
@@ -28,7 +28,7 @@ class Customers extends Component{
     }
 
     public function render() {
-        $table = Customer::select('*');
+        $table = Customer::orderby('id', 'desc')->select('*');
         if (!empty($this->filterStatus)) {
             $table->where(['status' => $this->filterStatus]);
         }
@@ -44,6 +44,9 @@ class Customers extends Component{
         if (!empty($this->filterVip)) {
             $table->where(['vip' => $this->filterVip]);
         }
+        if(!empty($this->searchTerm)){
+            $table->where('name', 'like', "%".$this->searchTerm."%");
+        }
         $table = $table->paginate(10);
         return view('livewire.customers', compact('table'));
     }
@@ -56,34 +59,36 @@ class Customers extends Component{
         $this->marketerid = null; $this->statusdate = null; $this->name = null;
         $this->identity = null; $this->address = null; $this->cellphone = null;
         $this->homephone = null; $this->email = null; $this->paytype = 'penagihan ke pelanggan';
-        $this->servicetype = 'layanan reguler'; $this->servicename = null; $this->subsperiod = null;
+        $this->servicetype = 'reguler'; $this->servicename = null; $this->subsperiod = null;
         $this->notes = null; $this->specialname = null; $this->specialprice = null; 
         $this->specialinfo = null;
     }
 
     public function create() {
-        $this->validateRule();
+        // $this->validateRule();
         $date = Carbon::create($this->statusdate)->now();
-        $member = substr(str_replace('-', '',$date->toDateString()), 2, 4);
+        $substr = substr(str_replace('-', '',$date->toDateString()), 2, 4);
+        $number = (Customer::where('member', 'like', $substr.'%')->get()->count()) + 1;
+        $member = $substr.str_pad($number, 3, "0", STR_PAD_LEFT);
         $custData = Customer::create([
             'member' => $member,
             'marketerid' => $this->marketerid , 'statusdate' => $this->statusdate, 'name' => $this->name,
             'identity' => $this->identity, 'address' => $this->address, 'cellphone' => $this->cellphone,
             'homephone' => $this->homephone, 'email' => $this->email, 
-            'paytype' => $this->paytype,
+            'paytype' => $this->paytype, 'vip' => 0,
             'servicetype' => $this->servicetype, 'servicename' => $this->servicename,
             'subsperiod' => $this->subsperiod, 'notes' => $this->notes,
             'specialname' => $this->specialname, 'specialprice' => $this->specialprice, 'specialinfo' => $this->specialinfo,
             'node' => 'NUL', 'billperiod' => 1, 'tvcount' => 0,
             'status' => 'registration',
         ]);
-        if($this->servicetype === 'layanan reguler'){
+        if($this->servicetype === 'reguler'){
             CustomerService::create([
                 'servicetype' => $this->service, 'serviceid' => $this->servicename, 'subsperiod' => $this->subsperiod,
                 'notes' => $this->notes, 'customerid' => $custData->id,
                 'status' => 'tidak aktif',
             ]);
-        }else if($this->servicetype === 'pembayaran non reguler'){
+        }else if($this->servicetype === 'special'){
             CustomerService::create([
                 'servicetype' => $this->service, 'specialname' => $this->specialname, 'specialprice' => $this->specialprice,
                 'specialinfo' => $this->specialinfo, 'customerid' => $custData->id,
@@ -104,7 +109,7 @@ class Customers extends Component{
 
     public function validateRule(){
         if($this->mode === 'add'){
-            if($this->service === 'layanan reguler'){
+            if($this->servicetype === 'layanan reguler'){
                 $this->validate([
                     'statusdate' => 'required',
                     'name' => 'required',
@@ -122,7 +127,7 @@ class Customers extends Component{
                     'servicename.required' => 'Paket layanan wajib dipilih',
                     'subsperiod.required' => 'Frekuensi layanan wajib dipilih',
                 ]);
-            }else if($this->service === 'pembayaran non reguler'){
+            }else if($this->servicetype === 'pembayaran non reguler'){
                 $this->validate([
                     'statusdate' => 'required',
                     'name' => 'required',
