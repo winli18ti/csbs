@@ -49,24 +49,37 @@
           </tr>
         </thead>
         <tbody>
-
+          @foreach($invoicesData as $data)
           <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td class="text-center">#</td>
+            <td class="text-center"><a href="/{{$data->id}}" class="text-danger-emphasis">{{$data->billnumber}}</a></td>
+            <td class="text-center">{{$data->servicetype}}</td>
+            <td>MM-YY</td>
+            <td>{{$data->service->name}}</td>
+            <td class="text-center">Per {{$data->subsperiod}} bulan</td>
+            <td class="text-end">{{number_format($data->bill, 0, ',', '.')}}</td>
+            <td class="text-center text-uppercase">
+              @if($data->status === 'lunas')
+              <span class="badge text-bg-success">{{$data->status}}</span>
+              @elseif($data->status === 'belum lunas')
+              <span class="badge text-bg-danger">blm lunas</span>
+              @endif
+            </td>
+            <td>{{$data->paiddate}}</td>
+            <td>
+              @if(!is_null($data->user))
+              {{$data->user->name}}
+              @endif
+            </td>
+            <td class="text-center"><a href="/{{$data->id}}" class="btn btn-outline-warning btn-sm">Ubah</a></td>
           </tr>
-
+          @endforeach
         </tbody>
       </table>
+      {{-- {{ $invoicesData->links() }} --}}
     </div>
-    <p class="text-center fst-italic">Data tidak ditemukan</p>
+    @if(!$invoicesData->count())
+    <p class="text-center fst-italic">Data tagihan tidak ada</p>
+    @endif
   </div>
 </div>

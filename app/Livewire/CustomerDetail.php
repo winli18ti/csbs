@@ -9,6 +9,7 @@ use App\Models\Marketer;
 use App\Models\TvAnalog;
 use App\Models\TvDigital;
 use App\Models\Complain;
+use App\Models\Invoice;
 use Carbon\Carbon;
 use Livewire\Component;
 
@@ -27,6 +28,8 @@ class CustomerDetail extends Component {
   public $complain_status, $complain_priority, $service_type, $report, $source, $reporter, $report_subject, $customer_complain, $completion, $complain_id;
   // Public var yang digunakan untuk mengisikan data db dalam bentuk eloquent model
   public $complainData;
+
+  public $invoicesData;
 
   public $nodes = [
     'NUL',
@@ -141,7 +144,7 @@ class CustomerDetail extends Component {
       
     }
     else if ($this->currentTab === 'invoice') {
-      
+      $this->invoicesData = Invoice::where('customerid', $this->id)->get();
     }
     else if ($this->currentTab === 'spk') {
       

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('subsperiod');
             $table->integer('bill');
             $table->string('status');
+            $table->timestamp('duedate');
             $table->timestamp('paiddate')->nullable();
             $table->string('info')->nullable();
             $table->integer('serviceid');

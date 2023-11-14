@@ -65,6 +65,15 @@
 
                 <button class="btn btn-danger btn-sm mt-1" 
                   data-bs-toggle="dropdown">
+                  Billing
+                </button>
+
+                <ul class="dropdown-menu">
+                  <li><a href="/invoices" class="dropdown-item">Data tagihan</a></li>
+                </ul>
+
+                <button class="btn btn-danger btn-sm mt-1" 
+                  data-bs-toggle="dropdown">
                   Setup
                 </button>
 
