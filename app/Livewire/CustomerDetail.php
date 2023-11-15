@@ -10,6 +10,7 @@ use App\Models\TvAnalog;
 use App\Models\TvDigital;
 use App\Models\Complain;
 use App\Models\Invoice;
+use App\Models\Collector;
 use Carbon\Carbon;
 use Livewire\Component;
 
@@ -27,7 +28,7 @@ class CustomerDetail extends Component {
   // Public var yang digunakan untuk form komplain
   public $complain_status, $complain_priority, $service_type, $report, $source, $reporter, $report_subject, $customer_complain, $completion, $complain_id;
   // Public var yang digunakan untuk mengisikan data db dalam bentuk eloquent model
-  public $complainData;
+  public $complainData, $collectorData;
 
   public $invoicesData;
 
@@ -104,6 +105,7 @@ class CustomerDetail extends Component {
 
   public function mount($id) {
     $this->id = $id;
+    $this->collectorData = Collector::get();
   }
 
   public function render() {

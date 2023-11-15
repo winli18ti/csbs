@@ -20,7 +20,6 @@
 
   @elseif($currentTab === 'invoice')
     @include('livewire.customers.invoice')
-
   @elseif($currentTab === 'spk')
     @include('livewire.customers.spk')
 
@@ -29,6 +28,8 @@
 
   @elseif($currentTab === 'complainform' || $currentTab === 'complainviewform' || $currentTab === 'complaineditform' )
     @include('livewire.customers.complainform')
-
+  
+  @elseif($currentTab === 'create-invoices')
+    @include('livewire.customers.create-invoices')
   @endif
 </div>
