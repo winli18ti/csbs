@@ -21,7 +21,7 @@
     </div>
   </div>
   
-  <div class="container-fluid d-flex gap-1 justify-content-end">
+  <div class="container-fluid d-flex gap-1 justify-content-end mb-2">
     <button class="btn btn-outline-primary btn-sm">
       Generate (Reguler)
     </button>
@@ -53,8 +53,14 @@
           <tr>
             <td class="text-center">#</td>
             <td class="text-center"><a href="/{{$data->id}}" class="text-danger-emphasis">{{$data->billnumber}}</a></td>
-            <td class="text-center">{{$data->servicetype}}</td>
-            <td>MM-YY</td>
+            <td class="text-center text-uppercase">
+              @if($data->type === 'reguler')
+                <span class="badge text-bg-primary">{{$data->type}}</span>
+              @elseif($data->type === 'non reguler')
+                <span class="badge text-bg-warning">{{$data->type}}</span>
+              @endif
+            </td>
+            <td>{{date('F Y', strtotime($data->billdate))}}</td>
             <td>{{$data->service->name}}</td>
             <td class="text-center">Per {{$data->subsperiod}} bulan</td>
             <td class="text-end">{{number_format($data->bill, 0, ',', '.')}}</td>
@@ -65,7 +71,11 @@
               <span class="badge text-bg-danger">blm lunas</span>
               @endif
             </td>
-            <td>{{$data->paiddate}}</td>
+            <td>
+              @if($data->paiddate)
+              {{date('d M Y', strtotime($data->paiddate))}}
+              @endif
+            </td>
             <td>
               @if(!is_null($data->user))
               {{$data->user->name}}

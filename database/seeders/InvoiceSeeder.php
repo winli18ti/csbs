@@ -9,7 +9,7 @@ use Illuminate\Database\Seeder;
 class InvoiceSeeder extends Seeder
 {
   /*
-  id, billnumber, servicetype, period, paytype,
+  id, billnumber, type, period, paytype,
   subsperiod, bill, status, paiddate, info,
   serviceid, collectorid, customerid, userid
   */
@@ -19,7 +19,8 @@ class InvoiceSeeder extends Seeder
         $arr = array(
           [
             'billnumber' => '230900001',
-            'servicetype' => 'reguler',
+            'type' => 'reguler',
+            'servicetype' => 'analog',
             'paytype' => 'penagihan ke pelanggan',
             'subsperiod' => 1,
             'bill' => 250000,
@@ -35,7 +36,8 @@ class InvoiceSeeder extends Seeder
           ],
           [
             'billnumber' => '231000001',
-            'servicetype' => 'reguler',
+            'type' => 'reguler',
+            'servicetype' => 'analog',
             'paytype' => 'penagihan ke pelanggan',
             'subsperiod' => 1,
             'bill' => 66000,
@@ -47,7 +49,8 @@ class InvoiceSeeder extends Seeder
           ],
           [
             'billnumber' => '231100001',
-            'servicetype' => 'reguler',
+            'type' => 'reguler',
+            'servicetype' => 'analog',
             'paytype' => 'penagihan ke pelanggan',
             'subsperiod' => 1,
             'bill' => 75000,
@@ -59,7 +62,8 @@ class InvoiceSeeder extends Seeder
           ],
           [
             'billnumber' => '230800001',
-            'servicetype' => 'reguler',
+            'type' => 'reguler',
+            'servicetype' => 'tv & inet',
             'paytype' => 'pembayaran ke kantor',
             'subsperiod' => 1,
             'bill' => 210000,
@@ -75,7 +79,8 @@ class InvoiceSeeder extends Seeder
           ],
           [
             'billnumber' => '230900002',
-            'servicetype' => 'reguler',
+            'type' => 'reguler',
+            'servicetype' => 'tv & inet',
             'paytype' => 'pembayaran ke kantor',
             'subsperiod' => 1,
             'bill' => 210000,
@@ -91,7 +96,8 @@ class InvoiceSeeder extends Seeder
           ],
           [
             'billnumber' => '231000002',
-            'servicetype' => 'reguler',
+            'type' => 'reguler',
+            'servicetype' => 'tv & inet',
             'paytype' => 'pembayaran ke kantor',
             'subsperiod' => 1,
             'bill' => 200000,
@@ -103,7 +109,8 @@ class InvoiceSeeder extends Seeder
           ],
           [
             'billnumber' => '221000001',
-            'servicetype' => 'reguler',
+            'type' => 'reguler',
+            'servicetype' => 'tv',
             'paytype' => 'pembayaran ke kantor',
             'subsperiod' => 1,
             'bill' => 205000,
@@ -119,7 +126,8 @@ class InvoiceSeeder extends Seeder
           ],
           [
             'billnumber' => '221100001',
-            'servicetype' => 'reguler',
+            'type' => 'reguler',
+            'servicetype' => 'tv',
             'paytype' => 'pembayaran ke kantor',
             'subsperiod' => 1,
             'bill' => 200000,
@@ -131,7 +139,8 @@ class InvoiceSeeder extends Seeder
           ],
           [
             'billnumber' => '221200001',
-            'servicetype' => 'reguler',
+            'type' => 'reguler',
+            'servicetype' => 'analog',
             'paytype' => 'penagihan ke rumah',
             'subsperiod' => 1,
             'bill' => 75000,
@@ -143,7 +152,8 @@ class InvoiceSeeder extends Seeder
           ],
           [
             'billnumber' => '230100001',
-            'servicetype' => 'reguler',
+            'type' => 'reguler',
+            'servicetype' => 'analog',
             'paytype' => 'penagihan ke rumah',
             'subsperiod' => 1,
             'bill' => 75000,
@@ -155,7 +165,8 @@ class InvoiceSeeder extends Seeder
           ],
           [
             'billnumber' => '230900003',
-            'servicetype' => 'reguler',
+            'type' => 'reguler',
+            'servicetype' => 'analog',
             'paytype' => 'penagihan ke rumah',
             'subsperiod' => 1,
             'bill' => 75000,
@@ -170,7 +181,8 @@ class InvoiceSeeder extends Seeder
           ],
           [
             'billnumber' => '231000003',
-            'servicetype' => 'reguler',
+            'type' => 'reguler',
+            'servicetype' => 'analog',
             'paytype' => 'penagihan ke rumah',
             'subsperiod' => 1,
             'bill' => 75000,

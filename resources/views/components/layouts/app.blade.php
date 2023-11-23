@@ -7,7 +7,7 @@
         <title>Customer Service and Billing System</title>
         @livewireStyles
     </head>
-    <body>
+    <body class="d-flex flex-column min-vh-100">
       <nav class="navbar navbar-expand bg-dark" data-bs-theme="dark">
         <div class="container-fluid">
           <div class="navbar-nav">
@@ -94,10 +94,12 @@
 
         {{ $slot }}
 
-      <div class="container-fluid bg-danger bg-opacity-75 text-white d-flex justify-content-between py-1 my-2">
-        <span>Staff: Hans Anderson</span>
-        <span>Copyright 2023</span>
-      </div>
+      <footer class="mt-auto">
+        <div class="container-fluid bg-danger bg-opacity-75 text-white d-flex justify-content-between py-1">
+          <span>Staff: Hans Anderson</span>
+          <span>Copyright 2023</span>
+        </div>
+      </footer>
       
       @livewireScripts
       <script src="{{ URL::asset('js/bootstrap.bundle.min.js') }}"></script>

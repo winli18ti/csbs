@@ -8,7 +8,7 @@ use Livewire\WithPagination;
 
 class Spks extends Component
 {
-    use WithPagination;
+    use WithPagination; protected $paginationTheme = 'bootstrap';
     // public $id;
     public $mode = 'table';
     public $title = 'SPK pelanggan';

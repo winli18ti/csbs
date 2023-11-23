@@ -8,7 +8,7 @@
       <div class="col-5 col-sm-4 col-md-3 col-xl-2">
         <label for="filterType" class="col-form-label">Jenis</label>
       </div>
-      <div class="col-7 col-sm-5 col-md-4 col-lg-3">
+      <div class="col-7 col-sm-5 col-md-3 col-lg-3">
         <select id="filterType" class="form-select form-select-sm"
           wire:model.live="filterType">
           <option value="">Semua</option>
@@ -16,13 +16,10 @@
           <option value="non reguler">Non reguler</option>
         </select>
       </div>
-    </div>
-
-    <div class="row align-items-center">
       <div class="col-5 col-sm-4 col-md-3 col-xl-2">
         <label for="filterService" class="col-form-label">Layanan</label>
       </div>
-      <div class="col-7 col-sm-5 col-md-4 col-lg-3">
+      <div class="col-7 col-sm-5 col-md-3 col-lg-3">
         <select id="filterService" class="form-select form-select-sm"
           wire:model.live="filterService">
           <option value="">Semua</option>
@@ -39,7 +36,7 @@
       <div class="col-5 col-sm-4 col-md-3 col-xl-2">
         <label for="filterSubsperiod" class="col-form-label">Frekuensi</label>
       </div>
-      <div class="col-7 col-sm-5 col-md-4 col-lg-3">
+      <div class="col-7 col-sm-5 col-md-3 col-lg-3">
         <select id="filterSubsperiod" class="form-select form-select-sm"
           wire:model.live="filterSubsperiod">
           <option value="">Semua</option>
@@ -49,13 +46,10 @@
           <option value="12">Per 12 bulan</option>
         </select>
       </div>
-    </div>
-
-    <div class="row align-items-center">
       <div class="col-5 col-sm-4 col-md-3 col-xl-2">
         <label for="filterStatus" class="col-form-label">Status</label>
       </div>
-      <div class="col-7 col-sm-5 col-md-4 col-lg-3">
+      <div class="col-7 col-sm-5 col-md-3 col-lg-3">
         <select id="filterStatus" class="form-select form-select-sm"
           wire:model.live="filterStatus">
           <option value="">Semua</option>
@@ -69,7 +63,7 @@
       <div class="col-5 col-sm-4 col-md-3 col-xl-2">
         <label for="filterDay" class="col-form-label">Tanggal Tagihan</label>
       </div>
-      <div class="col-7 col-sm-5 col-md-4 col-lg-3">
+      <div class="col-7 col-sm-5 col-md-3 col-lg-3">
         <div class="input-group">
           <select id="filterDay" class="form-select form-select-sm"
             wire:model.live="filterDay">
@@ -105,13 +99,10 @@
           
         </div>
       </div>
-    </div>
-
-    <div class="row align-items-center">
       <div class="col-5 col-sm-4 col-md-3 col-xl-2">
         <label for="searchTerm" class="col-form-label">Cari</label>
       </div>
-      <div class="col-7 col-sm-5 col-md-4 col-lg-3">
+      <div class="col-7 col-sm-5 col-md-3 col-lg-3">
         <input type="text" id="searchTerm" class="form-control form-control-sm"
           wire:model.live="searchTerm">
       </div>
@@ -139,11 +130,17 @@
         <tbody>
           @foreach($table as $data)
           <tr>
-            <td class="text-center">{{ $table->firstItem() + $loop->index }}</td>
-            <td><a class="text-danger-emphasis" href="/{{$data->id}}">{{$data->billnumber}}</a></td>
-            <td>{{$data->servicetype}}</td>
-            <td>MM-YY</td>
-            <td>DD-MM-YY</td>
+            <td class="text-end">{{ $table->firstItem() + $loop->index }}</td>
+            <td class="text-center"><a class="text-danger-emphasis" href="/{{$data->id}}">{{$data->billnumber}}</a></td>
+            <td class="text-center text-uppercase">
+              @if($data->type === 'reguler')
+                <span class="badge text-bg-primary">{{$data->type}}</span>
+              @elseif($data->type === 'non reguler')
+                <span class="badge text-bg-warning">{{$data->type}}</span>
+              @endif
+            </td>
+            <td>{{date('F Y', strtotime($data->billdate))}}</td>
+            <td>{{date('d M Y', strtotime($data->billdate))}}</td>
             <td><a href="/customer_detail/{{$data->customerid}}" class="text-danger-emphasis">{{$data->customer->member}}</a></td>
             <td>{{$data->customer->name}}</td>
             <td>{{$data->service->name}}</td>

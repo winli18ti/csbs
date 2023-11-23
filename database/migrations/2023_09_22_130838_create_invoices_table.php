@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->string('billnumber');
+            $table->string('type');
             $table->string('servicetype');
             $table->string('paytype');
             $table->integer('subsperiod');

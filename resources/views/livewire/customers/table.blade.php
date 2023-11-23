@@ -8,7 +8,7 @@
       <div class="col-5 col-sm-4 col-md-3 col-xl-2">
         <label for="filterStatus" class="col-form-label">Status</label>
       </div>
-      <div class="col-7 col-sm-5 col-md-4 col-lg-3">
+      <div class="col-7 col-sm-5 col-md-3 col-lg-3">
         <select id="filterStatus" class="form-select form-select-sm"
           wire:model.live="filterStatus">
           <option value="">Semua</option>
@@ -20,13 +20,10 @@
           <option value="cancel">Batal</option>
         </select>
       </div>
-    </div>
-
-    <div class="row align-items-center">
       <div class="col-5 col-sm-4 col-md-3 col-xl-2">
         <label for="filterPaytype" class="col-form-label">Cara pembayaran</label>
       </div>
-      <div class="col-7 col-sm-5 col-md-4 col-lg-3">
+      <div class="col-7 col-sm-5 col-md-3 col-lg-3">
         <select id="filterPaytype" class="form-select form-select-sm"
           wire:model.live="filterPaytype">
           <option value="">Semua</option>
@@ -41,7 +38,7 @@
       <div class="col-5 col-sm-4 col-md-3 col-xl-2">
         <label for="filterBillperiod" class="col-form-label">Periode tanggal tagihan</label>
       </div>
-      <div class="col-7 col-sm-5 col-md-4 col-lg-3">
+      <div class="col-7 col-sm-5 col-md-3 col-lg-3">
         <select id="filterBillperiod" class="form-select form-select-sm"
           wire:model.live="filterBillperiod">
           <option value="">Semua</option>
@@ -50,13 +47,10 @@
           <option value="belum terdefinisi">Belum terdefinisi</option>
         </select>
       </div>
-    </div>
-
-    <div class="row align-items-center">
       <div class="col-5 col-sm-4 col-md-3 col-xl-2">
         <label for="filterSubsperiod" class="col-form-label">Periode pembayaran</label>
       </div>
-      <div class="col-7 col-sm-5 col-md-4 col-lg-3">
+      <div class="col-7 col-sm-5 col-md-3 col-lg-3">
         <select id="filterSubsperiod" class="form-select form-select-sm"
           wire:model.live="filterSubsperiod">
           <option value="">Semua</option>
@@ -72,7 +66,7 @@
       <div class="col-5 col-sm-4 col-md-3 col-xl-2">
         <label for="filterVip" class="col-form-label">VIP</label>
       </div>
-      <div class="col-7 col-sm-5 col-md-4 col-lg-3">
+      <div class="col-7 col-sm-5 col-md-3 col-lg-3">
         <select id="filterVip" class="form-select form-select-sm"
           wire:model.live="filterVip">
           <option value="">Semua pelanggan</option>
@@ -80,13 +74,10 @@
           <option value="0">Selain VIP</option>
         </select>
       </div>
-    </div>
-
-    <div class="row align-items-center">
       <div class="col-5 col-sm-4 col-md-3 col-xl-2">
         <label for="searchTerm" class="col-form-label">Cari</label>
       </div>
-      <div class="col-7 col-sm-5 col-md-4 col-lg-3">
+      <div class="col-7 col-sm-5 col-md-3 col-lg-3">
         <input type="text" id="searchTerm" class="form-control form-control-sm"
           wire:model.live="searchTerm">
       </div>
@@ -133,7 +124,7 @@
         <tbody>
           @foreach($table as $data)
           <tr>
-            <td class="text-center">{{ $table->firstItem() + $loop->index }}</td>
+            <td class="text-end">{{ $table->firstItem() + $loop->index }}</td>
             @if(!($filterStatus === '' || $filterStatus === 'active'))
             <td class="text-center">{{$data->statusdate}}</td>
             @endif
@@ -154,7 +145,7 @@
               <span class="badge text-bg-success">{{$data->node}}</span>
               @endif
             </td>
-            <td class="text-uppercase">
+            <td class="text-uppercase text-center">
               @if($data->status === 'active')
               <span class="badge text-bg-success">{{$data->status}}</span>
               @elseif($data->status === 'suspend')

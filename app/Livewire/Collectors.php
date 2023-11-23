@@ -8,7 +8,8 @@ use Livewire\WithPagination;
 
 class Collectors extends Component
 {
-    use WithPagination;
+    use WithPagination; protected $paginationTheme = 'bootstrap';
+    
     public $id, $name, $status;
     public $mode = 'table';
     public $title = 'Kolektor';

@@ -4,9 +4,14 @@ namespace App\Livewire;
 
 use App\Models\Invoice;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Invoices extends Component
 {
+    use WithPagination; protected $paginationTheme = 'bootstrap';
+    
+    public $currentTab = 'table';
+
     public $filterType = '', $filterService = '', $filterSubsperiod = '', $filterStatus = '', 
     $filterDay = '', $filterMonth = '', $filterYear = '', $searchTerm = '';
 
@@ -18,10 +23,10 @@ class Invoices extends Component
     {
         $table = Invoice::orderby('id', 'desc')->select('*');
         if(!empty($this->filterType)) {
-            $table->where(['servicetype' => $this->filterType]);
+            $table->where(['type' => $this->filterType]);
         }
         if(!empty($this->filterService)) {
-        
+            $table->where(['servicetype' => $this->filterService]);
         }
         if(!empty($this->filterSubsperiod)) {
             $table->where(['subsperiod' => $this->filterSubsperiod]);
@@ -41,7 +46,7 @@ class Invoices extends Component
         if(!empty($this->searchTerm)) {
             
         }
-        $table = $table->paginate(10);
+        $table = $table->paginate(20);
         return view('livewire.invoices', compact('table'));
     }
 }

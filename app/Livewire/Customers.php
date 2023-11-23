@@ -9,8 +9,11 @@ use App\Models\Marketer;
 use App\Models\Service;
 use App\Models\Spk;
 use Carbon\Carbon;
+use Livewire\WithPagination;
 
 class Customers extends Component{
+    use WithPagination; protected $paginationTheme = 'bootstrap';
+    
     public $marketerid, $statusdate, $name, $identity, $address, 
     $cellphone, $homephone, $email, $paytype = 'penagihan ke pelanggan', $servicetype = 'reguler', 
     $servicename, $subsperiod, $notes, $specialname, $specialprice, $specialinfo;
@@ -47,7 +50,7 @@ class Customers extends Component{
         if(!empty($this->searchTerm)){
             $table->where('name', 'like', "%".$this->searchTerm."%");
         }
-        $table = $table->paginate(10);
+        $table = $table->paginate(20);
         return view('livewire.customers', compact('table'));
     }
 

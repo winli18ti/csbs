@@ -8,7 +8,7 @@
       <div class="col-5 col-sm-4 col-md-3 col-xl-2">
         <label for="filterStatus" class="col-form-label">Status</label>
       </div>
-      <div class="col-7 col-sm-5 col-md-4 col-lg-3">
+      <div class="col-7 col-sm-5 col-md-3 col-lg-3">
         <select id="filterStatus" class="form-select form-select-sm"
           wire:model.live="filterStatus">
           <option value="">Semua</option>
@@ -24,7 +24,7 @@
       <div class="col-5 col-sm-4 col-md-3 col-xl-2">
         <label for="category" class="col-form-label">Kategori</label>
       </div>
-      <div class="col-7 col-sm-5 col-md-4 col-lg-3">
+      <div class="col-7 col-sm-5 col-md-3 col-lg-3">
         <select id="filterCategory" class="form-select form-select-sm"
           wire:model.live="filterCategory">
           <option value="">Semua</option>

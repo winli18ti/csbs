@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('invoice_details', function (Blueprint $table) {
             $table->id();
+            $table->string('type');
             $table->string('info');
             $table->integer('price');
             $table->integer('invoiceid');

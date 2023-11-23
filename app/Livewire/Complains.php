@@ -9,7 +9,8 @@ use Livewire\WithPagination;
 
 class Complains extends Component
 {
-    use WithPagination;
+    use WithPagination; protected $paginationTheme = 'bootstrap';
+    
     public $id, $code, $customerid, $member, $name, 
     $status, $priority, $servicetype, $via, $source, 
     $submittedby, $subject, $description, $solution, $acceptedby, $acceptedbydate,

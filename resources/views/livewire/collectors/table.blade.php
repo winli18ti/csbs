@@ -46,7 +46,7 @@
         <tbody>
           @foreach($table as $data)
           <tr>
-            <td class="text-center">{{$data->id}}</td>
+            <td class="text-center">{{ $table->firstItem() + $loop->index }}</td>
             <td>{{$data->name}}</td>
             <td class="text-center text-uppercase">
               @if($data->status === 'aktif')

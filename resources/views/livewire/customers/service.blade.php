@@ -51,7 +51,7 @@
     </div>
   </div>
 
-  <div class="container-fluid d-flex gap-1 mt-4">
+  <div class="container-fluid d-flex gap-1 mt-4 mb-2">
     @if($status === 'registration')
     <button class="btn btn-outline-primary btn-sm" wire:click.prevent="updateStatus('cancel')">
       Pembatalan Layanan
@@ -99,7 +99,7 @@
         <tbody>
           @foreach($customerServiceData as $data)
           <tr>
-            <td>{{$data->id}}</td>
+            <td class="text-center">#</td>
             <td>{{$data->name}}</td>
             <td>{{$data->info}}</td>
             <td class="text-center text-uppercase">{{$data->status}}</td>

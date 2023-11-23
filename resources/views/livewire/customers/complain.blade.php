@@ -21,7 +21,7 @@
     </div>
   </div>
 
-  <div class="container-fluid d-flex gap-1 justify-content-end">
+  <div class="container-fluid d-flex gap-1 justify-content-end mb-2">
     <button class="btn btn-outline-primary btn-sm" wire:click.prevent="navigate('complainform')">
       Tambah Pengaduan
     </button>
@@ -47,17 +47,26 @@
           @if($complainData->count())
             @foreach($complainData as $data)
               <tr>
-                <td></td>
-                <td>{{ $data->code  }}</td>
+                <td class="text-end">#</td>
+                <td class="text-center">{{ $data->code  }}</td>
                 <td>{{ $data->subject  }}</td>
-                <td>{{ $data->servicetype  }}</td>
-                <td>{{ $data->priority  }}</td>
-                <td>{{ $data->submittedby  }}</td>
+                <td class="text-uppercase">{{ $data->servicetype  }}</td>
+                <td class="text-capitalize">{{ $data->priority  }}</td>
+                <td>{{ date('d M Y H:i:s', strtotime($data->acceptedbydate))  }}</td>
                 <td>{{ Carbon\Carbon::create($data->acceptedbydate)->diffForHumans(Carbon\Carbon::now())  }}</td>
-                <td>{{ $data->status  }}</td>
-                <td>
-                  <button wire:click.prevent="complainView({{$data->id}}, 'view')">View</button>
-                  <button wire:click.prevent="complainView({{$data->id}}, 'edit')">Edit</button>
+                <td class="text-center text-uppercase">
+                  @if($data->status === 'tunggu')
+                    <span class="badge text-bg-danger">{{$data->status}}</span>
+                  @elseif($data->status === 'proses')
+                    <span class="badge text-bg-warning">{{$data->status}}</span>
+                  @elseif($data->status === 'selesai')
+                    <span class="badge text-bg-primary">{{$data->status}}</span>
+                  @endif
+                </td>
+                <td class="text-center">
+
+                  <button wire:click.prevent="complainView({{$data->id}}, 'view')" class="btn btn-outline-warning btn-sm">View</button>
+                  <button wire:click.prevent="complainView({{$data->id}}, 'edit')" class="btn btn-outline-warning btn-sm">Edit</button>
                 </td>
               </tr>
             @endforeach

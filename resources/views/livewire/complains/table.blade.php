@@ -8,7 +8,7 @@
       <div class="col-5 col-sm-4 col-md-3 col-xl-2">
         <label for="filterStatus" class="col-form-label">Status</label>
       </div>
-      <div class="col-7 col-sm-5 col-md-4 col-lg-3">
+      <div class="col-7 col-sm-5 col-md-3 col-lg-3">
         <select id="filterStatus" class="form-select form-select-sm"
           wire:model.live="filterStatus">
           <option value="">Semua</option>
@@ -46,21 +46,31 @@
         <tbody>
           @foreach($table as $data)
           <tr>
-            <td class="text-center">{{$data->id}}</td>
-            <td class="text-center">{{$data->code}}</td>
-            <td class="text-center"><a href="/customer_detail/{{$data->customerid}}">{{$data->customerid}}</a></td>
-            <td>{{$data->address}}</td>
+            <td class="text-end">{{ $table->firstItem() + $loop->index }}</td>
+            <td class="text-center">
+              <a class="text-danger-emphasis" href=""
+                wire:click.prevent="edit({{$data->id}})">
+                {{$data->code}}
+              </a>
+            </td>
+            <td class="text-center">
+              <a class="text-danger-emphasis" 
+                href="/customer_detail/{{$data->customerid}}">
+                {{$data->customer->member}}
+              </a>
+            </td>
+            <td>{{$data->customer->address}}</td>
             <td>{{$data->subject}}</td>
-            <td>{{$data->servicetype}}</td>
-            <td>{{$data->priority}}</td>
-            <td>{{$data->acceptedby}}</td>
+            <td class="text-uppercase">{{$data->servicetype}}</td>
+            <td class="text-capitalize">{{$data->priority}}</td>
+            <td>{{ date('d M Y H:i:s', strtotime($data->acceptedbydate))  }}</td>
             <td class="text-center text-uppercase">
               @if($data->status === 'tunggu')
                 <span class="badge text-bg-danger">{{$data->status}}</span>
               @elseif($data->status === 'proses')
                 <span class="badge text-bg-warning">{{$data->status}}</span>
               @elseif($data->status === 'selesai')
-                <span class="badge text-bg-success">{{$data->status}}</span>
+                <span class="badge text-bg-primary">{{$data->status}}</span>
               @endif
             </td>
             <td class="text-center">

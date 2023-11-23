@@ -16,6 +16,7 @@ class Invoice extends Model
     protected $fillable = [
         'id',
         'billnumber',
+        'type',
         'servicetype',
         'paytype',
         'subsperiod',
