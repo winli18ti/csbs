@@ -13,19 +13,20 @@
   </div>
 
   @if($currentTab === 'profile')
-    @include('livewire.customers.profile')
-
+    {{-- @include('livewire.customers.profile') --}}
+    <livewire:profile :userid="$id" />
   @elseif($currentTab === 'service')
-    @include('livewire.customers.service')
-
+    {{-- @include('livewire.customers.service') --}}
+    <livewire:service :userid="$id" />
   @elseif($currentTab === 'invoice')
-    @include('livewire.customers.invoice')
+    {{-- @include('livewire.customers.invoice') --}}
+    <livewire:invoices :userid="$id" />
   @elseif($currentTab === 'spk')
-    @include('livewire.customers.spk')
-
+    {{-- @include('livewire.customers.spk') --}}
+    <livewire:spks :userid="$id" />
   @elseif($currentTab === 'complain')
-    @include('livewire.customers.complain')
-
+    {{-- @include('livewire.customers.complain') --}}
+    <livewire:complains :userid="$id" />
   @elseif($currentTab === 'complainform' || $currentTab === 'complainviewform' || $currentTab === 'complaineditform' )
     @include('livewire.customers.complainform')
   

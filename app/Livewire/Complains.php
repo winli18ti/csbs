@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Complain;
+use App\Models\Customer;
 use App\Models\Marketer;
 use Livewire\WithPagination;
 
@@ -15,18 +16,32 @@ class Complains extends Component
     $status, $priority, $servicetype, $via, $source, 
     $submittedby, $subject, $description, $solution, $acceptedby, $acceptedbydate,
     $updatedby, $updatedbydate;
-    public $mode = 'table';
+    public $mode = 'hero';
     public $title = 'Pengaduan pelanggan';
     public $filterStatus = '';
 
+    public $complainData, $collectorData;
+
+    public function mount($userid){
+        $this->id = $userid;
+    }
+
     public function render()
     {
+        $this->setData();
         $table = Complain::select('*');
         if (!empty($this->filterStatus)) {
             $table->where(['status' => $this->filterStatus]);
         }
         $table = $table->paginate(20);
         return view('livewire.complains', compact('table'));
+    }
+
+    public function setData(){
+        $data = Customer::find($this->id);
+        $this->complainData = Complain::where('customerid', $this->id)->get();
+        $this->member = $data->member;
+        $this->name = $data->name;
     }
 
     public function navigate($mode) {

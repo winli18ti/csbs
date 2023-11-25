@@ -152,7 +152,7 @@ class CustomerDetail extends Component {
       
     }
     else if ($this->currentTab === 'complain') {
-      
+        
     }
     return view('livewire.customer-detail');
   }

@@ -7,5 +7,7 @@
         @include('livewire.invoices.add')
     @elseif($currentTab === 'edit')
         @include('livewire.invoices.edit')
+    @elseif($currentTab === 'hero')
+        @include('livewire.invoices.hero')
     @endif
 </div>

@@ -3,5 +3,7 @@
     @include('livewire.complains.table')
   @elseif($mode === 'edit')
     @include('livewire.complains.form')
+  @elseif($mode === 'hero')
+    @include('livewire.complains.hero')
   @endif
 </div>
