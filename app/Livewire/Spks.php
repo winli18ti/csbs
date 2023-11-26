@@ -19,7 +19,11 @@ class Spks extends Component
     public $id, $member, $name;
     
     public function mount($userid){
-        $this->id = $userid;
+        if($userid === 'none'){
+            $this->mode = 'table';
+        }else{
+            $this->id = $userid; $this->mode = 'hero';
+        }
     }
 
     public function render()

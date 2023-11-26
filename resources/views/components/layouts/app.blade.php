@@ -5,6 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/bootstrap.min.css') }}">
         <title>Customer Service and Billing System</title>
+        {{-- Sweet Alert --}}
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         @livewireStyles
     </head>
     <body class="d-flex flex-column min-vh-100">

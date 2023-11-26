@@ -7,10 +7,12 @@ use App\Models\Customer;
 use App\Models\Marketer;
 use Carbon\Carbon;
 
+use function PHPSTORM_META\map;
+
 class Profile extends Component{
 // Public single data
     public $id, $member, $name, $company, $identity, 
-    $address, $email, $vip, $effectivedate,
+    $address, $city, $email, $vip, $effectivedate,
     $node, $marketerid, $homephone, $officephone, $cellphone,
     $servicetype, $specialprice, $specialinfo, $paytype,
     $billperiod, $subsperiod, $tvcount, $notes, $status;
@@ -125,4 +127,73 @@ class Profile extends Component{
         $this->status = $data->status;
     }
 // ------------------------------------------------------------------------------------------------------------------------------------
+    public function update() {
+        if ($this->vip != 1) $this->vip = 0;
+        if(empty($this->tvcount)) $this->tvcount = 0;
+        $this->validateChecker('update');
+        Customer::where('id', $this->id)->update([
+            // member' => $this->member,
+            'name' => $this->name,
+            'company' => $this->company,
+            'identity' => $this->identity,
+            'address' => $this->address,
+            'city' => $this->city,
+            'email' => $this->email,
+            'vip' => $this->vip,
+            'effectivedate' => $this->effectivedate,
+            'node' => $this->node,
+            'marketerid' => $this->marketerid,
+            'homephone' => $this->homephone,
+            'officephone' => $this->officephone,
+            'cellphone' => $this->cellphone,
+            // 'servicetype' => $this->servicetype,
+            'specialprice' => $this->specialprice,
+            'specialinfo' => $this->specialinfo,
+            'paytype' => $this->paytype,
+            'billperiod' => $this->billperiod,
+            'subsperiod' => $this->subsperiod,
+            'tvcount' => $this->tvcount,
+            'notes' => $this->notes,
+        ]);
+
+        $this->alerttoaster('Data berhasil di update', 'success');
+        // return redirect()->route('customers');
+    }
+// -----------------------------------------------------------------------------------------------------------------------------------
+// Validation Rules
+    public function validateChecker($info){
+        if($info === 'update'){
+            $this->validate([
+                'name' => 'required',
+                'address' => 'required',
+                'marketerid' => 'required',
+                'cellphone' => 'required',
+                'billperiod' => 'required',
+                'subsperiod' => 'required',
+            ],[
+                'name.required' => 'Kolom nama harus diisikan',
+                'address.required' => 'Kolom alamat harus diisikan',
+                'marketerid.required' => 'Sales harus dipilih',
+                'cellphone.required' => 'Nomor HP perlu diisikan', 
+                'billperiod.required' => 'Periode tagihan perlu dipilih',
+                'subsperiod.required' => 'Periode berlanggan perlu dipilih',
+            ]);
+        }
+    }
+// -----------------------------------------------------------------------------------------------------------------------------------
+// Alert ()
+    public function alert($title, $msg, $icon){
+        $this->dispatch('swal', [
+            'title' => $title,
+            'text' => $msg,
+            'icon' => $icon,
+        ]);
+    }
+    public function alerttoaster($title, $icon){
+        $this->dispatch('toast', [
+            'title' => $title,
+            'icon' => $icon,
+        ]);
+    }
+// -----------------------------------------------------------------------------------------------------------------------------------
 }

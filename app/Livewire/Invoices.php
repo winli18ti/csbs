@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Collector;
 use App\Models\Customer;
 use App\Models\Invoice;
 use Livewire\Component;
@@ -16,12 +17,16 @@ class Invoices extends Component
     public $filterType = '', $filterService = '', $filterSubsperiod = '', $filterStatus = '', 
     $filterDay = '', $filterMonth = '', $filterYear = '', $searchTerm = '';
     
-    public $id, $member, $name;
+    public $id, $member, $name, $billdate, $collectorid;
 
-    public $invoicesData;
+    public $invoicesData, $collectorData;
 
     public function mount($userid){
-        $this->id = $userid;
+        if($userid === 'none'){
+            $this->currentTab = 'table';
+        }else{
+            $this->id = $userid; $this->currentTab = 'hero';
+        }
     }
 
     public function render()
@@ -61,5 +66,10 @@ class Invoices extends Component
         $this->member = $data->member;
         $this->name = $data->name;
         $this->invoicesData = Invoice::where('customerid', $this->id)->get();
+        $this->collectorData = Collector::get();
+    }
+
+    public function navigate($tab){
+        $this->currentTab = $tab;
     }
 }
