@@ -7,19 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-    protected $fillable = [
-        'id',
-        'name',
-        'username',
-        'password',
-        'role',
-        'notes',
-        'status'
-    ];
+  protected $fillable = [
+    'id',
+    'name',
+    'username',
+    'password',
+    'role',
+    'notes',
+    'status'
+  ];
 
-    public function invoices() {
-        return $this->hasMany(Invoice::class, 'userid');
-    }
+  public function invoices()
+  {
+    return $this->hasMany(Invoice::class, 'userid');
+  }
 }

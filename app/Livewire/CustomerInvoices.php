@@ -10,32 +10,37 @@ use Livewire\WithPagination;
 
 class CustomerInvoices extends Component
 {
-    use WithPagination; protected $paginationTheme = 'bootstrap';
-    
-    public $mode = 'hero';
-    
-    public $id, $member, $name, $billdate, $collectorid;
+  use WithPagination;
+  protected $paginationTheme = 'bootstrap';
 
-    public $invoicesData, $collectorData;
+  public $mode = 'hero';
 
-    public function mount($userid) {
-        $this->id = $userid;
-    }
+  public $id, $member, $name, $billdate, $collectorid;
 
-    public function render() {
-        $this->setData();
-        return view('livewire.customerinvoices');
-    }
+  public $invoicesData, $collectorData;
 
-    public function setData(){
-        $data = Customer::find($this->id);
-        $this->member = $data->member;
-        $this->name = $data->name;
-        $this->invoicesData = Invoice::where('customerid', $this->id)->get();
-        $this->collectorData = Collector::get();
-    }
+  public function mount($userid)
+  {
+    $this->id = $userid;
+  }
 
-    public function navigate($mode){
-        $this->mode = $mode;
-    }
+  public function render()
+  {
+    $this->setData();
+    return view('livewire.customerinvoices');
+  }
+
+  public function setData()
+  {
+    $data = Customer::find($this->id);
+    $this->member = $data->member;
+    $this->name = $data->name;
+    $this->invoicesData = Invoice::where('customerid', $this->id)->get();
+    $this->collectorData = Collector::get();
+  }
+
+  public function navigate($mode)
+  {
+    $this->mode = $mode;
+  }
 }

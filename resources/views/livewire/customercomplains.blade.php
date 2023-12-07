@@ -1,10 +1,10 @@
 <diV class="mt-3">
   @if($mode === 'hero')
-    @include('livewire.complains.hero')
+    @include('livewire.customercomplains.hero')
   @elseif($mode === 'edit')
-    @include('livewire.complains.form')
+    @include('livewire.customercomplains.form')
   @elseif($mode === 'complainform' || $mode === 'complainviewform' || $mode === 'complaineditform' )
-    @include('livewire.complains.complainform')
+    @include('livewire.customercomplains.complainform')
   @endif
 </div>
 <script>

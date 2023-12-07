@@ -7,20 +7,22 @@ use Illuminate\Database\Eloquent\Model;
 
 class Service extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-    protected $fillable = [
-        'id',
-        'name',
-        'info',
-        'price',
-    ];
+  protected $fillable = [
+    'id',
+    'name',
+    'info',
+    'price',
+  ];
 
-    public function customerServices() {
-        return $this->hasMany(CustomerService::class, 'serviceid');
-    }
+  public function customerServices()
+  {
+    return $this->hasMany(CustomerService::class, 'serviceid');
+  }
 
-    public function invoices() {
-        return $this->hasMany(Invoice::class, 'serviceid');
-    }
+  public function invoices()
+  {
+    return $this->hasMany(Invoice::class, 'serviceid');
+  }
 }

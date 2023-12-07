@@ -8,14 +8,17 @@ use App\Models\Customer;
 
 class TvDigital extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-    protected $fillable = [
-        'id',
-        'serialnumber',
-        'smartcard',
-        'customerid',
-    ];
+  protected $fillable = [
+    'id',
+    'serialnumber',
+    'smartcard',
+    'customerid',
+  ];
 
-    public function customer() { return $this->belongsTo(Customer::class,'customerid'); }
+  public function customer()
+  {
+    return $this->belongsTo(Customer::class, 'customerid');
+  }
 }

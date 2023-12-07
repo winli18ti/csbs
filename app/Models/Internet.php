@@ -8,17 +8,20 @@ use App\Models\Customer;
 
 class Internet extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-    protected $fillable = [
-        'id',
-        'modemnumber',
-        'modemip',
-        'modemmac',
-        'cpeip',
-        'cpemac',
-        'customerid',
-    ];
+  protected $fillable = [
+    'id',
+    'modemnumber',
+    'modemip',
+    'modemmac',
+    'cpeip',
+    'cpemac',
+    'customerid',
+  ];
 
-    public function customer() { return $this->belongsTo(Customer::class,'customerid'); }
+  public function customer()
+  {
+    return $this->belongsTo(Customer::class, 'customerid');
+  }
 }

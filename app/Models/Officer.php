@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Officer extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-    protected $fillable = [
-        'id',
-        'name',
-        'status',
-    ];
+  protected $fillable = [
+    'id',
+    'name',
+    'status',
+  ];
 }

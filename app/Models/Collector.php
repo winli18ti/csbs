@@ -7,15 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Collector extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-    protected $fillable = [
-        'id',
-        'name',
-        'status',
-    ];
+  protected $fillable = [
+    'id',
+    'name',
+    'status',
+  ];
 
-    public function invoices() {
-        return $this->hasMany(Invoice::class, 'collectorid');
-    }
+  public function invoices()
+  {
+    return $this->hasMany(Invoice::class, 'collectorid');
+  }
 }
