@@ -14,6 +14,7 @@ use Livewire\WithPagination;
 class Customers extends Component{
     use WithPagination; protected $paginationTheme = 'bootstrap';
     
+    //form
     public $marketerid, $statusdate, $name, $identity, $address, 
     $cellphone, $homephone, $email, $paytype = 'penagihan ke pelanggan', $servicetype = 'reguler', 
     $servicename, $subsperiod, $notes, $specialname, $specialprice, $specialinfo;
@@ -21,6 +22,8 @@ class Customers extends Component{
     public $serviceData, $marketerData;
 
     public $mode = 'table'; public $title = 'Pelanggan';
+
+    //filter table
     public $filterStatus = ''; public $filterPaytype = '';
     public $filterBillperiod = ''; public $filterSubsperiod = '';
     public $filterVip = ''; public $searchTerm;

@@ -70,10 +70,10 @@
           Nonaktifkan Layanan
         </button>
         @endif
-      <button class="btn btn-outline-primary btn-sm" wire:click.prevent="">
+      <button class="btn btn-outline-primary btn-sm" wire:click.prevent="navigate('packet')">
         Ubah Paket
       </button>
-      <button class="btn btn-outline-primary btn-sm" wire:click.prevent="">
+      <button class="btn btn-outline-primary btn-sm" wire:click.prevent="navigate('stb')">
         Ubah STB/TV
       </button>
       <button class="btn btn-outline-primary btn-sm" wire:click.prevent="updateStatus('req dismantle')">

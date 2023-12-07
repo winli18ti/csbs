@@ -7,25 +7,30 @@ use App\Models\Spk;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class Spks extends Component
+class CustomerSpks extends Component
 {
     use WithPagination; protected $paginationTheme = 'bootstrap';
-    // public $id;
-    public $mode = 'table';
+    public $mode = 'hero';
     public $title = 'SPK pelanggan';
     public $filterStatus = '';
     public $filterCategory = '';
 
+    public $id, $member, $name;
+    
+    public function mount($userid){
+        $this->id = $userid;
+        $this->mode = 'hero';
+    }
+
     public function render() {
-        $table = Spk::select('*');
-        if (!empty($this->filterStatus)) {
-            $table->where(['status' => $this->filterStatus]);
-        }
-        if (!empty($this->filterCategory)) {
-            $table->where(['category' => $this->filterCategory]);
-        }
-        $table = $table->paginate(20);
-        return view('livewire.spks', compact('table'));
+        $this->setData();
+        return view('livewire.customerspks');
+    }
+
+    public function setData(){
+        $data = Customer::find($this->id);
+        $this->member = $data->member;
+        $this->name = $data->name;
     }
 
     public function navigate($mode) {

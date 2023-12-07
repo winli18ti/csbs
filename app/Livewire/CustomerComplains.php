@@ -9,7 +9,7 @@ use App\Models\Marketer;
 use Carbon\Carbon;
 use Livewire\WithPagination;
 
-class Complains extends Component
+class CustomerComplains extends Component
 {
     use WithPagination; protected $paginationTheme = 'bootstrap';
     
@@ -17,7 +17,7 @@ class Complains extends Component
     $status, $priority, $servicetype, $via, $source, 
     $submittedby, $subject, $description, $solution, $acceptedby, $acceptedbydate,
     $updatedby, $updatedbydate;
-    public $mode = 'table';
+    public $mode = 'hero';
     public $title = 'Pengaduan pelanggan';
     public $filterStatus = '';
 
@@ -25,16 +25,24 @@ class Complains extends Component
 
     public $complainData, $collectorData;
 
+    public function mount($userid) {
+      $this->id = $userid;
+    }
+
     public function render() {
-        $table = Complain::select('*');
-        if (!empty($this->filterStatus)) {
-            $table->where(['status' => $this->filterStatus]);
-        }
-        $table = $table->paginate(20);
-        return view('livewire.complains', compact('table'));
+        $this->setData();
+        return view('livewire.customercomplains');
+    }
+
+    public function setData() {
+        $data = Customer::find($this->id);
+        $this->complainData = Complain::where('customerid', $this->id)->get();
+        $this->member = $data->member;
+        $this->name = $data->name;
     }
 
     public function navigate($mode) {
+        if($mode === 'hero') { $this->varEmpty(); }
         $this->mode = $mode;
     }
 
@@ -72,7 +80,7 @@ class Complains extends Component
             'solution' => $this->solution,
         ]);
         session()->flash('message', $this->title.' berhasil diubah');
-        $this->navigate('table');
+        $this->navigate('hero');
     }
 
     public function complainCreate() {

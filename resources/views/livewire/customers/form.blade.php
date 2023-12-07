@@ -37,8 +37,7 @@
                 <label for="statusdate" class="col-form-label">Tanggal registrasi</label>
               </div>
               <div class="col-7 col-md-8">
-                <input type="date" id="statusdate" class="form-control form-control-sm" 
-                  value="2023-08-31" min="2023-08-31"
+                <input type="date" id="statusdate" class="form-control form-control-sm"
                   wire:model.live="statusdate">
                 @error('statusdate') <span class="text-danger fw-light">{{$message}}</span> @enderror
               </div>

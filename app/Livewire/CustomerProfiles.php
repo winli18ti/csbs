@@ -9,7 +9,7 @@ use Carbon\Carbon;
 
 use function PHPSTORM_META\map;
 
-class Profile extends Component{
+class CustomerProfiles extends Component{
 // Public single data
     public $id, $member, $name, $company, $identity, 
     $address, $city, $email, $vip, $effectivedate,
@@ -96,7 +96,7 @@ class Profile extends Component{
     
     public function render(){
         $this->setData();
-        return view('livewire.profile');
+        return view('livewire.customerprofiles');
     }
 // ------------------------------------------------------------------------------------------------------------------------------------
 // First Dynamic Setup Data

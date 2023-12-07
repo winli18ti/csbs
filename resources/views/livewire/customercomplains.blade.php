@@ -1,6 +1,6 @@
 <diV class="mt-3">
-  @if($mode === 'table')
-    @include('livewire.complains.table')
+  @if($mode === 'hero')
+    @include('livewire.complains.hero')
   @elseif($mode === 'edit')
     @include('livewire.complains.form')
   @elseif($mode === 'complainform' || $mode === 'complainviewform' || $mode === 'complaineditform' )

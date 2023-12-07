@@ -1,4 +1,7 @@
 <div class="mt-3">
+  <div>
+      <button wire:click.prevent="navigate('hero')">Kembali</button>
+  </div>
   <div class="container-fluid">
     <div class="row align-items-center">
       <div class="col-5 col-sm-4 col-md-3 col-xl-2">
@@ -36,10 +39,10 @@
       <div class="col-auto">
         <select id="collectorid" class="form-select form-select-sm" wire:model.live="collectorid">
           <option value="" selected>-- Pilih Kolektor --</option>
+          @foreach($collectorData as $data)
+              <option value="{{$data->id}}">{{$data->name}}</option>
+          @endforeach
         </select>
-        @foreach($collectorData as $data)
-          <option value="{{$data->id}}">{{$data->name}}</option>
-        @endforeach
       </div>
     </div>
   </div>

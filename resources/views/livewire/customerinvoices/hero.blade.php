@@ -25,7 +25,7 @@
       <button class="btn btn-outline-primary btn-sm">
         Generate (Reguler)
       </button>
-      <button class="btn btn-outline-primary btn-sm" wire:click.prevent="navigate('create-invoices')">
+      <button class="btn btn-outline-primary btn-sm" wire:click.prevent="navigate('add')">
         Tambah Tagihan
       </button>
     </div>

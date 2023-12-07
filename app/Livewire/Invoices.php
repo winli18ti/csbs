@@ -2,8 +2,6 @@
 
 namespace App\Livewire;
 
-use App\Models\Collector;
-use App\Models\Customer;
 use App\Models\Invoice;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -12,26 +10,12 @@ class Invoices extends Component
 {
     use WithPagination; protected $paginationTheme = 'bootstrap';
     
-    public $currentTab = 'hero';
+    public $mode = 'table';
 
     public $filterType = '', $filterService = '', $filterSubsperiod = '', $filterStatus = '', 
     $filterDay = '', $filterMonth = '', $filterYear = '', $searchTerm = '';
-    
-    public $id, $member, $name, $billdate, $collectorid;
 
-    public $invoicesData, $collectorData;
-
-    public function mount($userid){
-        if($userid === 'none'){
-            $this->currentTab = 'table';
-        }else{
-            $this->id = $userid; $this->currentTab = 'hero';
-        }
-    }
-
-    public function render()
-    {
-        $this->setData();
+    public function render() {
         $table = Invoice::orderby('id', 'desc')->select('*');
         if(!empty($this->filterType)) {
             $table->where(['type' => $this->filterType]);
@@ -61,15 +45,7 @@ class Invoices extends Component
         return view('livewire.invoices', compact('table'));
     }
 
-    public function setData(){
-        $data = Customer::find($this->id);
-        $this->member = $data->member;
-        $this->name = $data->name;
-        $this->invoicesData = Invoice::where('customerid', $this->id)->get();
-        $this->collectorData = Collector::get();
-    }
-
-    public function navigate($tab){
-        $this->currentTab = $tab;
+    public function navigate($mode){
+        $this->mode = $mode;
     }
 }
