@@ -18,9 +18,29 @@ return new class extends Migration
             $table->string('service');
             $table->string('servicetype');
             $table->string('status');
-            $table->timestamp('statusdate');
+            //penambahan / pengurangan tv analog
+            $table->integer('tvanalog')->nullable();
+            //tv digital
+            $table->string('serialnumber')->nullable();
+            $table->string('smartcard')->nullable();
+            //internet
+            $table->string('modemnumber')->nullable();
+            $table->string('modemip')->nullable();
+            $table->string('modemmac')->nullable();
+            $table->string('cpeip')->nullable();
+            $table->string('cpemac')->nullable();
+            
+            $table->timestamp('inputdate');
+            $table->timestamp('startdate')->nullable();
+            $table->timestamp('enddate')->nullable();
+            $table->integer('officerid1')->nullable();
+            $table->integer('officerid2')->nullable();
+            $table->string('node')->nullable();
+            //dismantle
+            $table->text('reason')->nullable();
+            $table->text('solution')->nullable();
+
             $table->integer('customerid');
-            //status dan petugas lapangan
             $table->timestamps();
         });
     }

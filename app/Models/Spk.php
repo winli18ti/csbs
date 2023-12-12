@@ -17,7 +17,22 @@ class Spk extends Model
     'service',
     'servicetype',
     'status',
-    'statusdate',
+    'tvanalog',
+    'serialnumber',
+    'smartcard',
+    'modemnumber',
+    'modemip',
+    'modemmac',
+    'cpeip',
+    'cpemac',
+    'inputdate',
+    'startdate',
+    'enddate',
+    'officerid1',
+    'officerid2',
+    'node',
+    'reason',
+    'solution',
     'customerid',
   ];
 
@@ -25,4 +40,7 @@ class Spk extends Model
   {
     return $this->belongsTo(Customer::class, 'customerid');
   }
+
+  //Officer::find(id_officer_nya)->name ==> controller
+  //App\Models\Officer::find(id_officernya)->name ==> view
 }
