@@ -128,45 +128,48 @@
           </tr>
         </thead>
         <tbody>
-          @foreach($table as $data)
-          <tr>
-            <td class="text-end">{{ $table->firstItem() + $loop->index }}</td>
-            <td class="text-center"><a class="text-danger-emphasis" href="/{{$data->id}}">{{$data->billnumber}}</a></td>
-            <td class="text-center text-uppercase">
-              @if($data->type === 'reguler')
-                <span class="badge text-bg-primary">{{$data->type}}</span>
-              @elseif($data->type === 'non reguler')
-                <span class="badge text-bg-warning">{{$data->type}}</span>
-              @endif
-            </td>
-            <td>{{date('F Y', strtotime($data->billdate))}}</td>
-            <td>{{date('d M Y', strtotime($data->billdate))}}</td>
-            <td><a href="/customer_detail/{{$data->customerid}}" class="text-danger-emphasis">{{$data->customer->member}}</a></td>
-            <td>{{$data->customer->name}}</td>
-            <td>{{$data->service->name}}</td>
-            <td class="text-end">{{number_format($data->bill, 0, ',', '.')}}</td>
-            <td class="text-center text-uppercase">
-              @if($data->status === 'lunas')
-              <span class="badge text-bg-success">{{$data->status}}</span>
-              @elseif($data->status === 'belum lunas')
-              <span class="badge text-bg-danger">blm lunas</span>
-              @endif
-            </td>
-            <td class="text-center">
-              <a class="btn btn-outline-warning btn-sm" 
-                href="/{{$data->id}}">
-                Ubah
-              </a>
-            </td>
-          </tr>
-          @endforeach
+          @if($table->count())
+            @foreach($table as $data)
+              <tr wire:key="{{$data->id}}">
+                <td class="text-end">{{ $table->firstItem() + $loop->index }}</td>
+                <td class="text-center"><a class="text-danger-emphasis" href="/{{$data->id}}">{{$data->billnumber}}</a></td>
+                <td class="text-center text-uppercase">
+                  @if($data->type === 'reguler')
+                    <span class="badge text-bg-primary">{{$data->type}}</span>
+                  @elseif($data->type === 'non reguler')
+                    <span class="badge text-bg-warning">{{$data->type}}</span>
+                  @endif
+                </td>
+                <td>{{date('F Y', strtotime($data->billdate))}}</td>
+                <td>{{date('d M Y', strtotime($data->billdate))}}</td>
+                <td><a href="/customer_detail/{{$data->customerid}}" class="text-danger-emphasis">{{$data->customer->member}}</a></td>
+                <td>{{$data->customer->name}}</td>
+                <td>{{$data->service->name}}</td>
+                <td class="text-end">{{number_format($data->bill, 0, ',', '.')}}</td>
+                <td class="text-center text-uppercase">
+                  @if($data->status === 'lunas')
+                  <span class="badge text-bg-success">{{$data->status}}</span>
+                  @elseif($data->status === 'belum lunas')
+                  <span class="badge text-bg-danger">blm lunas</span>
+                  @endif
+                </td>
+                <td class="text-center">
+                  <a class="btn btn-outline-warning btn-sm" 
+                    href="/{{$data->id}}">
+                    Ubah
+                  </a>
+                </td>
+              </tr>
+            @endforeach
+          @else
+            <tr>
+              <td colspan="11">Data tidak ditemukan</td>
+            </tr>
+          @endif
         </tbody>
       </table>
       {{ $table->links() }}
     </div>
-    @if(!$table->count())
-    <p class="text-center fst-italic">Data tagihan kosong</p>
-    @endif
   </div>
 
 </div>

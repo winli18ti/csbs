@@ -18,7 +18,7 @@
             <a href="#" class="nav-link">Keluar</a>
           </div>
 
-          <span class="d-none d-sm-block navbar-text">Senin, 11 September 2023 10:08:00</span>
+          <span class="d-none d-sm-block navbar-text">{{Carbon\Carbon::now()->toCookieString()}}</span>
         </div>
       </nav>
 

@@ -22,8 +22,9 @@ class Collectors extends Component
     if (!empty($this->filterStatus)) {
       $table->where(['status' => $this->filterStatus]);
     }
-    $table = $table->paginate(20);
-    return view('livewire.collectors', compact('table'));
+    return view('livewire.collectors', [
+      'table' => $table->paginate(10, pageName: 'collector-page'),
+    ]);
   }
 
   public function navigate($mode)

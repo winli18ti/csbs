@@ -44,31 +44,32 @@
           </tr>
         </thead>
         <tbody>
-          @foreach($table as $data)
-          <tr>
-            <td class="text-center">{{ $table->firstItem() + $loop->index }}</td>
-            <td>{{$data->name}}</td>
-            <td class="text-center text-uppercase">
-              @if($data->status === 'aktif')
-                <span class="badge text-bg-success">{{$data->status}}</span>
-              @elseif($data->status === 'nonaktif')
-                <span class="badge text-bg-secondary">{{$data->status}}</span>
-              @endif
-            </td>
-            <td class="text-center">
-              <button class="btn btn-outline-warning btn-sm" 
-                wire:click.prevent="edit({{$data->id}})">
-                Ubah
-              </a>
-            </td>
-          </tr>
-          @endforeach
+          @if($table->count())
+            @foreach($table as $data)
+              <tr wire:key="{{$data->id}}">
+                <td class="text-center">{{ $table->firstItem() + $loop->index }}</td>
+                <td>{{$data->name}}</td>
+                <td class="text-center text-uppercase">
+                  @if($data->status === 'aktif')
+                    <span class="badge text-bg-success">{{$data->status}}</span>
+                  @elseif($data->status === 'nonaktif')
+                    <span class="badge text-bg-secondary">{{$data->status}}</span>
+                  @endif
+                </td>
+                <td class="text-center">
+                  <button class="btn btn-outline-warning btn-sm" 
+                    wire:click.prevent="edit({{$data->id}})">
+                    Ubah
+                  </a>
+                </td>
+              </tr>
+            @endforeach
+          @else
+              <tr><td colspan="4">Data tidak ditemukan</td></tr>
+          @endif
         </tbody>
       </table>
       {{ $table->links() }}
     </div>
-    @if(!$table->count())
-    <p class="text-center fst-italic">Data kolektor kosong</p>
-    @endif
   </div>
 </div>

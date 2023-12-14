@@ -39,8 +39,9 @@ class Invoices extends Component
     }
     if (!empty($this->searchTerm)) {
     }
-    $table = $table->paginate(20);
-    return view('livewire.invoices', compact('table'));
+    return view('livewire.invoices', [
+      'table' => $table->paginate(10, pageName: 'invoice-page'),
+    ]);
   }
 
   public function navigate($mode)

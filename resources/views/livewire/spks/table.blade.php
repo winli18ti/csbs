@@ -61,49 +61,52 @@
           </tr>
         </thead>
         <tbody>
-          @foreach($table as $data)
-          <tr>
-            <td class="text-center">{{$data->id}}</td>
-            <td class="text-center">{{$data->category}}</td>
-            <td class="text-center"><a class="text-danger-emphasis" href="#">{{$data->spknumber}}</a></td>
-            <td class="text-center"><a class="text-danger-emphasis" href="/customer_detail/{{$data->customerid}}">{{$data->customer->member}}</a></td>
-            <td>{{$data->customer->name}}</td>
-            <td>{{$data->customer->cellphone}}</td>
-            <td>{{$data->customer->address}}</td>
-            <td class="text-center">
-              @if($data->enddate)
-              {{date('d M Y', strtotime($data->enddate))}}
-              @elseif($data->startdate)
-              {{date('d M Y', strtotime($data->startdate))}}
-              @elseif($data->inputdate)
-              {{date('d M Y', strtotime($data->inputdate))}}
-              @endif
-            </td>
-            <td class="text-center text-uppercase">
-              @if($data->status === 'blm proses')
-                <span class="badge text-bg-danger">{{$data->status}}</span>
-              @elseif($data->status === 'pengerjaan')
-                <span class="badge text-bg-warning">{{$data->status}}</span>
-              @elseif($data->status === 'selesai')
-                <span class="badge text-bg-primary">{{$data->status}}</span>
-              @elseif($data->status === 'batal')
-                <span class="badge text-bg-secondary">{{$data->status}}</span>
-              @endif
-            </td>
-            <td class="text-center">
-              <button class="btn btn-outline-warning btn-sm" 
-                wire:click.prevent="edit({{$data->id}})">
-                Ubah
-              </a>
-            </td>
-          </tr>
-          @endforeach
+          @if($table->count())
+            @foreach($table as $data)
+            <tr wire:key="{{$data->id}}">
+              <td class="text-center">{{ $table->firstItem() + $loop->index }}</td>
+              <td class="text-center">{{$data->category}}</td>
+              <td class="text-center"><a class="text-danger-emphasis" href="#">{{$data->spknumber}}</a></td>
+              <td class="text-center"><a class="text-danger-emphasis" href="/customer_detail/{{$data->customerid}}">{{$data->customer->member}}</a></td>
+              <td>{{$data->customer->name}}</td>
+              <td>{{$data->customer->cellphone}}</td>
+              <td>{{$data->customer->address}}</td>
+              <td class="text-center">
+                @if($data->enddate)
+                {{date('d M Y', strtotime($data->enddate))}}
+                @elseif($data->startdate)
+                {{date('d M Y', strtotime($data->startdate))}}
+                @elseif($data->inputdate)
+                {{date('d M Y', strtotime($data->inputdate))}}
+                @endif
+              </td>
+              <td class="text-center text-uppercase">
+                @if($data->status === 'blm proses')
+                  <span class="badge text-bg-danger">{{$data->status}}</span>
+                @elseif($data->status === 'pengerjaan')
+                  <span class="badge text-bg-warning">{{$data->status}}</span>
+                @elseif($data->status === 'selesai')
+                  <span class="badge text-bg-primary">{{$data->status}}</span>
+                @elseif($data->status === 'batal')
+                  <span class="badge text-bg-secondary">{{$data->status}}</span>
+                @endif
+              </td>
+              <td class="text-center">
+                <button class="btn btn-outline-warning btn-sm" 
+                  wire:click.prevent="edit({{$data->id}})">
+                  Ubah
+                </a>
+              </td>
+            </tr>
+            @endforeach
+          @else
+            <tr>
+              <td colspan="10">Data tidak ditemukan</td>
+            </tr>
+          @endif
         </tbody>
       </table>
       {{ $table->links() }}
     </div>
-    @if(!$table->count())
-    <p class="text-center fst-italic">Data pengaduan kosong</p>
-    @endif
   </div>
 </div>

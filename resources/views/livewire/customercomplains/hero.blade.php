@@ -32,7 +32,7 @@
         <table class="table table-sm table-striped table-hover caption-top text-truncate">
           <thead>
             <tr class="table-danger text-center">
-              <th class="col">#</th>
+              <th class="col">No</th>
               <th class="col">Kode</th>
               <th class="col">Subyek</th>
               <th class="col">Layanan</th>
@@ -47,7 +47,7 @@
             @if($complainData->count())
               @foreach($complainData as $data)
                 <tr>
-                  <td class="text-end">#</td>
+                  <td class="text-end">{{ $complainData->firstItem() + $loop->index }}</td>
                   <td class="text-center">{{ $data->code  }}</td>
                   <td>{{ $data->subject  }}</td>
                   <td class="text-uppercase">{{ $data->servicetype  }}</td>
@@ -77,6 +77,7 @@
             @endif
           </tbody>
         </table>
+        {{$complainData->links()}}
       </div>
     </div>
   </div>

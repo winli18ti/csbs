@@ -10,14 +10,13 @@ use Livewire\WithPagination;
 
 class CustomerInvoices extends Component
 {
-  use WithPagination;
-  protected $paginationTheme = 'bootstrap';
+  use WithPagination; protected $paginationTheme = 'bootstrap';
 
   public $mode = 'hero';
 
   public $id, $member, $name, $billdate, $collectorid;
 
-  public $invoicesData, $collectorData;
+  public $collectorData;
 
   public function mount($userid)
   {
@@ -26,8 +25,11 @@ class CustomerInvoices extends Component
 
   public function render()
   {
+    $invoicesData = Invoice::where('customerid', $this->id)->select('*');
     $this->setData();
-    return view('livewire.customerinvoices');
+    return view('livewire.customerinvoices',[
+      'invoicesData' => $invoicesData->paginate(10, pageName: 'custinvoice-page'),
+    ]);
   }
 
   public function setData()
@@ -35,7 +37,6 @@ class CustomerInvoices extends Component
     $data = Customer::find($this->id);
     $this->member = $data->member;
     $this->name = $data->name;
-    $this->invoicesData = Invoice::where('customerid', $this->id)->get();
     $this->collectorData = Collector::get();
   }
 

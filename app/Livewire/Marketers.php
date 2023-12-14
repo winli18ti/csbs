@@ -22,8 +22,9 @@ class Marketers extends Component
     if (!empty($this->filterStatus)) {
       $table->where(['status' => $this->filterStatus]);
     }
-    $table = $table->paginate(20);
-    return view('livewire.marketers', compact('table'));
+    return view('livewire.marketers', [
+      'table' => $table->paginate(10, pageName: 'marketers-page'),
+    ]);
   }
 
   public function navigate($mode)
