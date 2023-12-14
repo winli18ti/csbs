@@ -29,26 +29,36 @@
               <th class="col">#</th>
               <th class="col">Kategori</th>
               <th class="col">No SPK</th>
-              <th class="col">No Pelanggan</th>
-              <th class="col">Nama Pelanggan</th>
               <th class="col">Tanggal Selesai</th>
               <th class="col">Status</th>
               <th class="col">Opsi</th>
             </tr>
           </thead>
           <tbody>
-  
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+            @foreach($spkData as $data)
+            <tr class="text-center">
+              <td>#</td>
+              <td>{{$data->category}}</td>
+              <td>{{$data->spknumber}}</td>
+              <td>
+                @if($data->enddate)
+                {{date('d M Y', strtotime($data->enddate))}}
+                @endif
+              </td>
+              <td class="text-uppercase">
+                @if($data->status === 'blm proses')
+                  <span class="badge text-bg-danger">{{$data->status}}</span>
+                @elseif($data->status === 'pengerjaan')
+                  <span class="badge text-bg-warning">{{$data->status}}</span>
+                @elseif($data->status === 'selesai')
+                  <span class="badge text-bg-primary">{{$data->status}}</span>
+                @elseif($data->status === 'batal')
+                  <span class="badge text-bg-secondary">{{$data->status}}</span>
+                @endif
+              </td>
               <td></td>
             </tr>
-  
+            @endforeach
           </tbody>
         </table>
       </div>

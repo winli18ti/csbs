@@ -17,6 +17,7 @@ class CustomerSpks extends Component
   public $filterCategory = '';
 
   public $id, $member, $name;
+  public $spkData;
 
   public function mount($userid)
   {
@@ -35,6 +36,7 @@ class CustomerSpks extends Component
     $data = Customer::find($this->id);
     $this->member = $data->member;
     $this->name = $data->name;
+    $this->spkData = Spk::where('customerid', $this->id)->get();
   }
 
   public function navigate($mode)

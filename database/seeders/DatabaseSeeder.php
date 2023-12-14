@@ -23,5 +23,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ComplainSeeder::class);
         $this->call(InvoiceSeeder::class);
         $this->call(InvoiceDetailSeeder::class);
+        $this->call(SpkSeeder::class);
     }
 }

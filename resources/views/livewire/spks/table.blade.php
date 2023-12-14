@@ -12,7 +12,7 @@
         <select id="filterStatus" class="form-select form-select-sm"
           wire:model.live="filterStatus">
           <option value="">Semua</option>
-          <option value="belum proses">Belum diproses</option>
+          <option value="blm proses">Belum diproses</option>
           <option value="pengerjaan">Proses pengerjaan</option>
           <option value="selesai">Telah selesai</option>
           <option value="batal">Pembatalan</option>
@@ -65,19 +65,27 @@
           <tr>
             <td class="text-center">{{$data->id}}</td>
             <td class="text-center">{{$data->category}}</td>
-            <td class="text-center"><a href="#">{{$data->spknumber}}</a></td>
-            <td class="text-center"><a href="#">{{$data->customerid}}</a></td>
-            <td>Nama pelanggan</td>
-            <td>No telp</td>
-            <td>Alamat</td>
-            <td class="text-center">{{$data->statusdate}}</td>
+            <td class="text-center"><a class="text-danger-emphasis" href="#">{{$data->spknumber}}</a></td>
+            <td class="text-center"><a class="text-danger-emphasis" href="/customer_detail/{{$data->customerid}}">{{$data->customer->member}}</a></td>
+            <td>{{$data->customer->name}}</td>
+            <td>{{$data->customer->cellphone}}</td>
+            <td>{{$data->customer->address}}</td>
+            <td class="text-center">
+              @if($data->enddate)
+              {{date('d M Y', strtotime($data->enddate))}}
+              @elseif($data->startdate)
+              {{date('d M Y', strtotime($data->startdate))}}
+              @elseif($data->inputdate)
+              {{date('d M Y', strtotime($data->inputdate))}}
+              @endif
+            </td>
             <td class="text-center text-uppercase">
-              @if($data->status === 'belum proses')
+              @if($data->status === 'blm proses')
                 <span class="badge text-bg-danger">{{$data->status}}</span>
               @elseif($data->status === 'pengerjaan')
                 <span class="badge text-bg-warning">{{$data->status}}</span>
               @elseif($data->status === 'selesai')
-                <span class="badge text-bg-success">{{$data->status}}</span>
+                <span class="badge text-bg-primary">{{$data->status}}</span>
               @elseif($data->status === 'batal')
                 <span class="badge text-bg-secondary">{{$data->status}}</span>
               @endif

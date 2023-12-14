@@ -92,7 +92,7 @@ class Customers extends Component
 
   public function create()
   {
-    // $this->validateRule();
+    $this->validateRule();
     $date = Carbon::create($this->statusdate)->now();
     $substr = substr(str_replace('-', '', $date->toDateString()), 2, 4);
     $number = (Customer::where('member', 'like', $substr . '%')->get()->count()) + 1;
@@ -122,11 +122,13 @@ class Customers extends Component
         'status' => 'tidak aktif',
       ]);
     }
+
+    $service = Service::find($this->servicename);
     Spk::create([
-      'category' => 'registrasi',
+      'category' => 'Registrasi',
       'spknumber' => substr(str_replace('-', '', $date->toDateString()), 0, 6),
-      'service' => '???',
-      'servicetype' => 'tv & internet',
+      'service' => $service->name.' - '.$service->info,
+      'servicetype' => $service->type,
       'status' => 'blm proses',
     ]);
     session()->flash('message', $this->title . ' baru berhasil ditambah');
