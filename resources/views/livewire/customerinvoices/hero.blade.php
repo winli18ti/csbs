@@ -35,7 +35,7 @@
         <table class="table table-sm table-striped table-hover caption-top text-truncate">
           <thead>
             <tr class="table-danger text-center">
-              <th class="col">#</th>
+              <th class="col">No</th>
               <th class="col">No Tagihan</th>
               <th class="col">Jenis</th>
               <th class="col">Periode</th>
@@ -49,47 +49,50 @@
             </tr>
           </thead>
           <tbody>
-            @foreach($invoicesData as $data)
-            <tr>
-              <td class="text-center">#</td>
-              <td class="text-center"><a href="/{{$data->id}}" class="text-danger-emphasis">{{$data->billnumber}}</a></td>
-              <td class="text-center text-uppercase">
-                @if($data->type === 'reguler')
-                  <span class="badge text-bg-primary">{{$data->type}}</span>
-                @elseif($data->type === 'non reguler')
-                  <span class="badge text-bg-warning">{{$data->type}}</span>
-                @endif
-              </td>
-              <td>{{date('F Y', strtotime($data->billdate))}}</td>
-              <td>{{$data->service->name}}</td>
-              <td class="text-center">Per {{$data->subsperiod}} bulan</td>
-              <td class="text-end">{{number_format($data->bill, 0, ',', '.')}}</td>
-              <td class="text-center text-uppercase">
-                @if($data->status === 'lunas')
-                <span class="badge text-bg-success">{{$data->status}}</span>
-                @elseif($data->status === 'belum lunas')
-                <span class="badge text-bg-danger">blm lunas</span>
-                @endif
-              </td>
-              <td>
-                @if($data->paiddate)
-                {{date('d M Y', strtotime($data->paiddate))}}
-                @endif
-              </td>
-              <td>
-                @if(!is_null($data->user))
-                {{$data->user->name}}
-                @endif
-              </td>
-              <td class="text-center"><a href="/{{$data->id}}" class="btn btn-outline-warning btn-sm">Ubah</a></td>
-            </tr>
-            @endforeach
+            @if($invoicesData->count())
+              @foreach($invoicesData as $data)
+                <tr wire:key="{{$data->id}}">
+                  <td class="text-center">{{ $invoicesData->firstItem() + $loop->index }}</td>
+                  <td class="text-center"><a href="/{{$data->id}}" class="text-danger-emphasis">{{$data->billnumber}}</a></td>
+                  <td class="text-center text-uppercase">
+                    @if($data->type === 'reguler')
+                      <span class="badge text-bg-primary">{{$data->type}}</span>
+                    @elseif($data->type === 'non reguler')
+                      <span class="badge text-bg-warning">{{$data->type}}</span>
+                    @endif
+                  </td>
+                  <td>{{date('F Y', strtotime($data->billdate))}}</td>
+                  <td>{{$data->service->name}}</td>
+                  <td class="text-center">Per {{$data->subsperiod}} bulan</td>
+                  <td class="text-end">{{number_format($data->bill, 0, ',', '.')}}</td>
+                  <td class="text-center text-uppercase">
+                    @if($data->status === 'lunas')
+                    <span class="badge text-bg-success">{{$data->status}}</span>
+                    @elseif($data->status === 'belum lunas')
+                    <span class="badge text-bg-danger">blm lunas</span>
+                    @endif
+                  </td>
+                  <td>
+                    @if($data->paiddate)
+                    {{date('d M Y', strtotime($data->paiddate))}}
+                    @endif
+                  </td>
+                  <td>
+                    @if(!is_null($data->user))
+                    {{$data->user->name}}
+                    @endif
+                  </td>
+                  <td class="text-center"><a href="/{{$data->id}}" class="btn btn-outline-warning btn-sm">Ubah</a></td>
+                </tr>
+              @endforeach
+            @else
+              <tr>
+                <td colspan="11">Data tidak ditemukan</td>
+              </tr>
+            @endif
           </tbody>
         </table>
-        {{-- {{ $invoicesData->links() }} --}}
+        {{ $invoicesData->links() }}
       </div>
-      @if(!$invoicesData->count())
-      <p class="text-center fst-italic">Data tagihan tidak ada</p>
-      @endif
     </div>
   </div>

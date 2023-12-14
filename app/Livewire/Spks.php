@@ -26,8 +26,9 @@ class Spks extends Component
     if (!empty($this->filterCategory)) {
       $table->where(['category' => $this->filterCategory]);
     }
-    $table = $table->paginate(20);
-    return view('livewire.spks', compact('table'));
+    return view('livewire.spks', [
+      'table' => $table->paginate(10, pageName: 'spk-page'),
+    ]);
   }
 
   public function navigate($mode)

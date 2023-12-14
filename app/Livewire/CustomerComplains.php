@@ -24,7 +24,7 @@ class CustomerComplains extends Component
 
   public $complain_status, $complain_priority, $service_type, $report, $reporter, $report_subject, $customer_complain, $completion, $complain_id;
 
-  public $complainData, $collectorData;
+  public $collectorData;
 
   public function mount($userid)
   {
@@ -33,14 +33,16 @@ class CustomerComplains extends Component
 
   public function render()
   {
+    $complainData = Complain::where('customerid', $this->id)->select('*');
     $this->setData();
-    return view('livewire.customercomplains');
+    return view('livewire.customercomplains',[
+      'complainData' => $complainData->paginate(10, pageName: 'custcomplain-page'),
+    ]);
   }
 
   public function setData()
   {
     $data = Customer::find($this->id);
-    $this->complainData = Complain::where('customerid', $this->id)->get();
     $this->member = $data->member;
     $this->name = $data->name;
   }

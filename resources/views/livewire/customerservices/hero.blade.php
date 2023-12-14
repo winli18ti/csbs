@@ -89,7 +89,7 @@
         <table class="table table-sm table-striped table-hover caption-top text-truncate">
           <thead>
             <tr class="table-danger text-center">
-              <th class="col">#</th>
+              <th class="col">No</th>
               <th class="col">Nama Layanan</th>
               <th class="col">Keterangan</th>
               <th class="col">Status</th>
@@ -97,17 +97,24 @@
             </tr>
           </thead>
           <tbody>
-            @foreach($customerServiceData as $data)
-            <tr>
-              <td class="text-center">#</td>
-              <td>{{$data->name}}</td>
-              <td>{{$data->info}}</td>
-              <td class="text-center text-uppercase">{{$data->status}}</td>
-              <td class="text-center">{{$data->since}}</td>
-            </tr>
-            @endforeach
+            @if($customerServiceData->count())
+              @foreach($customerServiceData as $data)
+                <tr wire:key="{{$data->id}}">
+                  <td>{{ $customerServiceData->firstItem() + $loop->index }}</td>
+                  <td>{{$data->name}}</td>
+                  <td>{{$data->info}}</td>
+                  <td class="text-center text-uppercase">{{$data->status}}</td>
+                  <td class="text-center">{{$data->since}}</td>
+                </tr>
+              @endforeach
+            @else
+                <tr>
+                  <td colspan="6">Data tidak ditemukan</td>
+                </tr>
+            @endif
           </tbody>
         </table>
+        {{$customerServiceData->links()}}
       </div>
     </div>
     @endif

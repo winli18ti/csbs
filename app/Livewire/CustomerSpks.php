@@ -17,7 +17,6 @@ class CustomerSpks extends Component
   public $filterCategory = '';
 
   public $id, $member, $name;
-  public $spkData;
 
   public function mount($userid)
   {
@@ -27,8 +26,11 @@ class CustomerSpks extends Component
 
   public function render()
   {
+    $spkData = Spk::where('customerid', $this->id)->select('*');
     $this->setData();
-    return view('livewire.customerspks');
+    return view('livewire.customerspks',[
+      'spkData' => $spkData->paginate(10, pageName: 'custspk-page'),
+    ]);
   }
 
   public function setData()
@@ -36,7 +38,6 @@ class CustomerSpks extends Component
     $data = Customer::find($this->id);
     $this->member = $data->member;
     $this->name = $data->name;
-    $this->spkData = Spk::where('customerid', $this->id)->get();
   }
 
   public function navigate($mode)

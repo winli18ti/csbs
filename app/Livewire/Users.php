@@ -26,8 +26,9 @@ class Users extends Component
     if (!empty($this->filterRole)) {
       $table->where(['role' => $this->filterRole]);
     }
-    $table = $table->paginate(20);
-    return view('livewire.users', compact('table'));
+    return view('livewire.users', [
+      'table' => $table->paginate(10, pageName: 'users-page')
+    ]);
   }
 
   public function navigate($mode)

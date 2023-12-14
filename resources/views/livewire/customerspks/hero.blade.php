@@ -26,7 +26,7 @@
         <table class="table table-sm table-striped table-hover caption-top text-truncate">
           <thead>
             <tr class="table-danger text-center">
-              <th class="col">#</th>
+              <th class="col">No</th>
               <th class="col">Kategori</th>
               <th class="col">No SPK</th>
               <th class="col">Tanggal Selesai</th>
@@ -35,33 +35,39 @@
             </tr>
           </thead>
           <tbody>
-            @foreach($spkData as $data)
-            <tr class="text-center">
-              <td>#</td>
-              <td>{{$data->category}}</td>
-              <td>{{$data->spknumber}}</td>
-              <td>
-                @if($data->enddate)
-                {{date('d M Y', strtotime($data->enddate))}}
-                @endif
-              </td>
-              <td class="text-uppercase">
-                @if($data->status === 'blm proses')
-                  <span class="badge text-bg-danger">{{$data->status}}</span>
-                @elseif($data->status === 'pengerjaan')
-                  <span class="badge text-bg-warning">{{$data->status}}</span>
-                @elseif($data->status === 'selesai')
-                  <span class="badge text-bg-primary">{{$data->status}}</span>
-                @elseif($data->status === 'batal')
-                  <span class="badge text-bg-secondary">{{$data->status}}</span>
-                @endif
-              </td>
-              <td></td>
-            </tr>
-            @endforeach
+            @if($spkData->count())
+              @foreach($spkData as $data)
+              <tr class="text-center" wire:key="{{$data->id}}">
+                <td>{{ $spkData->firstItem() + $loop->index }}</td>
+                <td>{{$data->category}}</td>
+                <td>{{$data->spknumber}}</td>
+                <td>
+                  @if($data->enddate)
+                  {{date('d M Y', strtotime($data->enddate))}}
+                  @endif
+                </td>
+                <td class="text-uppercase">
+                  @if($data->status === 'blm proses')
+                    <span class="badge text-bg-danger">{{$data->status}}</span>
+                  @elseif($data->status === 'pengerjaan')
+                    <span class="badge text-bg-warning">{{$data->status}}</span>
+                  @elseif($data->status === 'selesai')
+                    <span class="badge text-bg-primary">{{$data->status}}</span>
+                  @elseif($data->status === 'batal')
+                    <span class="badge text-bg-secondary">{{$data->status}}</span>
+                  @endif
+                </td>
+                <td></td>
+              </tr>
+              @endforeach
+            @else
+              <tr>
+                <td colspan="6">Data tidak ditemukan</td>
+              </tr>
+            @endif
           </tbody>
         </table>
+        {{ $spkData->links() }}
       </div>
-      <p class="text-center fst-italic">Data tidak ditemukan</p>
     </div>
   </div>

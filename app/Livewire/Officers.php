@@ -22,8 +22,9 @@ class Officers extends Component
     if (!empty($this->filterStatus)) {
       $table->where(['status' => $this->filterStatus]);
     }
-    $table = $table->paginate(20);
-    return view('livewire.officers', compact('table'));
+    return view('livewire.officers', [
+      'table' => $table->paginate(10, pageName: 'officer-page'),
+    ]);
   }
 
   public function navigate($mode)

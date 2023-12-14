@@ -31,8 +31,9 @@ class Complains extends Component
     if (!empty($this->filterStatus)) {
       $table->where(['status' => $this->filterStatus]);
     }
-    $table = $table->paginate(20);
-    return view('livewire.complains', compact('table'));
+    return view('livewire.complains', [
+      'table' => $table->paginate(10, pageName: 'complain-page')
+    ]);
   }
 
   public function navigate($mode)
