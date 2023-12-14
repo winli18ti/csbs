@@ -25,6 +25,7 @@ class Spk extends Model
     'modemmac',
     'cpeip',
     'cpemac',
+    'cpegateway',
     'inputdate',
     'startdate',
     'enddate',

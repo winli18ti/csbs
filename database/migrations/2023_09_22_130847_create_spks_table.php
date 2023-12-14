@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('modemmac')->nullable();
             $table->string('cpeip')->nullable();
             $table->string('cpemac')->nullable();
+            $table->string('cpegateway')->nullable();
             
             $table->timestamp('inputdate');
             $table->timestamp('startdate')->nullable();

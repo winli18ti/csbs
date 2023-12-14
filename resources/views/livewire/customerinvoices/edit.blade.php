@@ -1,5 +1,7 @@
 <div class="mt-3">
   <div class="container-fluid">
+    <button wire:click.prevent="navigate('hero')" class="btn btn-outline-primary btn-sm my-2">Kembali</button>
+
     <div class="row align-items-center">
       <div class="col-5 col-sm-4 col-md-3 col-xl-2">
         <label for="member" class="col-form-label">No pelanggan</label>

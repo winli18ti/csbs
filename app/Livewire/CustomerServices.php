@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Customer;
 use App\Models\CustomerService;
 use App\Models\Internet;
+use App\Models\Service;
 use App\Models\TvAnalog;
 use App\Models\TvDigital;
 use Livewire\Component;
@@ -12,7 +13,7 @@ use Livewire\Component;
 class CustomerServices extends Component
 {
   public $id, $member, $name, $address, $status;
-  public $customerServiceData, $tvAnalogData, $tvDigitalData, $internetData;
+  public $customerServiceData, $tvAnalogData, $tvDigitalData, $internetData, $serviceData;
 
   public $mode = 'hero';
 
@@ -50,5 +51,6 @@ class CustomerServices extends Component
     $this->tvAnalogData = TvAnalog::where('customerid', $this->id)->get();
     $this->tvDigitalData = TvDigital::where('customerid', $this->id)->get();
     $this->internetData = Internet::where('customerid', $this->id)->get();
+    $this->serviceData = Service::get();
   }
 }
