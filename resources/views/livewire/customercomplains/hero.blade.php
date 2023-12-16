@@ -64,7 +64,6 @@
                     @endif
                   </td>
                   <td class="text-center">
-  
                     <button wire:click.prevent="complainView({{$data->id}}, 'view')" class="btn btn-outline-warning btn-sm">View</button>
                     <button wire:click.prevent="complainView({{$data->id}}, 'edit')" class="btn btn-outline-warning btn-sm">Edit</button>
                   </td>

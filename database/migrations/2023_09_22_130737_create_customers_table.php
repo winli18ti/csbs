@@ -32,7 +32,7 @@ return new class extends Migration
             $table->integer('billperiod')->nullable();
             $table->integer('subsperiod')->nullable();
             $table->integer('tvcount')->nullable();
-            $table->string('node')->nullable();
+            $table->integer('nodeid')->nullable();
             $table->string('status')->nullable();
             $table->timestamp('statusdate')->nullable();
             $table->integer('marketerid')->nullable();

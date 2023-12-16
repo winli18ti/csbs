@@ -196,10 +196,10 @@
   
           <div class="row align-items-center">
             <div class="col-5 col-md-4">
-              <label for="status" class="col-form-label">Status Pengerjaan</label>
+              <label for="statusnow" class="col-form-label">Status Pengerjaan</label>
             </div>
             <div class="col-7 col-md-8">
-              <select id="status" class="form-select form-select-sm" wire:model.live="status">
+              <select id="statusnow" class="form-select form-select-sm" wire:model.live="statusnow">
                 <option value="selesai">SELESAI</option>
               </select>
             </div>
@@ -243,13 +243,13 @@
   
           <div class="row align-items-center">
             <div class="col-5 col-md-4">
-              <label for="node" class="col-form-label">Lokasi Fiber Node</label>
+              <label for="nodeid" class="col-form-label">Lokasi Fiber Node</label>
             </div>
             <div class="col-7 col-md-8">
-              <select id="node" class="form-select form-select-sm"
-                  wire:model="node">
-                  @foreach($nodes as $node)
-                  <option value="{{$node}}">{{$node}}</option>
+              <select id="nodeid" class="form-select form-select-sm"
+                  wire:model="nodeid">
+                  @foreach($nodesData as $data)
+                  <option value="{{$data->id}}">{{$data->node}}</option>
                   @endforeach
                 </select>
             </div>

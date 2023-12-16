@@ -106,7 +106,7 @@ class Customers extends Component
       'servicetype' => $this->servicetype, 'servicename' => $this->servicename,
       'subsperiod' => $this->subsperiod, 'notes' => $this->notes,
       'specialname' => $this->specialname, 'specialprice' => $this->specialprice, 'specialinfo' => $this->specialinfo,
-      'node' => 'NUL', 'billperiod' => 1, 'tvcount' => 0,
+      'billperiod' => 1, 'tvcount' => 0,
       'status' => 'registration',
     ]);
     if ($this->servicetype === 'reguler') {

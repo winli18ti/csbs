@@ -36,7 +36,7 @@ return new class extends Migration
             $table->timestamp('enddate')->nullable();
             $table->integer('officerid1')->nullable();
             $table->integer('officerid2')->nullable();
-            $table->string('node')->nullable();
+            $table->integer('nodeid')->nullable();
             //dismantle
             $table->text('reason')->nullable();
             $table->text('solution')->nullable();

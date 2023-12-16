@@ -57,7 +57,9 @@
                     <span class="badge text-bg-secondary">{{$data->status}}</span>
                   @endif
                 </td>
-                <td></td>
+                <td>
+                  
+                </td>
               </tr>
               @endforeach
             @else

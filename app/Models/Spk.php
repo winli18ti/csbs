@@ -31,7 +31,7 @@ class Spk extends Model
     'enddate',
     'officerid1',
     'officerid2',
-    'node',
+    'nodeid',
     'reason',
     'solution',
     'customerid',
@@ -40,6 +40,11 @@ class Spk extends Model
   public function customer()
   {
     return $this->belongsTo(Customer::class, 'customerid');
+  }
+
+  public function node() 
+  {
+    return $this->belongsTo(Node::class, 'nodeid');
   }
 
   //Officer::find(id_officer_nya)->name ==> controller

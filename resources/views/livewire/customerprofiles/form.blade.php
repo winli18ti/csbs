@@ -88,13 +88,13 @@
   
           <div class="row align-items-center">
             <div class="col-5 col-sm-4 col-lg-5 col-xl-4">
-              <label for="node" class="col-form-label">Lokasi node</label>
+              <label for="nodeid" class="col-form-label">Lokasi node</label>
             </div>
             <div class="col-7 col-sm-8 col-lg-7 col-xl-8">
-              <select id="node" class="form-select form-select-sm"
-                wire:model="node">
-                @foreach($nodes as $node)
-                <option value="{{$node}}">{{$node}}</option>
+              <select id="nodeid" class="form-select form-select-sm"
+                wire:model="nodeid">
+                @foreach($nodesData as $data)
+                <option value="{{$data->id}}">{{$data->node}}</option>
                 @endforeach
               </select>
             </div>

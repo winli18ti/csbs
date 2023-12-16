@@ -31,7 +31,7 @@ class Customer extends Model
     'billperiod',
     'subsperiod',
     'tvcount',
-    'node',
+    'nodeid',
     'status',
     'statusdate',
     'marketerid',
@@ -41,6 +41,11 @@ class Customer extends Model
   public function marketer()
   {
     return $this->belongsTo(Marketer::class, 'marketerid');
+  }
+
+  public function node() 
+  {
+    return $this->belongsTo(Node::class, 'nodeid');
   }
 
   public function complains()

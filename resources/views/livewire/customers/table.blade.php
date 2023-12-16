@@ -139,10 +139,10 @@
             <td>Per {{$data->subsperiod}} bulan</td>
             <td>{{$data->paytype}}</td>
             <td class="text-center text-uppercase">
-              @if($data->node === 'NUL')
-              <span class="badge text-bg-warning">{{$data->node}}</span>
-              @else
-              <span class="badge text-bg-success">{{$data->node}}</span>
+              @if($data->nodeid === 1)
+              <span class="badge text-bg-warning">NUL</span>
+              @elseif($data->nodeid)
+              <span class="badge text-bg-success">{{$data->node->node}}</span>
               @endif
             </td>
             <td class="text-uppercase text-center">

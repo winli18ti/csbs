@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
         $this->call(MarketerSeeder::class);
         $this->call(OfficerSeeder::class);
         $this->call(ServiceSeeder::class);
+        $this->call(NodeSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(CustomerSeeder::class);
         $this->call(CustomerServiceSeeder::class);
@@ -24,5 +25,6 @@ class DatabaseSeeder extends Seeder
         $this->call(InvoiceSeeder::class);
         $this->call(InvoiceDetailSeeder::class);
         $this->call(SpkSeeder::class);
+
     }
 }
