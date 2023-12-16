@@ -51,14 +51,16 @@
                     <span class="badge text-bg-danger">{{$data->status}}</span>
                   @elseif($data->status === 'pengerjaan')
                     <span class="badge text-bg-warning">{{$data->status}}</span>
+                  @elseif($data->status === 'aktivasi')
+                    <span class="badge text-bg-success">{{$data->status}}</span>
                   @elseif($data->status === 'selesai')
                     <span class="badge text-bg-primary">{{$data->status}}</span>
                   @elseif($data->status === 'batal')
                     <span class="badge text-bg-secondary">{{$data->status}}</span>
                   @endif
                 </td>
-                <td>
-                  
+                <td class="text-center">
+                  <button wire:click.prevent="edit({{$data->id}})" class="btn btn-outline-warning btn-sm">Ubah</button>
                 </td>
               </tr>
               @endforeach

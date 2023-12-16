@@ -82,7 +82,10 @@
                     {{$data->user->name}}
                     @endif
                   </td>
-                  <td class="text-center"><a href="/{{$data->id}}" class="btn btn-outline-warning btn-sm">Ubah</a></td>
+                  <td class="text-center">
+                    <button wire:click.prevent="view({{$data->id}})" class="btn btn-outline-warning btn-sm">Lihat</button>
+                    <button wire:click.prevent="edit({{$data->id}})" class="btn btn-outline-warning btn-sm">Ubah</button>
+                  </td>
                 </tr>
               @endforeach
             @else

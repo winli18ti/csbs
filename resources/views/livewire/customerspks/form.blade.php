@@ -80,107 +80,111 @@
 
     <div class="row mt-2">
       <div class="col-sm-9 col-md-7 col-lg-6 col-xl-5">
-        <fieldset class="border border-2 border-danger-subtle rounded-3 px-3 pb-3 my-2">
-          <legend class="fs-6 float-none w-auto">TV Analog</legend>
+        @if(str_contains($servicetype, 'tv'))
+          <fieldset class="border border-2 border-danger-subtle rounded-3 px-3 pb-3 my-2">
+            <legend class="fs-6 float-none w-auto">TV Analog</legend>
+    
+            <div class="row align-items-center">
+              <div class="col-5 col-md-4">
+                <label for="tvanalog" class="col-form-label">Jumlah</label>
+              </div>
+              <div class="col-7 col-md-8">
+                <input type="number" id="tvanalog" 
+                  class="form-control form-control-sm" wire:model="tvanalog" min="0">
+              </div>
+            </div>
+          </fieldset>
+    
+          <fieldset class="border border-2 border-danger-subtle rounded-3 px-3 pb-3 my-2">
+            <legend class="fs-6 float-none w-auto">TV Digital</legend>
+    
+            <div class="row align-items-center">
+              <div class="col-5 col-md-4">
+                <label for="serialnumber" class="col-form-label">No Serial</label>
+              </div>
+              <div class="col-7 col-md-8">
+                <input type="text" id="serialnumber" 
+                  class="form-control form-control-sm" wire:model="serialnumber">
+              </div>
+            </div>
+    
+            <div class="row align-items-center">
+              <div class="col-5 col-md-4">
+                <label for="smartcard" class="col-form-label">Smart Card</label>
+              </div>
+              <div class="col-7 col-md-8">
+                <input type="text" id="smartcard" 
+                  class="form-control form-control-sm" wire:model="smartcard">
+              </div>
+            </div>
+          </fieldset>
+        @endif
   
-          <div class="row align-items-center">
-            <div class="col-5 col-md-4">
-              <label for="tvanalog" class="col-form-label">Jumlah</label>
+        @if(str_contains($servicetype, 'internet'))
+          <fieldset class="border border-2 border-danger-subtle rounded-3 px-3 pb-3 my-2">
+            <legend class="fs-6 float-none w-auto">Internet</legend>
+    
+            <div class="row align-items-center">
+              <div class="col-5 col-md-4">
+                <label for="modemnumber" class="col-form-label">No Seri Modem</label>
+              </div>
+              <div class="col-7 col-md-8">
+                <input type="text" id="modemnumber" 
+                  class="form-control form-control-sm" wire:model="modemnumber">
+              </div>
             </div>
-            <div class="col-7 col-md-8">
-              <input type="number" id="tvanalog" 
-                class="form-control form-control-sm" wire:model="tvanalog" min="0">
+    
+            <div class="row align-items-center">
+              <div class="col-5 col-md-4">
+                <label for="modemmac" class="col-form-label">MAC Modem</label>
+              </div>
+              <div class="col-7 col-md-8">
+                <input type="text" id="modemmac" 
+                  class="form-control form-control-sm" wire:model="modemmac">
+              </div>
             </div>
-          </div>
-        </fieldset>
-  
-        <fieldset class="border border-2 border-danger-subtle rounded-3 px-3 pb-3 my-2">
-          <legend class="fs-6 float-none w-auto">TV Digital</legend>
-  
-          <div class="row align-items-center">
-            <div class="col-5 col-md-4">
-              <label for="serialnumber" class="col-form-label">No Serial</label>
+    
+            <div class="row align-items-center">
+              <div class="col-5 col-md-4">
+                <label for="modemip" class="col-form-label">IP Address Modem</label>
+              </div>
+              <div class="col-7 col-md-8">
+                <input type="text" id="modemip" 
+                  class="form-control form-control-sm" wire:model="modemip">
+              </div>
             </div>
-            <div class="col-7 col-md-8">
-              <input type="text" id="serialnumber" 
-                class="form-control form-control-sm" wire:model="serialnumber">
+    
+            <div class="row align-items-center">
+              <div class="col-5 col-md-4">
+                <label for="cpemac" class="col-form-label">MAC CPE</label>
+              </div>
+              <div class="col-7 col-md-8">
+                <input type="text" id="cpemac" 
+                  class="form-control form-control-sm" wire:model="cpemac">
+              </div>
             </div>
-          </div>
-  
-          <div class="row align-items-center">
-            <div class="col-5 col-md-4">
-              <label for="smartcard" class="col-form-label">Smart Card</label>
+    
+            <div class="row align-items-center">
+              <div class="col-5 col-md-4">
+                <label for="cpeip" class="col-form-label">IP Address CPE</label>
+              </div>
+              <div class="col-7 col-md-8">
+                <input type="text" id="cpeip" 
+                  class="form-control form-control-sm" wire:model="cpeip">
+              </div>
             </div>
-            <div class="col-7 col-md-8">
-              <input type="text" id="smartcard" 
-                class="form-control form-control-sm" wire:model="smartcard">
+    
+            <div class="row align-items-center">
+              <div class="col-5 col-md-4">
+                <label for="cpegateway" class="col-form-label">IP Gateway CPE</label>
+              </div>
+              <div class="col-7 col-md-8">
+                <input type="text" id="cpegateway" 
+                  class="form-control form-control-sm" wire:model="cpegateway">
+              </div>
             </div>
-          </div>
-        </fieldset>
-  
-        <fieldset class="border border-2 border-danger-subtle rounded-3 px-3 pb-3 my-2">
-          <legend class="fs-6 float-none w-auto">Internet</legend>
-  
-          <div class="row align-items-center">
-            <div class="col-5 col-md-4">
-              <label for="modemnumber" class="col-form-label">No Seri Modem</label>
-            </div>
-            <div class="col-7 col-md-8">
-              <input type="text" id="modemnumber" 
-                class="form-control form-control-sm" wire:model="modemnumber">
-            </div>
-          </div>
-  
-          <div class="row align-items-center">
-            <div class="col-5 col-md-4">
-              <label for="modemmac" class="col-form-label">MAC Modem</label>
-            </div>
-            <div class="col-7 col-md-8">
-              <input type="text" id="modemmac" 
-                class="form-control form-control-sm" wire:model="modemmac">
-            </div>
-          </div>
-  
-          <div class="row align-items-center">
-            <div class="col-5 col-md-4">
-              <label for="modemip" class="col-form-label">IP Address Modem</label>
-            </div>
-            <div class="col-7 col-md-8">
-              <input type="text" id="modemip" 
-                class="form-control form-control-sm" wire:model="modemip">
-            </div>
-          </div>
-  
-          <div class="row align-items-center">
-            <div class="col-5 col-md-4">
-              <label for="cpemac" class="col-form-label">MAC CPE</label>
-            </div>
-            <div class="col-7 col-md-8">
-              <input type="text" id="cpemac" 
-                class="form-control form-control-sm" wire:model="cpemac">
-            </div>
-          </div>
-  
-          <div class="row align-items-center">
-            <div class="col-5 col-md-4">
-              <label for="cpeip" class="col-form-label">IP Address CPE</label>
-            </div>
-            <div class="col-7 col-md-8">
-              <input type="text" id="cpeip" 
-                class="form-control form-control-sm" wire:model="cpeip">
-            </div>
-          </div>
-  
-          <div class="row align-items-center">
-            <div class="col-5 col-md-4">
-              <label for="cpegateway" class="col-form-label">IP Gateway CPE</label>
-            </div>
-            <div class="col-7 col-md-8">
-              <input type="text" id="cpegateway" 
-                class="form-control form-control-sm" wire:model="cpegateway">
-            </div>
-          </div>
-        </fieldset>
+          </fieldset>
+        @endif
   
         <fieldset class="border border-2 border-danger-subtle rounded-3 px-3 pb-3 my-2">
           <legend class="fs-6 float-none w-auto">Status & Petugas Lapangan</legend>
@@ -190,7 +194,7 @@
               <label for="inputdate" class="col-form-label">Tanggal Input</label>
             </div>
             <div class="col-7 col-md-8">
-              Input Date
+              {{$inputdate}}
             </div>
           </div>
   
@@ -200,7 +204,18 @@
             </div>
             <div class="col-7 col-md-8">
               <select id="statusnow" class="form-select form-select-sm" wire:model.live="statusnow">
-                <option value="selesai">SELESAI</option>
+                @if($status === 'blm proses')
+                  <option value="blm proses">BELUM PROSES</option>
+                  <option value="pengerjaan">PROSES PENGERJAAN</option>
+                @elseif($status === 'pengerjaan')
+                  <option value="pengerjaan">PROSES PENGERJAAN</option>
+                  <option value="aktivasi">AKTIVASI LAYANAN</option>
+                @elseif($status === 'aktivasi')
+                  <option value="aktivasi">AKTIVASI LAYANAN</option>
+                  <option value="selesai">SELESAI</option>
+                @elseif($status === 'selesai')
+                  <option value="selesai">SELESAI</option>
+                @endif
               </select>
             </div>
           </div>
@@ -260,38 +275,45 @@
               <label for="enddate" class="col-form-label">Tanggal Selesai</label>
             </div>
             <div class="col-7 col-md-8">
+              @if($status === 'blm proses' || $status === 'pengerjaan')
+              <input type="date" id="enddate" 
+                class="form-control form-control-sm" wire:model="enddate" readonly>
+              @else
               <input type="date" id="enddate" 
                 class="form-control form-control-sm" wire:model="enddate">
+              @endif
             </div>
           </div>
         </fieldset>
   
-        <fieldset class="border border-2 border-danger-subtle rounded-3 px-3 pb-3 my-2">
-          <legend class="fs-6 float-none w-auto">Keterangan</legend>
-  
-          <div class="row align-items-center">
-            <div class="col-5 col-md-4">
-              <label for="reason" class="col-form-label">Alasan Berhenti</label>
+        @if($category === 'dismantle')
+          <fieldset class="border border-2 border-danger-subtle rounded-3 px-3 pb-3 my-2">
+            <legend class="fs-6 float-none w-auto">Keterangan</legend>
+    
+            <div class="row align-items-center">
+              <div class="col-5 col-md-4">
+                <label for="reason" class="col-form-label">Alasan Berhenti</label>
+              </div>
+              <div class="col-7 col-md-8">
+                <textarea id="reason" rows="2" class="form-control form-control-sm"
+                wire:model="reason"></textarea>
+              </div>
             </div>
-            <div class="col-7 col-md-8">
-              <textarea id="reason" rows="2" class="form-control form-control-sm"
-              wire:model="reason"></textarea>
+    
+            <div class="row align-items-center">
+              <div class="col-5 col-md-4">
+                <label for="solution" class="col-form-label">Penyelesaian</label>
+              </div>
+              <div class="col-7 col-md-8">
+                <textarea id="solution" rows="2" class="form-control form-control-sm"
+                wire:model="solution"></textarea>
+              </div>
             </div>
-          </div>
-  
-          <div class="row align-items-center">
-            <div class="col-5 col-md-4">
-              <label for="solution" class="col-form-label">Penyelesaian</label>
-            </div>
-            <div class="col-7 col-md-8">
-              <textarea id="solution" rows="2" class="form-control form-control-sm"
-              wire:model="solution"></textarea>
-            </div>
-          </div>
-        </fieldset>
-  
+          </fieldset>
+        @endif
+
         <fieldset class="border border-2 border-danger-subtle rounded-3 text-center p-3 my-3">
-            <button type="submit" class="btn btn-outline-primary btn-sm">
+            <button wire:click.prevent="update" class="btn btn-outline-primary btn-sm">
               Simpan
             </button>
         </fieldset>

@@ -123,22 +123,22 @@
         Biaya
       </div>
     </div>
-    @foreach($invoiceDetailData as $data)
-    <div class="row align-items-center my-1">
-      <div class="col-6">
-        {{$data->info}}
+    {{-- @foreach($invoiceDetailData as $data)
+      <div class="row align-items-center my-1">
+        <div class="col-6">
+          {{$data->info}}
+        </div>
+        <div class="col-3 col-xl-2 text-end">
+          {{$data->price}}
+        </div>
       </div>
-      <div class="col-3 col-xl-2 text-end">
-        {{$data->price}}
-      </div>
-    </div>
-    @endforeach
+    @endforeach --}}
     <div class="row text-end fw-bold">
       <div class="col-6">
         Total (Rp)
       </div>
       <div class="col-3 col-xl-2">
-        Total Harga
+        {{$bill}}
       </div>
     </div>
     <div class="row">
