@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\LogoutController;
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Login;
 use App\Livewire\Home;
 use App\Livewire\Customers;
 use App\Livewire\CustomerDetail;
@@ -22,19 +24,25 @@ use App\Livewire\Users;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
+Route::middleware(['guest'])->group(function(){
+    Route::get('/', function(){
+        return redirect('login');
+    });
+    Route::get('/login', Login::class)->name('login');
 });
 
-Route::get('/home', Home::class)->name('home');
-Route::get('/login', [Users::class, 'login'])->name('login');
-Route::get('/customers', Customers::class)->name('customers');
-Route::get('/customer_detail/{id}', CustomerDetail::class)->name('pelanggan_detail');
-Route::get('/invoices', Invoices::class)->name('invoices');
-Route::get('/complains', Complains::class)->name('complains');
-Route::get('/spks', Spks::class)->name('spks');
-Route::get('/collectors', Collectors::class)->name('collectors');
-Route::get('/marketers', Marketers::class)->name('marketers');
-Route::get('/officers', Officers::class)->name('officers');
-Route::get('/users', Users::class)->name('users');
+Route::middleware(['auth'])->group(function(){
+    Route::get('/home', Home::class)->name('home');
+    
+    Route::get('/customers', Customers::class)->name('customers');
+    Route::get('/customer_detail/{id}', CustomerDetail::class)->name('pelanggan_detail');
+    Route::get('/invoices', Invoices::class)->name('invoices');
+    Route::get('/complains', Complains::class)->name('complains');
+    Route::get('/spks', Spks::class)->name('spks');
+    Route::get('/collectors', Collectors::class)->name('collectors');
+    Route::get('/marketers', Marketers::class)->name('marketers');
+    Route::get('/officers', Officers::class)->name('officers');
+    Route::get('/users', Users::class)->name('users');
+
+    Route::post('logout', LogoutController::class)->name('logout'); 
+});

@@ -12,19 +12,19 @@ class UserSeeder extends Seeder
     $arr = array(
       [
         'name' => 'Herawati Zhen',
-        'username' => 'zhen',
+        'email' => 'zhen',
         'password' => 'zhen',
         'role' => 'admin',
       ],
       [
         'name' => 'Ineke Putri',
-        'username' => 'ineke.putri',
+        'email' => 'ineke.putri',
         'password' => 'ineke.putri',
         'role' => 'cs',
       ],
       [
         'name' => 'Lili',
-        'username' => 'lili',
+        'email' => 'lili',
         'password' => 'lili',
         'role' => 'cs',
       ],
