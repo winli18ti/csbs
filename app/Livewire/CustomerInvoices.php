@@ -26,10 +26,11 @@ class CustomerInvoices extends Component
     $paiddate, $collectorid, $collectorname, $username, $servicename, $bill, $status,
     $info;
 
-  public $cartData;
   public $invoice_type, $invoice_info, $invoice_price;
   
   public $invoiceDetailData;
+
+  public $cartData;
 
   public $invoiceDataType = array(
     'biaya denda' => 'Biaya Denda (+)',
@@ -121,14 +122,12 @@ class CustomerInvoices extends Component
     // dd($this->cartData);
   }
   public function editTypeCart($slug, $type){
-    dd($slug, $type);
     \Cart::session($this->userId.'-edit')->update($slug,[
       'name' => $type,
     ]);
   }
 
   public function editInfoCart($slug, $info){
-    dd($slug, $info);
     \Cart::session($this->userId.'-edit')->update($slug,[
       'attributes' => array(
         'info' => $info,
@@ -137,7 +136,6 @@ class CustomerInvoices extends Component
   }
 
   public function editPriceCart($slug, $price){
-    dd($slug, $price);
     \Cart::session($this->userId.'-edit')->update($slug,[
       'price' => $price,
     ]);
@@ -172,5 +170,26 @@ class CustomerInvoices extends Component
     $this->invoice_type = ''; $this->invoice_info = ''; $this->invoice_price = '';
     $this->navigate('hero');
     $this->edit($this->id);
+  }
+  public function deleteCart($slug){
+    \Cart::session($this->userId.'-edit')->remove($slug);
+    InvoiceDetail::find($slug)->delete();
+    $this->navigate('hero');
+    $this->edit($this->id);
+  }
+
+  public function updateDetailInvoice(){
+    $cartDatas = \Cart::session($this->userId.'-edit')->getContent();
+    foreach($cartDatas as $data){
+      InvoiceDetail::find($data->id)->update([
+        'type' => $data->name,
+        'info' => $data->attributes->info,
+        'price' => $data->price,
+      ]);
+    }
+    Invoice::find($this->id)->update([
+      'collectorid' => $this->collectorid,
+    ]);
+    $this->navigate('hero');
   }
 }

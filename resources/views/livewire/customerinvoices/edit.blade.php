@@ -141,6 +141,9 @@
           <div class="col-3 col-xl-2 text-center">
             <input type="number" id="invoice_price" class="form-control form-control-sm" min="0" value="{{$data->price}}" wire:change="editPriceCart('{{$data->id}}', $event.target.value)" wire:key="{{$data->id.'-'.$data->price}}">
           </div>
+          <div class="col-1">
+            <button wire:click.prevent="deleteCart('{{$data->id}}')">Hapus</button>
+          </div>
         </div>
       @endforeach
       <div class="row g-0">
@@ -183,7 +186,7 @@
           Total (Rp)
         </div>
         <div class="col-3 col-xl-2">
-          Total Harga
+          Total Harga {{ \Cart::session($userId.'-edit')->getTotal() }}
         </div>
       </div>
       <div class="row align-items-center my-3">
@@ -201,7 +204,7 @@
       </div>
       <div class="row">
         <div class="col-12 col-xl-10 text-center mb-3">
-          <button class="btn btn-outline-primary btn-sm">
+          <button class="btn btn-outline-primary btn-sm" wire:click.prevent="updateDetailInvoice()">
             Simpan
           </button>
         </div>
