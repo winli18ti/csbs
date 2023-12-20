@@ -11,9 +11,10 @@
         @livewireStyles
     </head>
     <body class="d-flex flex-column min-vh-100">
-      <nav class="navbar navbar-expand bg-dark" data-bs-theme="dark">
+        @if(Auth::user()->role ?? '')
+        <nav class="navbar navbar-expand bg-dark" data-bs-theme="dark">
         <div class="container-fluid">
-          <div class="navbar-nav">
+            <div class="navbar-nav">
             @if(Auth::user()->role ?? '')
                 <a href="#" class="nav-link active">Home</a>
                 <a class="nav-link" class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Keluar</a>
@@ -21,11 +22,11 @@
             @else
                 <a href="#" class="nav-link">Login</a>
             @endif
-          </div>
+            </div>
 
-          <span class="d-none d-sm-block navbar-text">{{Carbon\Carbon::now()->toCookieString()}}</span>
+            <span class="d-none d-sm-block navbar-text">{{Carbon\Carbon::now()->toCookieString()}}</span>
         </div>
-      </nav>
+        </nav>
 
         <div class="container-fluid bg-danger bg-opacity-75 text-white text-center py-3">
             <div class="row">
@@ -103,3 +104,4 @@
                 @endif
             </div>
         </div>
+        @endif

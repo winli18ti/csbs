@@ -1,6 +1,6 @@
 <div>
   <div class="container-fluid mb-2">
-    <span class="lead">Data Pengaduan</span>
+    <span class="lead">Data SPK</span>
   </div>
 
   <div class="container-fluid my-2">

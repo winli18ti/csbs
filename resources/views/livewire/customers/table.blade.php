@@ -1,5 +1,5 @@
 <div>
-  <div class="container-fluid">
+  <div class="container-fluid mb-2">
     <span class="lead">Data Pelanggan</span>
   </div>
 
