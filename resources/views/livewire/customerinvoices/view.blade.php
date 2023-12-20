@@ -123,16 +123,24 @@
         Biaya
       </div>
     </div>
-    {{-- @foreach($invoiceDetailData as $data)
-      <div class="row align-items-center my-1">
-        <div class="col-6">
-          {{$data->info}}
+    @if($invoiceDetailData->count())
+      @foreach($invoiceDetailData as $data)
+        <div class="row align-items-center my-1">
+          <div class="col-6">
+            {{$data->info}}
+          </div>
+          <div class="col-3 col-xl-2 text-end">
+            {{$data->price}}
+          </div>
         </div>
-        <div class="col-3 col-xl-2 text-end">
-          {{$data->price}}
+      @endforeach
+    @else
+      <div class="row align-items-center my-1">
+        <div class="col-9">
+          <span>Data tidak ditemukan</span>
         </div>
       </div>
-    @endforeach --}}
+    @endif
     <div class="row text-end fw-bold">
       <div class="col-6">
         Total (Rp)
@@ -148,7 +156,7 @@
     </div>
     <div class="row mt-3">
       <div class="col-12 col-xl-10 text-center mb-3">
-        <button class="btn btn-outline-primary btn-sm">
+        <button wire:click.prevent="navigate('hero')" class="btn btn-outline-primary btn-sm">
           Kembali
         </button>
       </div>

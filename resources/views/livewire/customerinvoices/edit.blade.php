@@ -98,120 +98,95 @@
           Biaya
         </div>
       </div>
+        {{-- <div class="row g-0">
+          <div class="col-3 col-xl-2 text-center">
+            <select id="type0" class="form-select form-select-sm" wire:model.live="invoice_type">
+              <option value="" selected>-- Pilih Tipe --</option>
+              <option value="biaya denda">Biaya Denda (+)</option>
+              <option value="biaya jasa kolektor">Biaya Jasa Kolektor (+)</option>
+              <option value="biaya lain">Biaya Lain-lain (+)</option>
+              <option value="biaya layanan">Biaya Layanan (+)</option>
+              <option value="biaya material">Biaya Material (+)</option>
+              <option value="biaya pemasangan">Biaya Pemasangan (+)</option>
+              <option value="biaya pinalti">Biaya Pinalti (+)</option>
+              <option value="diskon layanan">Diskon Layanan (-)</option>
+              <option value="penambahan tv">Penambahan TV (+)</option>
+              <option value="penyesuaian biaya">Penyesuaian Biaya (-)</option>
+              <option value="penyesuaian downgrade">Penyesuaian Downgrade (-)</option>
+              <option value="penyesuaian upgrade">Penyesuaian Upgrade (+)</option>
+            </select>
+          </div>
+          <div class="col-6 text-center">
+            <input type="text" id="info0" 
+              class="form-control form-control-sm" wire:model="invoice_info">
+          </div>
+          <div class="col-3 col-xl-2 text-center">
+            <input type="number" id="price0" class="form-control form-control-sm" min="0"
+              wire:model="invoice_price">
+          </div>
+        </div> --}}
+      @foreach($cartData as $data)
+        <div class="row g-0">
+          <div class="col-3 col-xl-2 text-center">
+            <select id="type0" class="form-select form-select-sm" value="{{ $data->name }}" wire:change="editTypeCart('{{$data->id}}', $event.target.value)" wire:key="{{$data->id.'-'.$data->name}}">
+              <option value="">-- Pilih Tipe --</option>
+              @foreach($invoiceDataType as $key => $item)
+                <option value="{{$key}}" {{ $key === $data->name ? 'selected' : '' }}>{{$item}}</option>
+              @endforeach
+            </select>
+          </div>
+          <div class="col-6 text-center">
+            <input type="text" id="invoice_info" class="form-control form-control-sm" value="{{$data->attributes->info}}" wire:change="editInfoCart('{{$data->id}}', $event.target.value)" wire:key="{{$data->id.'-'.$data->attributes->info}}">
+          </div>
+          <div class="col-3 col-xl-2 text-center">
+            <input type="number" id="invoice_price" class="form-control form-control-sm" min="0" value="{{$data->price}}" wire:change="editPriceCart('{{$data->id}}', $event.target.value)" wire:key="{{$data->id.'-'.$data->price}}">
+          </div>
+          <div class="col-1">
+            <button wire:click.prevent="deleteCart('{{$data->id}}')">Hapus</button>
+          </div>
+        </div>
+      @endforeach
       <div class="row g-0">
-        <div class="col-3 col-xl-2 text-center">
-          <select id="type0" class="form-select form-select-sm" wire:model.live="type0">
-            <option value="" selected>-- Pilih Tipe --</option>
-            <option value="biaya denda">Biaya Denda (+)</option>
-            <option value="biaya jasa kolektor">Biaya Jasa Kolektor (+)</option>
-            <option value="biaya lain">Biaya Lain-lain (+)</option>
-            <option value="biaya layanan">Biaya Layanan (+)</option>
-            <option value="biaya material">Biaya Material (+)</option>
-            <option value="biaya pemasangan">Biaya Pemasangan (+)</option>
-            <option value="biaya pinalti">Biaya Pinalti (+)</option>
-            <option value="diskon layanan">Diskon Layanan (-)</option>
-            <option value="penambahan tv">Penambahan TV (+)</option>
-            <option value="penyesuaian biaya">Penyesuaian Biaya (-)</option>
-            <option value="penyesuaian downgrade">Penyesuaian Downgrade (-)</option>
-            <option value="penyesuaian upgrade">Penyesuaian Upgrade (+)</option>
-          </select>
-        </div>
-        <div class="col-6 text-center">
-          <input type="text" id="info0" 
-            class="form-control form-control-sm" wire:model="info0">
-        </div>
-        <div class="col-3 col-xl-2 text-center">
-          <input type="number" id="price0" class="form-control form-control-sm" min="0"
-            wire:model="price0">
-        </div>
+          <div class="col-3 col-xl-2 text-center">
+            <select id="invoice_type" class="form-select form-select-sm" wire:model.live="invoice_type">
+              <option value="" selected>-- Pilih Tipe --</option>
+              <option value="biaya denda">Biaya Denda (+)</option>
+              <option value="biaya jasa kolektor">Biaya Jasa Kolektor (+)</option>
+              <option value="biaya lain">Biaya Lain-lain (+)</option>
+              <option value="biaya layanan">Biaya Layanan (+)</option>
+              <option value="biaya material">Biaya Material (+)</option>
+              <option value="biaya pemasangan">Biaya Pemasangan (+)</option>
+              <option value="biaya pinalti">Biaya Pinalti (+)</option>
+              <option value="diskon layanan">Diskon Layanan (-)</option>
+              <option value="penambahan tv">Penambahan TV (+)</option>
+              <option value="penyesuaian biaya">Penyesuaian Biaya (-)</option>
+              <option value="penyesuaian downgrade">Penyesuaian Downgrade (-)</option>
+              <option value="penyesuaian upgrade">Penyesuaian Upgrade (+)</option>
+            </select>
+          </div>
+          <div class="col-6 text-center">
+            <input type="text" id="invoice_info" 
+              class="form-control form-control-sm" wire:model.live="invoice_info">
+          </div>
+          <div class="col-3 col-xl-2 text-center">
+            <input type="number" id="invoice_price" class="form-control form-control-sm" min="0"
+              wire:model.live="invoice_price">
+          </div>
+          <div class="col-1">
+            <button wire:click.prevent="addToCart">Tambah</button>
+          </div>
       </div>
-      <div class="row g-0">
-        <div class="col-3 col-xl-2 text-center">
-          <select id="type1" class="form-select form-select-sm" wire:model.live="type1">
-            <option value="" selected>-- Pilih Tipe --</option>
-            <option value="biaya denda">Biaya Denda (+)</option>
-            <option value="biaya jasa kolektor">Biaya Jasa Kolektor (+)</option>
-            <option value="biaya lain">Biaya Lain-lain (+)</option>
-            <option value="biaya layanan">Biaya Layanan (+)</option>
-            <option value="biaya material">Biaya Material (+)</option>
-            <option value="biaya pemasangan">Biaya Pemasangan (+)</option>
-            <option value="biaya pinalti">Biaya Pinalti (+)</option>
-            <option value="diskon layanan">Diskon Layanan (-)</option>
-            <option value="penambahan tv">Penambahan TV (+)</option>
-            <option value="penyesuaian biaya">Penyesuaian Biaya (-)</option>
-            <option value="penyesuaian downgrade">Penyesuaian Downgrade (-)</option>
-            <option value="penyesuaian upgrade">Penyesuaian Upgrade (+)</option>
-          </select>
-        </div>
-        <div class="col-6 text-center">
-          <input type="text" id="info1" 
-            class="form-control form-control-sm" wire:model="info1">
-        </div>
-        <div class="col-3 col-xl-2 text-center">
-          <input type="number" id="price1" class="form-control form-control-sm" min="0"
-            wire:model="price1">
-        </div>
-      </div>
-      <div class="row g-0">
-        <div class="col-3 col-xl-2 text-center">
-          <select id="type2" class="form-select form-select-sm" wire:model.live="type2">
-            <option value="" selected>-- Pilih Tipe --</option>
-            <option value="biaya denda">Biaya Denda (+)</option>
-            <option value="biaya jasa kolektor">Biaya Jasa Kolektor (+)</option>
-            <option value="biaya lain">Biaya Lain-lain (+)</option>
-            <option value="biaya layanan">Biaya Layanan (+)</option>
-            <option value="biaya material">Biaya Material (+)</option>
-            <option value="biaya pemasangan">Biaya Pemasangan (+)</option>
-            <option value="biaya pinalti">Biaya Pinalti (+)</option>
-            <option value="diskon layanan">Diskon Layanan (-)</option>
-            <option value="penambahan tv">Penambahan TV (+)</option>
-            <option value="penyesuaian biaya">Penyesuaian Biaya (-)</option>
-            <option value="penyesuaian downgrade">Penyesuaian Downgrade (-)</option>
-            <option value="penyesuaian upgrade">Penyesuaian Upgrade (+)</option>
-          </select>
-        </div>
-        <div class="col-6 text-center">
-          <input type="text" id="info2" 
-            class="form-control form-control-sm" wire:model="info2">
-        </div>
-        <div class="col-3 col-xl-2 text-center">
-          <input type="number" id="price2" class="form-control form-control-sm" min="0"
-            wire:model="price2">
-        </div>
-      </div>
-      <div class="row g-0">
-        <div class="col-3 col-xl-2 text-center">
-          <select id="type3" class="form-select form-select-sm" wire:model.live="type3">
-            <option value="" selected>-- Pilih Tipe --</option>
-            <option value="biaya denda">Biaya Denda (+)</option>
-            <option value="biaya jasa kolektor">Biaya Jasa Kolektor (+)</option>
-            <option value="biaya lain">Biaya Lain-lain (+)</option>
-            <option value="biaya layanan">Biaya Layanan (+)</option>
-            <option value="biaya material">Biaya Material (+)</option>
-            <option value="biaya pemasangan">Biaya Pemasangan (+)</option>
-            <option value="biaya pinalti">Biaya Pinalti (+)</option>
-            <option value="diskon layanan">Diskon Layanan (-)</option>
-            <option value="penambahan tv">Penambahan TV (+)</option>
-            <option value="penyesuaian biaya">Penyesuaian Biaya (-)</option>
-            <option value="penyesuaian downgrade">Penyesuaian Downgrade (-)</option>
-            <option value="penyesuaian upgrade">Penyesuaian Upgrade (+)</option>
-          </select>
-        </div>
-        <div class="col-6 text-center">
-          <input type="text" id="info3" 
-            class="form-control form-control-sm" wire:model="info3">
-        </div>
-        <div class="col-3 col-xl-2 text-center">
-          <input type="number" id="price3" class="form-control form-control-sm" min="0"
-            wire:model="price3">
-        </div>
+      <div>
+        @error('invoice_type') <span>{{$message}}</span> @enderror
+        @error('invoice_info') <span>{{$message}}</span> @enderror
+        @error('invoice_price') <span>{{$message}}</span> @enderror
       </div>
       <div class="row text-end fw-bold">
         <div class="col-9 col-xl-8">
           Total (Rp)
         </div>
         <div class="col-3 col-xl-2">
-          Total Harga
+          Total Harga {{ \Cart::session($userId.'-edit')->getTotal() }}
         </div>
       </div>
       <div class="row align-items-center my-3">
@@ -229,7 +204,7 @@
       </div>
       <div class="row">
         <div class="col-12 col-xl-10 text-center mb-3">
-          <button class="btn btn-outline-primary btn-sm">
+          <button class="btn btn-outline-primary btn-sm" wire:click.prevent="updateDetailInvoice()">
             Simpan
           </button>
         </div>
