@@ -27,7 +27,7 @@ class Complains extends Component
 
   public function render()
   {
-    $table = Complain::select('*');
+    $table = Complain::orderby('id', 'desc')->select('*');
     if (!empty($this->filterStatus)) {
       $table->where(['status' => $this->filterStatus]);
     }

@@ -19,7 +19,7 @@ class Spks extends Component
 
   public function render()
   {
-    $table = Spk::select('*');
+    $table = Spk::orderby('id', 'desc')->select('*');
     if (!empty($this->filterStatus)) {
       $table->where(['status' => $this->filterStatus]);
     }

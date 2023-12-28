@@ -35,7 +35,7 @@ class CustomerSpks extends Component
 
   public function render()
   {
-    $spkData = Spk::where('customerid', $this->customerid)->select('*');
+    $spkData = Spk::where('customerid', $this->customerid)->orderby('id', 'desc')->select('*');
     $this->setData();
     return view('livewire.customerspks',[
       'spkData' => $spkData->paginate(10, pageName: 'custspk-page'),

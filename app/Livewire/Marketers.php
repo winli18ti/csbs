@@ -18,7 +18,7 @@ class Marketers extends Component
 
   public function render()
   {
-    $table = Marketer::select('*');
+    $table = Marketer::orderby('id', 'desc')->select('*');
     if (!empty($this->filterStatus)) {
       $table->where(['status' => $this->filterStatus]);
     }

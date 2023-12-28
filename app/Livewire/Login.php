@@ -20,7 +20,7 @@ class Login extends Component
             'password' => 'required', 
         ]);
         if(Auth::attempt($credentials)){
-            return redirect()->route('customers');
+            return redirect()->route('home');
         }
         throw ValidationException::withMessages([
             'email' => 'username/password salah',

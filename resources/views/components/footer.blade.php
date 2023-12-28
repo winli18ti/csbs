@@ -9,5 +9,14 @@
   
   @livewireScripts
   <script src="{{ URL::asset('js/bootstrap.bundle.min.js') }}"></script>
+  <script>
+    function showTime() {
+      document.getElementById('currentTime').innerHTML = new Date().toLocaleString("en-US", {timeZone: "Asia/Jakarta"});
+    }
+    showTime();
+    setInterval(function () {
+      showTime();
+    }, 1000);
+  </script>
 </body>
 </html>

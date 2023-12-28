@@ -27,7 +27,7 @@
           wire:model.live="filterRole">
           <option value="">Semua</option>
           <option value="admin">Admin</option>
-          <option value="customer service">CS</option>
+          <option value="cs">CS</option>
           <option value="finance">Finance</option>
           <option value="noc">NOC</option>
           <option value="officer">Teknisi</option>
@@ -68,11 +68,11 @@
               <tr wire:key="{{$data->id}}">
                 <td class="text-center">{{$data->id}}</td>
                 <td>{{$data->name}}</td>
-                <td>{{$data->username}}</td>
+                <td>{{$data->email}}</td>
                 <td class="text-center">
                   @if($data->role === 'admin')
                   Admin
-                  @elseif($data->role === 'customer service')
+                  @elseif($data->role === 'cs')
                   CS
                   @elseif($data->role === 'finance')
                   Finance

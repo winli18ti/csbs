@@ -18,7 +18,7 @@ class Officers extends Component
 
   public function render()
   {
-    $table = Officer::select('*');
+    $table = Officer::orderby('id', 'desc')->select('*');
     if (!empty($this->filterStatus)) {
       $table->where(['status' => $this->filterStatus]);
     }
