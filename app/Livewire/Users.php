@@ -11,7 +11,7 @@ class Users extends Component
   use WithPagination;
   protected $paginationTheme = 'bootstrap';
 
-  public $id, $name, $username, $password, $password_confirmation, $role, $status;
+  public $id, $name, $email, $password, $password_confirmation, $role, $status;
   public $mode = 'table';
   public $title = 'User';
   public $filterStatus = '';
@@ -19,7 +19,7 @@ class Users extends Component
 
   public function render()
   {
-    $table = User::select('*');
+    $table = User::orderby('id', 'desc')->select('*');
     if (!empty($this->filterStatus)) {
       $table->where(['status' => $this->filterStatus]);
     }
@@ -41,7 +41,7 @@ class Users extends Component
     $this->navigate('add');
     $this->id = null;
     $this->name = null;
-    $this->username = null;
+    $this->email = null;
     $this->password = null;
     $this->password_confirmation = null;
     $this->role = null;
@@ -53,7 +53,7 @@ class Users extends Component
     $this->validateRule();
     User::create([
       'name' => $this->name,
-      'username' => $this->username,
+      'email' => $this->email,
       'password' => $this->password,
       'role' => $this->role,
       'status' => $this->status,
@@ -68,7 +68,7 @@ class Users extends Component
     $data = User::find($id);
     $this->id = $data->id;
     $this->name = $data->name;
-    $this->username = $data->username;
+    $this->email = $data->email;
     $this->role = $data->role;
     $this->status = $data->status;
   }
@@ -77,7 +77,7 @@ class Users extends Component
   {
     User::where('id', $this->id)->update([
       'name' => $this->name,
-      'username' => $this->username,
+      'email' => $this->email,
       'status' => $this->status,
     ]);
     session()->flash('message', $this->title . ' berhasil diubah');
@@ -97,11 +97,11 @@ class Users extends Component
   {
     $this->validate([
       'name' => 'required',
-      'username' => 'required',
+      'email' => 'required',
       'password' => 'required',
     ], [
       'name.required' => 'Nama wajib diisi',
-      'username.required' => 'Username wajib diisi',
+      'email.required' => 'Username wajib diisi',
       'password.required' => 'Password wajib diisi',
     ]);
   }

@@ -13,6 +13,7 @@ use App\Livewire\Invoices;
 use App\Livewire\Marketers;
 use App\Livewire\Officers;
 use App\Livewire\Users;
+use App\Livewire\Account;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,7 @@ Route::middleware(['guest'])->group(function(){
 
 Route::middleware(['auth'])->group(function(){
     Route::get('/home', Home::class)->name('home');
+    Route::get('/account', Account::class)->name('account');
     
     Route::get('/customers', Customers::class)->name('customers');
     Route::get('/customer_detail/{id}', CustomerDetail::class)->name('pelanggan_detail');

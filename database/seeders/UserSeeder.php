@@ -15,18 +15,21 @@ class UserSeeder extends Seeder
         'email' => 'zhen',
         'password' => 'zhen',
         'role' => 'admin',
+        'status' => 'aktif',
       ],
       [
         'name' => 'Ineke Putri',
         'email' => 'ineke.putri',
         'password' => 'ineke.putri',
         'role' => 'cs',
+        'status' => 'aktif',
       ],
       [
         'name' => 'Lili',
         'email' => 'lili',
         'password' => 'lili',
         'role' => 'cs',
+        'status' => 'aktif',
       ],
     );
 

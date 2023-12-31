@@ -26,7 +26,7 @@ class CustomerServices extends Component
 
   public function render()
   {
-    $customerServiceData = CustomerService::where('customerid', $this->id)->select('*');
+    $customerServiceData = CustomerService::where('customerid', $this->id)->orderby('id', 'desc')->select('*');
     $this->setData();
     return view('livewire.customerservices', [
       'customerServiceData' => $customerServiceData->paginate(10, pageName: 'custdata-page'),

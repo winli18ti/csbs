@@ -1,4 +1,4 @@
-<div>
+<div class="mt-3">
   @if($mode === 'table')
     @include('livewire.invoices.table')
   @elseif($mode === 'view')

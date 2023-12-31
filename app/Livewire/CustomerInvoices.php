@@ -55,7 +55,7 @@ class CustomerInvoices extends Component
 
   public function render()
   {
-    $invoicesData = Invoice::where('customerid', $this->customerid)->select('*');
+    $invoicesData = Invoice::where('customerid', $this->customerid)->orderby('id', 'desc')->select('*');
     $this->setData();
     return view('livewire.customerinvoices',[
       'invoicesData' => $invoicesData->paginate(10, pageName: 'custinvoice-page'),

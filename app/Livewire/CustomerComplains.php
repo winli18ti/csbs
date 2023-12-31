@@ -33,7 +33,7 @@ class CustomerComplains extends Component
 
   public function render()
   {
-    $complainData = Complain::where('customerid', $this->id)->select('*');
+    $complainData = Complain::where('customerid', $this->id)->orderby('id', 'desc')->select('*');
     $this->setData();
     return view('livewire.customercomplains',[
       'complainData' => $complainData->paginate(10, pageName: 'custcomplain-page'),

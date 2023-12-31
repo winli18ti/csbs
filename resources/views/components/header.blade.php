@@ -11,21 +11,23 @@
         @livewireStyles
     </head>
     <body class="d-flex flex-column min-vh-100">
-      <nav class="navbar navbar-expand bg-dark" data-bs-theme="dark">
+        @if(Auth::user()->role ?? '')
+        <nav class="navbar navbar-expand bg-dark" data-bs-theme="dark">
         <div class="container-fluid">
-          <div class="navbar-nav">
+            <div class="navbar-nav">
             @if(Auth::user()->role ?? '')
-                <a href="#" class="nav-link active">Home</a>
+                <a href="/home" class="nav-link {{ request()->is('home') ? 'active' : '' }}">Home</a>
+                <a href="/account" class="nav-link {{ request()->is('account') ? 'active' : '' }}">Akun</a>
                 <a class="nav-link" class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Keluar</a>
                 <form id="logout-form" action="{{ route('logout') }}" method="post">@csrf</form>
             @else
                 <a href="#" class="nav-link">Login</a>
             @endif
-          </div>
+            </div>
 
-          <span class="d-none d-sm-block navbar-text">{{Carbon\Carbon::now()->toCookieString()}}</span>
+            <span class="d-none d-sm-block navbar-text" id="currentTime"></span>
         </div>
-      </nav>
+        </nav>
 
         <div class="container-fluid bg-danger bg-opacity-75 text-white text-center py-3">
             <div class="row">
@@ -37,17 +39,17 @@
                         <div class="row">
                             <div class="col">
                                 <a href="/spks" class="text-decoration-none">
-                                    <span class="text-warning fw-bold">79</span>
+                                    <span class="text-warning fw-bold">79</span> <!-- blm proses && pengerjaan  -->
                                     <span class="text-light">Pending Orders</span>
                                 </a>
                                 <span>|</span>
                                 <a href="/invoices" class="text-decoration-none">
-                                    <span class="text-warning fw-bold">1311</span>
+                                    <span class="text-warning fw-bold">1311</span> <!-- blm lunas  -->
                                     <span class="text-light">Overdue Invoices</span>
                                 </a>
                                 <span>|</span>
                                 <a href="/complains" class="text-decoration-none">
-                                    <span class="text-warning fw-bold">20</span>
+                                    <span class="text-warning fw-bold">20</span> <!-- tunggu & proses  -->
                                     <span class="text-light">Ticket(s) Awaiting Reply</span>
                                 </a>
                             </div>
@@ -103,3 +105,4 @@
                 @endif
             </div>
         </div>
+        @endif

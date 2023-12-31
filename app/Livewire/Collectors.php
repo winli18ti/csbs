@@ -18,7 +18,7 @@ class Collectors extends Component
 
   public function render()
   {
-    $table = Collector::select('*');
+    $table = Collector::orderby('id', 'desc')->select('*');
     if (!empty($this->filterStatus)) {
       $table->where(['status' => $this->filterStatus]);
     }

@@ -26,12 +26,12 @@
 
         <div class="row align-items-center">
           <div class="col-5 col-md-4">
-            <label for="username" class="col-form-label">Username</label>
+            <label for="email" class="col-form-label">Username</label>
           </div>
           <div class="col-7 col-md-8">
-            <input type="text" id="username" class="form-control form-control-sm" 
-              wire:model="username">
-            @error('username')<span class="text-danger fw-light">{{ $message }}</span>@enderror
+            <input type="text" id="email" class="form-control form-control-sm" 
+              wire:model="email">
+            @error('email')<span class="text-danger fw-light">{{ $message }}</span>@enderror
           </div>
         </div>
 
