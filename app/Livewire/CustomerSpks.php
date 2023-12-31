@@ -22,10 +22,13 @@ class CustomerSpks extends Component
   public $officerData, $nodesData;
 
   public $id, $category, $spknumber, $service, $servicetype, $status, $address,
-    $tvanalog, $serialnumber, $smartcard, 
+    $tvanalog, $tvdigital,
+    // $serialnumber, $smartcard, 
     $modemnumber, $modemmac, $modemip, $cpemac, $cpeip, $cpegateway,
     $inputdate, $statusnow, $startdate, $officerid1, $officerid2, $nodeid, $enddate,
     $reason, $solution;
+
+  public $cartData;
 
   public function mount($userid)
   {
@@ -68,8 +71,8 @@ class CustomerSpks extends Component
     $this->servicetype = $data->servicetype;
     $this->status = $data->status;
     $this->tvanalog = $data->tvanalog;
-    $this->serialnumber = $data->serialnumber;
-    $this->smartcard = $data->smartcard;
+    // $this->serialnumber = $data->serialnumber;
+    // $this->smartcard = $data->smartcard;
     $this->modemnumber = $data->modemnumber;
     $this->modemmac = $data->modemmac;
     $this->modemip = $data->modemip;
@@ -85,15 +88,31 @@ class CustomerSpks extends Component
     $this->enddate = $data->enddate;
     $this->reason = $data->reason;
     $this->solution = $data->solution;
-
+    // if($data->servicetype === 'tv'){
+      if(!empty($data->tvdigital)){
+        $this->tvdigital = json_decode($data->tvdigital); $countnumb = 1;
+        foreach($this->tvdigital as $data){
+          \Cart::session('spktvdigital')->add(array(
+            'id' => $countnumb,
+            'name' => $data['serialnumber'],
+            'price' => 10000,
+            'quantity' => 1,
+            'attributes' => array(
+              'smartcard' => $data['smartcard'],
+            ),
+          ));
+          $this->cartData = \Cart::session('spktvdigital')->getContent();
+        }
+      }
+    // }
   }
 
   public function update()
   {
     Spk::where('id', $this->id)->update([
       'tvanalog' => $this->tvanalog,
-      'serialnumber' => $this->serialnumber,
-      'smartcard' => $this->smartcard,
+      // 'serialnumber' => $this->serialnumber,
+      // 'smartcard' => $this->smartcard,
       'modemnumber' => $this->modemnumber,
       'modemmac' => $this->modemmac,
       'modemip' => $this->modemip,

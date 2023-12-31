@@ -80,7 +80,7 @@
 
     <div class="row mt-2">
       <div class="col-sm-9 col-md-7 col-lg-6 col-xl-5">
-        @if(str_contains($servicetype, 'tv'))
+        {{-- @if(str_contains($servicetype, 'tv')) --}}
           <fieldset class="border border-2 border-danger-subtle rounded-3 px-3 pb-3 my-2">
             <legend class="fs-6 float-none w-auto">TV Analog</legend>
     
@@ -97,8 +97,29 @@
     
           <fieldset class="border border-2 border-danger-subtle rounded-3 px-3 pb-3 my-2">
             <legend class="fs-6 float-none w-auto">TV Digital</legend>
+            @if($servicetype === 'tv')
+              @foreach($cartData as $data)
+                <div class="row align-items-center">
+                  <div class="col-7 col-md-6">
+                    <input type="text" class="form-control form-control-sm" value="{{$data->name}}">
+                  </div>
+                  <div class="col-7 col-md-6">
+                    <input type="text" class="form-control form-control-sm" value="{{$data->attributes->smartcard}}">
+                  </div>
+                </div>
+              @endforeach
+            @else
+              <div class="row align-items-center">
+                <div class="col-7 col-md-6">
+                  <input type="text" class="form-control form-control-sm" wire:model.live="">
+                </div>
+                <div class="col-7 col-md-6">
+                  <input type="text" class="form-control form-control-sm" wire:model.live="">
+                </div>
+              </div>
+            @endif
     
-            <div class="row align-items-center">
+            {{-- <div class="row align-items-center">
               <div class="col-5 col-md-4">
                 <label for="serialnumber" class="col-form-label">No Serial</label>
               </div>
@@ -116,9 +137,9 @@
                 <input type="text" id="smartcard" 
                   class="form-control form-control-sm" wire:model="smartcard">
               </div>
-            </div>
+            </div> --}}
           </fieldset>
-        @endif
+        {{-- @endif --}}
   
         @if(str_contains($servicetype, 'internet'))
           <fieldset class="border border-2 border-danger-subtle rounded-3 px-3 pb-3 my-2">
