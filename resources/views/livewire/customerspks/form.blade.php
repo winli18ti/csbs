@@ -97,24 +97,42 @@
     
           <fieldset class="border border-2 border-danger-subtle rounded-3 px-3 pb-3 my-2">
             <legend class="fs-6 float-none w-auto">TV Digital</legend>
-            @if($servicetype === 'tv')
-              @foreach($cartData as $data)
-                <div class="row align-items-center">
-                  <div class="col-7 col-md-6">
-                    <input type="text" class="form-control form-control-sm" value="{{$data->name}}">
-                  </div>
-                  <div class="col-7 col-md-6">
-                    <input type="text" class="form-control form-control-sm" value="{{$data->attributes->smartcard}}">
-                  </div>
+            @if($servicetype === 'tv' || $servicetype === 'tv & internet')
+              <div class="row align-items-center">
+                <div class="col-7 col-md-6">
+                  <span class="form-control form-control-sm">No Serial</span>
                 </div>
-              @endforeach
+                <div class="col-7 col-md-6">
+                  <span class="form-control form-control-sm">smart card</span>
+                </div>
+                @foreach($cartData as $data)
+                    <div class="col-7 col-md-6">
+                      <input type="text" class="form-control form-control-sm" value="{{$data->name}}">
+                    </div>
+                    <div class="col-7 col-md-6">
+                      <input type="text" class="form-control form-control-sm" value="{{$data->attributes->info}}">
+                    </div>
+                    <div class="col-7 col-md-6">
+                      <button wire:click.prevent="deleteDigitalTv('{{$data->id}}')">Hapus</button>
+                    </div>
+                @endforeach
+                <div class="col-7 col-md-6">
+                  <input type="text" class="form-control form-control-sm" placeholder="Input No Serial" wire:model.live="serial_number">
+                </div>
+                <div class="col-7 col-md-6">
+                  <input type="text" class="form-control form-control-sm" placeholder="Input Smart Card" wire:model.live="smart_card">
+                </div>
+                <div class="col-7 col-md-6">
+                  <button class="form-control form-control-sm" wire:click.prevent="addNewDigitalTv">Add</button>
+                </div>
+              </div>
             @else
               <div class="row align-items-center">
                 <div class="col-7 col-md-6">
-                  <input type="text" class="form-control form-control-sm" wire:model.live="">
+                  <input type="text" class="form-control form-control-sm" placeholder="Serial Number" readonly>
                 </div>
                 <div class="col-7 col-md-6">
-                  <input type="text" class="form-control form-control-sm" wire:model.live="">
+                  <input type="text" class="form-control form-control-sm" placeholder="Smart Card" readonly>
                 </div>
               </div>
             @endif

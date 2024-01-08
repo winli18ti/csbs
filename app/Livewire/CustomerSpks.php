@@ -28,7 +28,7 @@ class CustomerSpks extends Component
     $inputdate, $statusnow, $startdate, $officerid1, $officerid2, $nodeid, $enddate,
     $reason, $solution;
 
-  public $cartData;
+  public $cartData, $serial_number, $smart_card;
 
   public function mount($userid)
   {
@@ -53,6 +53,7 @@ class CustomerSpks extends Component
     $this->address = $data->address;
     $this->officerData = Officer::get();
     $this->nodesData = Node::get();
+    $this->cartData = \Cart::session($this->customerid.'-customerspkstvdigital')->getContent();
   }
 
   public function navigate($mode)
@@ -101,7 +102,7 @@ class CustomerSpks extends Component
               'smartcard' => $data['smartcard'],
             ),
           ));
-          $this->cartData = \Cart::session('spktvdigital')->getContent();
+          
         }
       }
     // }
@@ -130,5 +131,32 @@ class CustomerSpks extends Component
     ]);
     session()->flash('message', $this->title . ' berhasil diubah');
     $this->navigate('hero');
+  }
+
+  public function addNewDigitalTv(){
+    $this->validate([
+      'serial_number' => 'required',
+      'smart_card' => 'required',
+    ],[
+      'serial_number.required' => 'No Serial harus diisi',
+      'smart_card.required' => 'Smart Card harus diisi',
+    ]);
+    $rand1 = rand(100000, 999999); $rand2 = rand(100000, 999999);
+    $idNumb = $rand1.$rand2.$this->customerid;
+    \Cart::session($this->customerid.'-customerspkstvdigital')->add(array(
+      'id' => $idNumb,
+      'name' => $this->serial_number,
+      'price' => 10000,
+      'quantity' => 1,
+      'attributes' => array(
+        'info' => $this->smart_card
+      ),
+    ));
+    $this->serial_number = ''; $this->smart_card = '';
+  }
+
+  public function deleteDigitalTv($slug){
+    dd($slug);
+    \Cart::session($this->customerid.'-customerspkstvdigital')->remove($slug);
   }
 }
