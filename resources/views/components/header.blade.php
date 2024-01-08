@@ -85,6 +85,35 @@
 
                                 <button class="btn btn-danger btn-sm mt-1" 
                                 data-bs-toggle="dropdown">
+                                Finance
+                                </button>
+
+                                <ul class="dropdown-menu">
+                                <li><a href="/summary_invoice" class="dropdown-item">Rekap periode tagihan</a></li>
+                                <li><a href="/summary_paid_invoice" class="dropdown-item">Rekap penerimaan harian</a></li>
+                                <li><a href="/summary_paid_detail" class="dropdown-item">Rekap penerimaan detail</a></li>
+                                <li><a href="/summary_payment" class="dropdown-item">Rekap pembayaran pelanggan</a></li>
+                                <li><a href="/summary_collector" class="dropdown-item">Penerimaan kolektor harian</a></li>
+                                </ul>
+
+                                <button class="btn btn-danger btn-sm mt-1" 
+                                data-bs-toggle="dropdown">
+                                Report
+                                </button>
+
+                                <ul class="dropdown-menu">
+                                <li><a href="/report_income_paid" class="dropdown-item">Laporan penerimaan pembayaran</a></li>
+                                <li><a href="/report_income" class="dropdown-item">Laporan penerimaan tagihan</a></li>
+                                <li><a href="/report_sales" class="dropdown-item">Laporan penjualan sales</a></li>
+                                <li><a href="/report_node" class="dropdown-item">Grafik utilisasi node pelanggan</a></li>
+                                <li><a href="/report_complain" class="dropdown-item">Grafik pengaduan pelanggan</a></li>
+                                <li><a href="/report_selling" class="dropdown-item">Grafik penjualan produk</a></li>
+                                <li><a href="/report_dismantle_date" class="dropdown-item">Grafik pemutusan tanggal dismantle</a></li>
+                                <li><a href="/report_dismantle_regs" class="dropdown-item">Grafik pemutusan tanggal registrasi</a></li>
+                                </ul>
+
+                                <button class="btn btn-danger btn-sm mt-1" 
+                                data-bs-toggle="dropdown">
                                 Setup
                                 </button>
 

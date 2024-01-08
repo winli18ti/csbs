@@ -1,7 +1,18 @@
 <div class="container-fluid mt-3">
   <span class="lead mb-2">Selamat Datang, {{$name}}</span>
-
   <div class="container-fluid row">
+    <div class="col-12 col-md-6">
+      <div class="m-2" style="height: 16rem;">
+        <livewire:livewire-line-chart key="{{ $sellingOverview->reactiveKey() }}" :line-chart-model="$sellingOverview"/>
+      </div>
+    </div>
+    <div class="col-12 col-md-6">
+      <div class="m-2" style="height: 16rem;">
+        <livewire:livewire-line-chart 
+          key="{{ $sellingGraph->reactiveKey() }}" 
+          :line-chart-model="$sellingGraph"/>
+      </div>
+    </div>
     <div class="col-12 col-md-6">
       <div class="m-2">
         <table class="table table-sm table-borderless">
@@ -35,9 +46,6 @@
           </tbody>
         </table>
       </div>
-    </div>
-    <div class="col-12 col-md-6">
-      
     </div>
   </div>
 </div>

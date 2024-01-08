@@ -8,9 +8,8 @@
       <div class="col">
         <div class="input-group">
           <label for="paiddate" class="input-group-text">Tanggal Pembayaran</label>
-          <input type="date" id="paiddate" class="form-control form-control-sm">
-          <button class="btn btn-outline-primary" type="button">Tampilkan</button>
-          <button class="btn btn-outline-primary" type="button">Ekspor Excel</button>
+          <input type="date" id="paiddate" class="form-control form-control-sm" wire:model.live="filterDate">
+          <button class="btn btn-outline-primary" type="button" wire:click.prevent="export">Ekspor Excel</button>
         </div>
       </div>
     </div>
