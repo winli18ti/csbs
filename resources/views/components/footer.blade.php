@@ -6,9 +6,11 @@
     </div>
   </footer>
 @endif
-  
+  <livewire:scripts />
+  @livewireChartsScripts
   @livewireScripts
   <script src="{{ URL::asset('js/bootstrap.bundle.min.js') }}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
   <script>
     function showTime() {
       document.getElementById('currentTime').innerHTML = new Date().toLocaleString("en-US", {timeZone: "Asia/Jakarta"});

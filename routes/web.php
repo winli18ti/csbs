@@ -14,6 +14,8 @@ use App\Livewire\Marketers;
 use App\Livewire\Officers;
 use App\Livewire\Users;
 use App\Livewire\Account;
+use App\Livewire\Summary;
+use App\Livewire\Report;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +47,20 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/marketers', Marketers::class)->name('marketers');
     Route::get('/officers', Officers::class)->name('officers');
     Route::get('/users', Users::class)->name('users');
+    Route::get('/summary_invoice', Summary::class);
+    Route::get('/summary_paid_invoice', Summary::class);
+    Route::get('/summary_paid_detail', Summary::class);
+    Route::get('/summary_payment', Summary::class);
+    Route::get('/summary_collector', Summary::class);
+
+    Route::get('/report_income_paid', Report::class);
+    Route::get('/report_income', Report::class);
+    Route::get('/report_sales', Report::class);
+    Route::get('/report_node', Report::class);
+    Route::get('/report_complain', Report::class);
+    Route::get('/report_selling', Report::class);
+    Route::get('/report_dismantle_date', Report::class);
+    Route::get('/report_dismantle_regs', Report::class);
 
     Route::post('logout', LogoutController::class)->name('logout'); 
 });
