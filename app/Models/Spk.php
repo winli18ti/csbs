@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Customer;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Spk extends Model
 {
@@ -46,6 +47,20 @@ class Spk extends Model
   public function node() 
   {
     return $this->belongsTo(Node::class, 'nodeid');
+  }
+
+  protected function data(): Attribute{
+      return Attribute::make(
+          get: fn ($value) => json_decode($value, true),
+          set: fn ($value) => json_encode ($value),
+      );
+  }
+
+  protected function data_update(): Attribute{
+      return Attribute::make(
+          get: fn ($value) => json_decode($value, true),
+          set: fn ($value) => json_encode($value),
+      );
   }
 
   //Officer::find(id_officer_nya)->name ==> controller

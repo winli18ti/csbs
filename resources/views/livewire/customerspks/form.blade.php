@@ -107,17 +107,17 @@
                 </div>
                 @foreach($cartData as $data)
                     <div class="col-7 col-md-6">
-                      <input type="text" class="form-control form-control-sm" value="{{$data->name}}">
+                      <input type="text" class="form-control form-control-sm" wire:change="editSerialNumb('{{$data->id}}', $event.target.value)" value="{{$data->name}}" wire:key="{{$data->id.'-'.$data->name}}">
                     </div>
                     <div class="col-7 col-md-6">
-                      <input type="text" class="form-control form-control-sm" value="{{$data->attributes->info}}">
+                      <input type="text" class="form-control form-control-sm" wire:Change="editSmartCard('{{$data->id}}', $event.target.value)" value="{{$data->attributes->info}}" wire:key="{{$data->id.'-'.$data->attributes->info}}">
                     </div>
                     <div class="col-7 col-md-6">
                       <button wire:click.prevent="deleteDigitalTv('{{$data->id}}')">Hapus</button>
                     </div>
                 @endforeach
                 <div class="col-7 col-md-6">
-                  <input type="text" class="form-control form-control-sm" placeholder="Input No Serial" wire:model.live="serial_number">
+                  <input type="text" class=" form-control form-control-sm" placeholder="Input No Serial" wire:model.live="serial_number">
                 </div>
                 <div class="col-7 col-md-6">
                   <input type="text" class="form-control form-control-sm" placeholder="Input Smart Card" wire:model.live="smart_card">
