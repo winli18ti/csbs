@@ -3,7 +3,7 @@
   <div class="container-fluid row">
     <div class="col-12 col-md-6">
       <div class="m-2" style="height: 16rem;">
-        <livewire:livewire-line-chart key="{{ $sellingOverview->reactiveKey() }}" :line-chart-model="$sellingOverview"/>
+        <livewire:livewire-column-chart key="{{ $sellingOverview->reactiveKey() }}" :column-chart-model="$sellingOverview"/>
       </div>
     </div>
     <div class="col-12 col-md-6">

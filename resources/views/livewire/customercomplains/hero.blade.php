@@ -32,7 +32,7 @@
         <table class="table table-sm table-striped table-hover caption-top text-truncate">
           <thead>
             <tr class="table-danger text-center">
-              <th class="col">No</th>
+              <th class="col">#</th>
               <th class="col">Kode</th>
               <th class="col">Subyek</th>
               <th class="col">Layanan</th>

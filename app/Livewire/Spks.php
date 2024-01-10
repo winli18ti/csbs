@@ -16,6 +16,7 @@ class Spks extends Component
   public $title = 'SPK pelanggan';
   public $filterStatus = '';
   public $filterCategory = '';
+  public $searchTerm = '';
 
   public function render()
   {
@@ -25,6 +26,9 @@ class Spks extends Component
     }
     if (!empty($this->filterCategory)) {
       $table->where(['category' => $this->filterCategory]);
+    }
+    if (!empty($this->searchTerm)) {
+      
     }
     return view('livewire.spks', [
       'table' => $table->paginate(10, pageName: 'spk-page'),

@@ -66,7 +66,7 @@
           @if($table->count())
             @foreach($table as $data)
               <tr wire:key="{{$data->id}}">
-                <td class="text-center">{{$data->id}}</td>
+                <td class="text-center">{{ $table->firstItem() + $loop->index }}</td>
                 <td>{{$data->name}}</td>
                 <td>{{$data->email}}</td>
                 <td class="text-center">

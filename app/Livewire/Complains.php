@@ -19,7 +19,7 @@ class Complains extends Component
     $updatedby, $updatedbydate;
   public $mode = 'table';
   public $title = 'Pengaduan pelanggan';
-  public $filterStatus = '';
+  public $filterStatus = '', $searchTerm = '';
 
   public $complain_status, $complain_priority, $service_type, $report, $reporter, $report_subject, $customer_complain, $completion, $complain_id;
 
@@ -30,6 +30,9 @@ class Complains extends Component
     $table = Complain::orderby('id', 'desc')->select('*');
     if (!empty($this->filterStatus)) {
       $table->where(['status' => $this->filterStatus]);
+    }
+    if (!empty($this->searchTerm)) {
+      $table->where('subject', 'like', "%" . $this->searchTerm . "%");
     }
     return view('livewire.complains', [
       'table' => $table->paginate(10, pageName: 'complain-page')

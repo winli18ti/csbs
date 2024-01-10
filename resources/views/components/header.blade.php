@@ -16,7 +16,7 @@
         <div class="container-fluid">
             <div class="navbar-nav">
             @if(Auth::user()->role ?? '')
-                <a href="/home" class="nav-link {{ request()->is('home') ? 'active' : '' }}">Home</a>
+                {{-- <a href="/home" class="nav-link {{ request()->is('home') ? 'active' : '' }}">Home</a> --}}
                 <a href="/account" class="nav-link {{ request()->is('account') ? 'active' : '' }}">Akun</a>
                 <a class="nav-link" class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Keluar</a>
                 <form id="logout-form" action="{{ route('logout') }}" method="post">@csrf</form>
@@ -39,23 +39,27 @@
                         <div class="row">
                             <div class="col">
                                 <a href="/spks" class="text-decoration-none">
-                                    <span class="text-warning fw-bold">79</span> <!-- blm proses && pengerjaan  -->
+                                    <span class="text-warning fw-bold">{{ App\Models\Spk::where('status', 'blm proses')->orWhere('status', 'pengerjaan')->count() }}</span>
                                     <span class="text-light">Pending Orders</span>
                                 </a>
                                 <span>|</span>
                                 <a href="/invoices" class="text-decoration-none">
-                                    <span class="text-warning fw-bold">1311</span> <!-- blm lunas  -->
+                                    <span class="text-warning fw-bold">{{ App\Models\Invoice::where('status', 'belum lunas')->count() }}</span>
                                     <span class="text-light">Overdue Invoices</span>
                                 </a>
                                 <span>|</span>
                                 <a href="/complains" class="text-decoration-none">
-                                    <span class="text-warning fw-bold">20</span> <!-- tunggu & proses  -->
+                                    <span class="text-warning fw-bold">{{ App\Models\Complain::where('status', 'tunggu')->orWhere('status', 'proses')->count() }}</span>
                                     <span class="text-light">Ticket(s) Awaiting Reply</span>
                                 </a>
                             </div>
                         </div>
                         <div class="row mt-2">
                             <div class="col">
+                                    <a href="/home" class="btn btn-danger btn-sm mt-1">
+                                        Home
+                                    </a>
+
                                 <button class="btn btn-danger btn-sm mt-1" 
                                 data-bs-toggle="dropdown">
                                     Customer
@@ -110,6 +114,15 @@
                                 <li><a href="/report_selling" class="dropdown-item">Grafik penjualan produk</a></li>
                                 <li><a href="/report_dismantle_date" class="dropdown-item">Grafik pemutusan tanggal dismantle</a></li>
                                 <li><a href="/report_dismantle_regs" class="dropdown-item">Grafik pemutusan tanggal registrasi</a></li>
+                                </ul>
+
+                                <button class="btn btn-danger btn-sm mt-1" 
+                                data-bs-toggle="dropdown">
+                                IT NOC
+                                </button>
+
+                                <ul class="dropdown-menu">
+                                <li><a href="/noc_tools" class="dropdown-item">Docsis Log Viewer</a></li>
                                 </ul>
 
                                 <button class="btn btn-danger btn-sm mt-1" 

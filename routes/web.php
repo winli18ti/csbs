@@ -14,6 +14,7 @@ use App\Livewire\Marketers;
 use App\Livewire\Officers;
 use App\Livewire\Users;
 use App\Livewire\Account;
+use App\Livewire\Noc;
 use App\Livewire\Summary;
 use App\Livewire\Report;
 
@@ -61,6 +62,8 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/report_selling', Report::class);
     Route::get('/report_dismantle_date', Report::class);
     Route::get('/report_dismantle_regs', Report::class);
+
+    Route::get('/noc_tools', Noc::class);
 
     Route::post('logout', LogoutController::class)->name('logout'); 
 });

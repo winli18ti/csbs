@@ -35,7 +35,7 @@
         <table class="table table-sm table-striped table-hover caption-top text-truncate">
           <thead>
             <tr class="table-danger text-center">
-              <th class="col">No</th>
+              <th class="col">#</th>
               <th class="col">No Tagihan</th>
               <th class="col">Jenis</th>
               <th class="col">Periode</th>

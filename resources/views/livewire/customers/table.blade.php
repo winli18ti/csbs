@@ -103,8 +103,16 @@
         <thead>
           <tr class="table-danger text-center">
             <th class="col">#</th>
-            @if(!($filterStatus === '' || $filterStatus === 'active'))
-            <th class="col">Tanggal</th>
+            @if($filterStatus === 'suspend')
+              <th class="col">Tgl Suspend</th>
+            @elseif($filterStatus === 'registration')
+              <th class="col">Tgl Registrasi</th>
+            @elseif($filterStatus === 'cancel')
+              <th class="col">Tgl Batal</th>
+            @elseif($filterStatus === 'dismantle')
+              <th class="col">Tgl Dismantle</th>
+            @elseif($filterStatus === 'req dismantle')
+              <th class="col">Tgl Request</th>
             @endif
             <th class="col">Cust ID</th>
             <th class="col">Nama</th>
@@ -116,8 +124,8 @@
             <th class="col">Tgl</th>
             <th class="col">Periode</th>
             <th class="col">Cara Pembayaran</th>
-            <th class="col">FN</th>
             <th class="col">Status</th>
+            <th class="col">FN</th>
             <th class="col">Opsi</th>
           </tr>
         </thead>
@@ -126,25 +134,22 @@
           <tr>
             <td class="text-end">{{ $table->firstItem() + $loop->index }}</td>
             @if(!($filterStatus === '' || $filterStatus === 'active'))
-            <td class="text-center">{{$data->statusdate}}</td>
+            <td class="text-center">
+              @if($data->statusdate)
+                {{date('d M Y', strtotime($data->statusdate))}}
+              @endif
+            </td>
             @endif
             <td><a class="text-danger-emphasis" href="/customer_detail/{{$data->id}}">{{$data->member}}</a></td>
             <td>{{$data->name}}</td>
             <td>{{$data->marketer->name}}</td>
             <td>{{App\Models\CustomerService::orderby('created_at', 'desc')->where('customerid', $data->id)->get()->first()->name}}</td>
-            <td>{{$data->address}}</td>
+            <td>{{strlen($data->address) > 50 ? substr($data->address, 0, 50)."..." : $data->address }}</td>
             <td>{{$data->homephone}}</td>
             <td>{{$data->cellphone}}</td>
             <td class="text-center">{{$data->billperiod}}</td>
             <td>Per {{$data->subsperiod}} bulan</td>
             <td>{{$data->paytype}}</td>
-            <td class="text-center text-uppercase">
-              @if($data->nodeid === 1)
-              <span class="badge text-bg-warning">NUL</span>
-              @elseif($data->nodeid)
-              <span class="badge text-bg-success">{{$data->node->node}}</span>
-              @endif
-            </td>
             <td class="text-uppercase text-center">
               @if($data->status === 'active')
               <span class="badge text-bg-success">{{$data->status}}</span>
@@ -158,6 +163,13 @@
               <span class="badge text-bg-danger">{{$data->status}}</span>
               @elseif($data->status === 'cancel')
               <span class="badge text-bg-secondary">{{$data->status}}</span>
+              @endif
+            </td>
+            <td class="text-center text-uppercase">
+              @if($data->nodeid === 1)
+              <span class="badge text-bg-warning">NUL</span>
+              @elseif($data->nodeid)
+              <span class="badge text-bg-success">{{$data->node->node}}</span>
               @endif
             </td>
             <td class="text-center">

@@ -35,6 +35,17 @@
         </select>
       </div>
     </div>
+
+    <div class="row align-items-center">
+      <div class="col-5 col-sm-4 col-md-3 col-xl-2">
+        <label for="searchTerm" class="col-form-label">Cari</label>
+      </div>
+      <div class="col-7 col-sm-5 col-md-3 col-lg-3">
+        <input type="text" id="searchTerm" class="form-control form-control-sm"
+          wire:model.live="searchTerm">
+      </div>
+    </div>
+  </div>
   </div>
 
   <div class="container-fluid">
@@ -55,7 +66,11 @@
             <th class="col">Nama Pelanggan</th>
             <th class="col">No Telp</th>
             <th class="col">Alamat</th>
-            <th class="col">Pengerjaan</th>
+            @if($filterStatus === 'batal')
+              <th class="col">Tgl Batal</th>
+            @else            
+              <th class="col">Pengerjaan</th>
+            @endif
             <th class="col">Status</th>
             <th class="col">Opsi</th>
           </tr>
@@ -70,14 +85,16 @@
               <td class="text-center"><a class="text-danger-emphasis" href="/customer_detail/{{$data->customerid}}">{{$data->customer->member}}</a></td>
               <td>{{$data->customer->name}}</td>
               <td>{{$data->customer->cellphone}}</td>
-              <td>{{$data->customer->address}}</td>
+              <td>{{strlen($data->customer->address) > 50 ? substr($data->customer->address, 0, 50)."..." : $data->customer->address }}</td>
               <td class="text-center">
-                @if($data->enddate)
-                {{date('d M Y', strtotime($data->enddate))}}
-                @elseif($data->startdate)
-                {{date('d M Y', strtotime($data->startdate))}}
-                @elseif($data->inputdate)
-                {{date('d M Y', strtotime($data->inputdate))}}
+                @if(!($data->status === 'blm proses'))
+                  @if($data->enddate)
+                  {{date('d M Y', strtotime($data->enddate))}}
+                  @elseif($data->startdate)
+                  {{date('d M Y', strtotime($data->startdate))}}
+                  @elseif($data->inputdate)
+                  {{date('d M Y', strtotime($data->inputdate))}}
+                  @endif
                 @endif
               </td>
               <td class="text-center text-uppercase">

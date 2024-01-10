@@ -13,7 +13,9 @@
   <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
   <script>
     function showTime() {
-      document.getElementById('currentTime').innerHTML = new Date().toLocaleString("en-US", {timeZone: "Asia/Jakarta"});
+      document.getElementById('currentTime').innerHTML = new Date().toLocaleString("en-GB", {timeZone: "Asia/Jakarta", 
+      year: "numeric", month: "long", day: "numeric", weekday: "long",
+      hour: "numeric", minute: "numeric", second: "numeric"});
     }
     showTime();
     setInterval(function () {

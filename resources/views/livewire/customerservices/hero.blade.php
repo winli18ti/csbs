@@ -89,7 +89,7 @@
         <table class="table table-sm table-striped table-hover caption-top text-truncate">
           <thead>
             <tr class="table-danger text-center">
-              <th class="col">No</th>
+              <th class="col">#</th>
               <th class="col">Nama Layanan</th>
               <th class="col">Keterangan</th>
               <th class="col">Status</th>

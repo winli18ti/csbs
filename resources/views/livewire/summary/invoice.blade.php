@@ -39,7 +39,7 @@
               </td>
             </tr>
             <tr>
-              <th scope="col">No</th>
+              <th scope="col">#</th>
               <th scope="col">Tgl Tagihan</th>
               <th scope="col">Jumlah</th>
               <th scope="col">Total Semua Tagihan</th>

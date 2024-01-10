@@ -27,7 +27,7 @@
           <th colspan="9">Collector: --NAMA KOLEKTOR--</td>
         </tr>
         <tr class="text-center align-middle">
-          <th scope="col">No</th>
+          <th scope="col">#</th>
           <th scope="col">Waktu</th>
           <th scope="col">No Tagihan</th>
           <th scope="col">Periode</th>
@@ -81,7 +81,7 @@
           <th colspan="9">Collector: --NAMA KOLEKTOR--</td>
         </tr>
         <tr class="text-center align-middle">
-          <th scope="col">No</th>
+          <th scope="col">#</th>
           <th scope="col">Waktu</th>
           <th scope="col">No Tagihan</th>
           <th scope="col">Periode</th>
@@ -124,7 +124,7 @@
           <th colspan="9">Collector: --NAMA KOLEKTOR--</td>
         </tr>
         <tr class="text-center align-middle">
-          <th scope="col">No</th>
+          <th scope="col">#</th>
           <th scope="col">Waktu</th>
           <th scope="col">No Tagihan</th>
           <th scope="col">Periode</th>

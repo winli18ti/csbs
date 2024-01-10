@@ -18,6 +18,16 @@
         </select>
       </div>
     </div>
+
+    <div class="row align-items-center">
+      <div class="col-5 col-sm-4 col-md-3 col-xl-2">
+        <label for="searchTerm" class="col-form-label">Cari subjek</label>
+      </div>
+      <div class="col-7 col-sm-5 col-md-3 col-lg-3">
+        <input type="text" id="searchTerm" class="form-control form-control-sm"
+          wire:model.live="searchTerm">
+      </div>
+    </div>
   </div>
 
   <div class="container-fluid">
@@ -31,7 +41,7 @@
       <table class="table table-sm table-striped table-hover caption-top text-truncate">
         <thead>
           <tr class="table-danger text-center">
-            <th class="col">No</th>
+            <th class="col">#</th>
             <th class="col">Kode</th>
             <th class="col">Cust ID</th>
             <th class="col">Alamat</th>
@@ -60,8 +70,8 @@
                     {{$data->customer->member}}
                   </a>
                 </td>
-                <td>{{$data->customer->address}}</td>
-                <td>{{$data->subject}}</td>
+                <td>{{strlen($data->customer->address) > 50 ? substr($data->customer->address, 0, 50)."..." : $data->customer->address }}</td>
+                <td>{{strlen($data->subject) > 50 ? substr($data->subject, 0, 50)."..." : $data->subject}}</td>
                 <td class="text-uppercase">{{$data->servicetype}}</td>
                 <td class="text-capitalize">{{$data->priority}}</td>
                 <td>{{ date('d M Y H:i:s', strtotime($data->acceptedbydate))  }}</td>

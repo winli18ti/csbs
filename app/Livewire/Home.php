@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\User;
+use Asantibanez\LivewireCharts\Models\ColumnChartModel;
 use Asantibanez\LivewireCharts\Models\LineChartModel;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -20,21 +21,21 @@ class Home extends Component
 
   public function render()
   {
-    $sellingOverview = (new LineChartModel())
-      ->singleLine()
+    $sellingOverview = (new ColumnChartModel())
+      ->multiColumn()
       ->setTitle('Jumlah Penjualan')
-      ->addPoint('Nov 22', 20)
-      ->addPoint('Des 22', 32)
-      ->addPoint('Jan 23', 17)
-      ->addPoint('Feb 23', 20)
-      ->addPoint('Mar 23', 25)
-      ->addPoint('Apr 23', 11)
-      ->addPoint('Mei 23', 20)
-      ->addPoint('Jun 23', 19)
-      ->addPoint('Jul 23', 16)
-      ->addPoint('Ags 23', 18)
-      ->addPoint('Sep 23', 13)
-      ->addPoint('Okt 23', 10);
+      ->addSeriesColumn('Jumlah penjualan', 'Nov 22', 20)
+      ->addSeriesColumn('Jumlah penjualan', 'Des 22', 32)
+      ->addSeriesColumn('Jumlah penjualan', 'Jan 23', 17)
+      ->addSeriesColumn('Jumlah penjualan', 'Feb 23', 20)
+      ->addSeriesColumn('Jumlah penjualan', 'Mar 23', 25)
+      ->addSeriesColumn('Jumlah penjualan', 'Apr 23', 11)
+      ->addSeriesColumn('Jumlah penjualan', 'Mei 23', 20)
+      ->addSeriesColumn('Jumlah penjualan', 'Jun 23', 19)
+      ->addSeriesColumn('Jumlah penjualan', 'Jul 23', 16)
+      ->addSeriesColumn('Jumlah penjualan', 'Ags 23', 18)
+      ->addSeriesColumn('Jumlah penjualan', 'Sep 23', 13)
+      ->addSeriesColumn('Jumlah penjualan', 'Okt 23', 10);
 
     $sellingGraph = (new LineChartModel())
       ->multiLine()
