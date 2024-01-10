@@ -111,7 +111,7 @@ class Customers extends Component
     ]);
     if ($this->servicetype === 'reguler') {
       CustomerService::create([
-        'servicetype' => $this->service, 'serviceid' => $this->servicename, 'subsperiod' => $this->subsperiod,
+        'servicetype' => $this->servicetype, 'serviceid' => $this->servicename, 'subsperiod' => $this->subsperiod,
         'notes' => $this->notes, 'customerid' => $custData->id,
         'status' => 'tidak aktif',
       ]);
@@ -130,6 +130,8 @@ class Customers extends Component
       'service' => $service->name.' - '.$service->info,
       'servicetype' => $service->type,
       'status' => 'blm proses',
+      'inputdate' => Carbon::now(),
+      'customerid' => $custData->id,
     ]);
     session()->flash('message', $this->title . ' baru berhasil ditambah');
     $this->emptyValue();

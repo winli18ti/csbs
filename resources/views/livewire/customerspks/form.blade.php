@@ -80,7 +80,7 @@
 
     <div class="row mt-2">
       <div class="col-sm-9 col-md-7 col-lg-6 col-xl-5">
-        @if(str_contains($servicetype, 'tv'))
+        {{-- @if(str_contains($servicetype, 'tv')) --}}
           <fieldset class="border border-2 border-danger-subtle rounded-3 px-3 pb-3 my-2">
             <legend class="fs-6 float-none w-auto">TV Analog</legend>
     
@@ -97,8 +97,47 @@
     
           <fieldset class="border border-2 border-danger-subtle rounded-3 px-3 pb-3 my-2">
             <legend class="fs-6 float-none w-auto">TV Digital</legend>
+            @if($servicetype === 'tv' || $servicetype === 'tv & internet')
+              <div class="row align-items-center">
+                <div class="col-7 col-md-6">
+                  <span class="form-control form-control-sm">No Serial</span>
+                </div>
+                <div class="col-7 col-md-6">
+                  <span class="form-control form-control-sm">smart card</span>
+                </div>
+                @foreach($cartData as $data)
+                    <div class="col-7 col-md-6">
+                      <input type="text" class="form-control form-control-sm" wire:change="editSerialNumb('{{$data->id}}', $event.target.value)" value="{{$data->name}}" wire:key="{{$data->id.'-'.$data->name}}">
+                    </div>
+                    <div class="col-7 col-md-6">
+                      <input type="text" class="form-control form-control-sm" wire:Change="editSmartCard('{{$data->id}}', $event.target.value)" value="{{$data->attributes->info}}" wire:key="{{$data->id.'-'.$data->attributes->info}}">
+                    </div>
+                    <div class="col-7 col-md-6">
+                      <button wire:click.prevent="deleteDigitalTv('{{$data->id}}')">Hapus</button>
+                    </div>
+                @endforeach
+                <div class="col-7 col-md-6">
+                  <input type="text" class=" form-control form-control-sm" placeholder="Input No Serial" wire:model.live="serial_number">
+                </div>
+                <div class="col-7 col-md-6">
+                  <input type="text" class="form-control form-control-sm" placeholder="Input Smart Card" wire:model.live="smart_card">
+                </div>
+                <div class="col-7 col-md-6">
+                  <button class="form-control form-control-sm" wire:click.prevent="addNewDigitalTv">Add</button>
+                </div>
+              </div>
+            @else
+              <div class="row align-items-center">
+                <div class="col-7 col-md-6">
+                  <input type="text" class="form-control form-control-sm" placeholder="Serial Number" readonly>
+                </div>
+                <div class="col-7 col-md-6">
+                  <input type="text" class="form-control form-control-sm" placeholder="Smart Card" readonly>
+                </div>
+              </div>
+            @endif
     
-            <div class="row align-items-center">
+            {{-- <div class="row align-items-center">
               <div class="col-5 col-md-4">
                 <label for="serialnumber" class="col-form-label">No Serial</label>
               </div>
@@ -116,9 +155,9 @@
                 <input type="text" id="smartcard" 
                   class="form-control form-control-sm" wire:model="smartcard">
               </div>
-            </div>
+            </div> --}}
           </fieldset>
-        @endif
+        {{-- @endif --}}
   
         @if(str_contains($servicetype, 'internet'))
           <fieldset class="border border-2 border-danger-subtle rounded-3 px-3 pb-3 my-2">

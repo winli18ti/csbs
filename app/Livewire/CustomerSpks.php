@@ -6,6 +6,7 @@ use App\Models\Customer;
 use App\Models\Node;
 use App\Models\Officer;
 use App\Models\Spk;
+use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -22,10 +23,13 @@ class CustomerSpks extends Component
   public $officerData, $nodesData;
 
   public $id, $category, $spknumber, $service, $servicetype, $status, $address,
-    $tvanalog, $serialnumber, $smartcard, 
+    $tvanalog, $tvdigital,
+    // $serialnumber, $smartcard, 
     $modemnumber, $modemmac, $modemip, $cpemac, $cpeip, $cpegateway,
     $inputdate, $statusnow, $startdate, $officerid1, $officerid2, $nodeid, $enddate,
     $reason, $solution;
+
+  public $cartData, $serial_number, $smart_card;
 
   public function mount($userid)
   {
@@ -50,6 +54,7 @@ class CustomerSpks extends Component
     $this->address = $data->address;
     $this->officerData = Officer::get();
     $this->nodesData = Node::get();
+    $this->cartData = \Cart::session($this->customerid.'-customerspkstvdigital')->getContent();
   }
 
   public function navigate($mode)
@@ -59,7 +64,6 @@ class CustomerSpks extends Component
 
   public function edit($id)
   {
-    $this->navigate('edit');
     $data = Spk::find($id);
     $this->id = $data->id;
     $this->category = $data->category;
@@ -68,8 +72,8 @@ class CustomerSpks extends Component
     $this->servicetype = $data->servicetype;
     $this->status = $data->status;
     $this->tvanalog = $data->tvanalog;
-    $this->serialnumber = $data->serialnumber;
-    $this->smartcard = $data->smartcard;
+    // $this->serialnumber = $data->serialnumber;
+    // $this->smartcard = $data->smartcard;
     $this->modemnumber = $data->modemnumber;
     $this->modemmac = $data->modemmac;
     $this->modemip = $data->modemip;
@@ -78,22 +82,41 @@ class CustomerSpks extends Component
     $this->cpegateway = $data->cpegateway;
     $this->inputdate = $data->inputdate;
     $this->statusnow = $data->status;
-    $this->startdate = $data->startdate;
+    $this->startdate = Carbon::create($data->startdate)->format('Y-m-d');
     $this->officerid1 = $data->officerid1;
     $this->officerid2 = $data->officerid2;
     $this->nodeid = $data->nodeid;
     $this->enddate = $data->enddate;
     $this->reason = $data->reason;
     $this->solution = $data->solution;
-
+    // if($data->servicetype === 'tv'){
+    if(!empty($data->tvdigital)){
+      $this->tvdigital = json_decode($data->tvdigital, true);
+      $arr_keys = array_keys($this->tvdigital);
+      for($i = 0; $i < count($arr_keys); $i++){
+        \Cart::session($this->customerid.'-customerspkstvdigital')->add(array(
+          'id' => $this->tvdigital[$arr_keys[$i]]['id'],
+          'name' => $this->tvdigital[$arr_keys[$i]]['name'],
+          'price' => $this->tvdigital[$arr_keys[$i]]['price'],
+          'quantity' => $this->tvdigital[$arr_keys[$i]]['quantity'],
+          'attributes' => array(
+            'info' => $this->tvdigital[$arr_keys[$i]]['attributes']['info'],
+          ),
+        ));
+        
+      }
+      $this->tvdigital = '';
+    }
+    // }
+    $this->navigate('edit');
   }
 
-  public function update()
-  {
+  public function update(){
     Spk::where('id', $this->id)->update([
       'tvanalog' => $this->tvanalog,
-      'serialnumber' => $this->serialnumber,
-      'smartcard' => $this->smartcard,
+      'tvdigital' => (!empty($this->cartData) ? json_encode($this->cartData) : ''),
+      // 'serialnumber' => $this->serialnumber,
+      // 'smartcard' => $this->smartcard,
       'modemnumber' => $this->modemnumber,
       'modemmac' => $this->modemmac,
       'modemip' => $this->modemip,
@@ -111,5 +134,45 @@ class CustomerSpks extends Component
     ]);
     session()->flash('message', $this->title . ' berhasil diubah');
     $this->navigate('hero');
+  }
+
+  public function addNewDigitalTv(){
+    $this->validate([
+      'serial_number' => 'required',
+      'smart_card' => 'required',
+    ],[
+      'serial_number.required' => 'No Serial harus diisi',
+      'smart_card.required' => 'Smart Card harus diisi',
+    ]);
+    $rand1 = rand(100000, 999999); $rand2 = rand(100000, 999999);
+    $idNumb = $rand1.$rand2.$this->customerid;
+    \Cart::session($this->customerid.'-customerspkstvdigital')->add(array(
+      'id' => $idNumb,
+      'name' => $this->serial_number,
+      'price' => 10000,
+      'quantity' => 1,
+      'attributes' => array(
+        'info' => $this->smart_card
+      ),
+    ));
+    $this->serial_number = ''; $this->smart_card = '';
+  }
+
+  public function editSerialNumb($slug, $sn){
+    \Cart::session($this->customerid.'-customerspkstvdigital')->update($slug, [
+      'name' => $sn,
+    ]);
+  }
+
+  public function editSmartCard($slug, $info){
+    \Cart::session($this->customerid.'-customerspkstvdigital')->update($slug, [
+      'attributes' => array(
+        'info' => $info,
+      )
+    ]);
+  }
+
+  public function deleteDigitalTv($slug){
+    \Cart::session($this->customerid.'-customerspkstvdigital')->remove($slug);
   }
 }

@@ -21,8 +21,9 @@ return new class extends Migration
             //penambahan / pengurangan tv analog
             $table->integer('tvanalog')->nullable();
             //tv digital
-            $table->string('serialnumber')->nullable();
-            $table->string('smartcard')->nullable();
+            $table->json('tvdigital')->nullable();
+                // $table->string('serialnumber')->nullable();
+                // $table->string('smartcard')->nullable();
             //internet
             $table->string('modemnumber')->nullable();
             $table->string('modemip')->nullable();

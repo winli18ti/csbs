@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 
 class Account extends Component
@@ -26,7 +27,7 @@ class Account extends Component
   {
     //$this->validateRule();
     User::where('id', $this->id)->update([
-      'password' => $this->newpassword, //hashing
+      'password' => Hash::make($this->newpassword), //hashing
     ]);
     session()->flash('message', 'Password berhasil diubah');
   }
@@ -44,7 +45,9 @@ class Account extends Component
       'repeatpassword.required' => 'Password baru (ulangi) wajib diisi',
     ]);
 
-    if($this->oldpassword !== Auth::user()->password) { //hashing
+    if(Hash::check($this->oldpassword, Auth::user()->password)) { //hashing
+      
+    }else{
       $this->addError('oldpassword', 'Password salah');
     }
   }
