@@ -93,6 +93,7 @@
               <th class="col">Nama Layanan</th>
               <th class="col">Keterangan</th>
               <th class="col">Status</th>
+              <th class="col">Kondisi</th>
               <th class="col">Terlayani Sejak</th>
             </tr>
           </thead>
@@ -104,7 +105,8 @@
                   <td>{{$data->name}}</td>
                   <td>{{$data->info}}</td>
                   <td class="text-center text-uppercase">{{$data->status}}</td>
-                  <td class="text-center">{{$data->since}}</td>
+                  <td class="text-center text-uppercase">{{$data->condition}}</td>
+                  <td class="text-center">{{Carbon\Carbon::create($data->date)}}</td>
                 </tr>
               @endforeach
             @else

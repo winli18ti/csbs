@@ -43,6 +43,7 @@ return new class extends Migration
             $table->text('solution')->nullable();
 
             $table->integer('customerid');
+            $table->integer('customerserviceid')->nullable();
             $table->timestamps();
         });
     }

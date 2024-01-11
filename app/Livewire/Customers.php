@@ -10,6 +10,7 @@ use App\Models\Service;
 use App\Models\Spk;
 use Carbon\Carbon;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Log;
 
 class Customers extends Component
 {
@@ -33,6 +34,9 @@ class Customers extends Component
   public $filterSubsperiod = '';
   public $filterVip = '';
   public $searchTerm;
+
+  // ID Uniq
+  public $custserv_id;
 
   public function mount()
   {
@@ -88,54 +92,61 @@ class Customers extends Component
     $this->specialname = null;
     $this->specialprice = null;
     $this->specialinfo = null;
+    $this->custserv_id = null;
   }
 
-  public function create()
-  {
+  public function createData(){
     $this->validateRule();
-    $date = Carbon::create($this->statusdate)->now();
+    $date = Carbon::create($this->statusdate);
     $substr = substr(str_replace('-', '', $date->toDateString()), 2, 4);
     $number = (Customer::where('member', 'like', $substr . '%')->get()->count()) + 1;
     $member = $substr . str_pad($number, 3, "0", STR_PAD_LEFT);
+    $service_data = Service::find($this->servicename);
+    Log::info('0 '.$service_data);
     $custData = Customer::create([
-      'member' => $member,
-      'marketerid' => $this->marketerid, 'statusdate' => $this->statusdate, 'name' => $this->name,
-      'identity' => $this->identity, 'address' => $this->address, 'cellphone' => $this->cellphone,
-      'homephone' => $this->homephone, 'email' => $this->email,
-      'paytype' => $this->paytype, 'vip' => 0,
-      'servicetype' => $this->servicetype, 'servicename' => $this->servicename,
-      'subsperiod' => $this->subsperiod, 'notes' => $this->notes,
-      'specialname' => $this->specialname, 'specialprice' => $this->specialprice, 'specialinfo' => $this->specialinfo,
-      'billperiod' => 1, 'tvcount' => 0,
+      'member' => $member, 'marketerid' => $this->marketerid, 
+      'statusdate' => $this->statusdate,  'name' => $this->name,
+      'identity' => $this->identity, 'address' => $this->address, 
+      'cellphone' => $this->cellphone, 'homephone' => $this->homephone, 
+      'email' => $this->email, 'paytype' => $this->paytype, 'vip' => 0,
       'status' => 'registration',
     ]);
+    Log::info('1 : '.$custData);
     if ($this->servicetype === 'reguler') {
-      CustomerService::create([
-        'servicetype' => $this->servicetype, 'serviceid' => $this->servicename, 'subsperiod' => $this->subsperiod,
-        'notes' => $this->notes, 'customerid' => $custData->id,
-        'status' => 'tidak aktif',
+      $this->custserv_id = CustomerService::create([
+        'name' => $service_data->name,  'info' => $service_data->info, 
+        'price' => null, 'note' => $this->notes, 'status' => 'tidak aktif', 
+        'condition' => 'sedang proses', 'date' => Carbon::now(),  
+        'subsperiod' => $this->subsperiod, 'setmain' => 1,
+        'customerid' => $custData->id, 'serviceid' => $service_data->id
       ]);
+      Log::info('2 : '.$this->custserv_id);
     } else if ($this->servicetype === 'special') {
-      CustomerService::create([
-        'servicetype' => $this->service, 'specialname' => $this->specialname, 'specialprice' => $this->specialprice,
-        'specialinfo' => $this->specialinfo, 'customerid' => $custData->id,
-        'status' => 'tidak aktif',
+      $this->custserv_id = CustomerService::create([
+        'name' => $this->specialname,  'info' => null, 
+        'price' => $this->specialprice, 'note' => $this->specialinfo, 
+        'status' => 'tidak aktif', 'condition' => 'sedang proses', 
+        'date' => Carbon::now(),  'subsperiod' => 1,
+        'setmain' => 1, 'customerid' => $custData->id, 'serviceid' => null
       ]);
+      Log::info('3 : '.$this->custserv_id);
     }
-
-    $service = Service::find($this->servicename);
-    Spk::create([
+    $spk_data = Spk::create([
       'category' => 'Registrasi',
       'spknumber' => substr(str_replace('-', '', $date->toDateString()), 0, 6),
-      'service' => $service->name.' - '.$service->info,
-      'servicetype' => $service->type,
+      'service' => $service_data->name.' - '.$service_data->info,
+      'servicetype' => $service_data->type,
       'status' => 'blm proses',
       'inputdate' => Carbon::now(),
       'customerid' => $custData->id,
+      'customerserviceid' => $this->custserv_id->id,
     ]);
-    session()->flash('message', $this->title . ' baru berhasil ditambah');
+    Log::info('4 : '.$spk_data);
+    // session()->flash('message', $this->title . ' baru berhasil ditambah');
     $this->emptyValue();
-    return redirect('/customer_detail/' . $custData->id);
+    Log::info('5');
+    Log::info('6');
+    // return redirect('/customer_detail/' . $custData->id);
   }
 
   public function validateRule()
@@ -143,19 +154,21 @@ class Customers extends Component
     if ($this->mode === 'add') {
       if ($this->servicetype === 'layanan reguler') {
         $this->validate([
+          'marketerid' => 'required',
           'statusdate' => 'required',
           'name' => 'required',
           'address' => 'required',
           'paytype' => 'required',
-          'service' => 'required',
+          'servicetype' => 'required',
           'servicename' => 'required',
           'subsperiod' => 'required',
         ], [
+          'marketerid.required' => 'Sales Marketing harus dipilih',
           'statusdate.required' => 'Tanggal registrasi wajib dipilih',
           'name.required' => 'Nama wajib diisi',
           'address.required' => 'Alamat wajib diisikan',
           'paytype.required' => 'Data pembayaran wajib dipilih',
-          'service.required' => 'Data layanan wajib dipilih',
+          'servicetype.required' => 'Data layanan wajib dipilih',
           'servicename.required' => 'Paket layanan wajib dipilih',
           'subsperiod.required' => 'Frekuensi layanan wajib dipilih',
         ]);

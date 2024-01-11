@@ -12,8 +12,6 @@
           wire:click.prevent="navigate('table')">
           Kembali
         </button>
-
-        <form wire:submit="create" enctype="multipart/form-data">
           <fieldset class="border border-2 border-danger-subtle rounded-3 px-3 pb-3 my-2">
             <legend class="fs-6 float-none w-auto">Data Registrasi</legend>
       
@@ -29,6 +27,7 @@
                     <option value="{{$data->id}}">{{$data->name}}</option>
                   @endforeach
                 </select>
+                @error('marketerid') <span class="text-danger fw-light">{{$message}}</span> @enderror
               </div>
             </div>
       
@@ -147,7 +146,7 @@
                 <input type="radio" id="service2" wire:model.live="servicetype" value="special" class="form-check-input">
                 <label for="service2" class="form-check-label">Pembayaran non reguler</label>
               </div>
-              @error('service') <span class="text-danger fw-light">{{$message}}</span> @enderror
+              @error('servicetype') <span class="text-danger fw-light">{{$message}}</span> @enderror
             </div>
 
             @if($servicetype === 'reguler')
@@ -223,11 +222,10 @@
           </fieldset>
       
           <fieldset class="border border-2 border-danger-subtle rounded-3 text-center p-3 my-3">
-            <button type="submit" class="btn btn-outline-primary btn-sm">
+            <button class="btn btn-outline-primary btn-sm" wire:click.prevent="createData">
               Tambah
             </button>
           </fieldset>
-        </form>
       </div>
     </div>
   </div>

@@ -25,4 +25,19 @@ class CustomerDetail extends Component
   {
     $this->currentTab = $tab;
   }
+// -----------------------------------------------------------------------------------------------------------------------------------
+// Alert 
+  public function alertmsg($title, $msg, $icon){
+    $this->dispatch('swal', [
+        'title' => $title,
+        'text' => $msg,
+        'icon' => $icon,
+    ]);
+  }
+  public function alerttoaster($title, $icon){
+    $this->dispatch('toast', [
+        'title' => $title,
+        'icon' => $icon,
+    ]);
+  }
 }

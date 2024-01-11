@@ -15,9 +15,15 @@ class CustomerService extends Model
     'id',
     'name',
     'info',
+    'price',
+    'note',
     'status',
-    'since',
+    'condition',
+    'date',
+    'subsperiod',
+    'setmain',
     'customerid',
+    'serviceid',
   ];
 
   public function service()
