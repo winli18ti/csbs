@@ -15,9 +15,15 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('info')->nullable();
+            $table->string('price')->nullable();
+            $table->string('note')->nullable();
             $table->string('status')->nullable();
-            $table->string('since')->nullable();
+            $table->string('condition')->nullable();
+            $table->timestamp("date")->nullable();
+            $table->integer('subsperiod')->nullable();
+            $table->integer('setmain')->nullable();
             $table->integer('customerid')->nullable();
+            $table->integer('serviceid')->nullable();
             $table->timestamps();
         });
     }

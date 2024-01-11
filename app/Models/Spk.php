@@ -37,6 +37,7 @@ class Spk extends Model
     'reason',
     'solution',
     'customerid',
+    'customerserviceid',
   ];
 
   public function customer()

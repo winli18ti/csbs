@@ -143,7 +143,7 @@
             <td><a class="text-danger-emphasis" href="/customer_detail/{{$data->id}}">{{$data->member}}</a></td>
             <td>{{$data->name}}</td>
             <td>{{$data->marketer->name}}</td>
-            <td>{{App\Models\CustomerService::orderby('created_at', 'desc')->where('customerid', $data->id)->get()->first()->name}}</td>
+            <td>{{App\Models\CustomerService::where(['customerid' => $data->id])->get()->first()->name}}</td>
             <td>{{strlen($data->address) > 50 ? substr($data->address, 0, 50)."..." : $data->address }}</td>
             <td>{{$data->homephone}}</td>
             <td>{{$data->cellphone}}</td>
