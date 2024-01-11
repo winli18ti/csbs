@@ -40,11 +40,11 @@ class Users extends Component
   {
     $this->navigate('add');
     $this->id = null;
-    $this->name = null;
-    $this->email = null;
-    $this->password = null;
-    $this->password_confirmation = null;
-    $this->role = null;
+    $this->name = '';
+    $this->email = '';
+    $this->password = '';
+    $this->password_confirmation = '';
+    $this->role = 'admin';
     $this->status = 'aktif';
   }
 

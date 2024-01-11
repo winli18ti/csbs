@@ -17,6 +17,7 @@ use App\Livewire\Account;
 use App\Livewire\Noc;
 use App\Livewire\Summary;
 use App\Livewire\Report;
+use App\Livewire\Services;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +49,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/marketers', Marketers::class)->name('marketers');
     Route::get('/officers', Officers::class)->name('officers');
     Route::get('/users', Users::class)->name('users');
+    Route::get('/services', Services::class)->name('services');
     Route::get('/summary_invoice', Summary::class);
     Route::get('/summary_paid_invoice', Summary::class);
     Route::get('/summary_paid_detail', Summary::class);

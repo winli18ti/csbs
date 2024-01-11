@@ -2,28 +2,28 @@
 
 namespace App\Livewire;
 
-use App\Models\Collector;
+use App\Models\Service;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class Collectors extends Component
+class Services extends Component
 {
   use WithPagination;
   protected $paginationTheme = 'bootstrap';
 
-  public $id, $name, $status;
+  public $id, $name, $info, $type, $price;
   public $mode = 'table';
-  public $title = 'Kolektor';
-  public $filterStatus = '';
+  public $title = 'Layanan';
+  public $filterType = '';
 
   public function render()
   {
-    $table = Collector::orderby('id', 'desc')->select('*');
-    if (!empty($this->filterStatus)) {
-      $table->where(['status' => $this->filterStatus]);
+    $table = Service::orderby('id', 'desc')->select('*');
+    if (!empty($this->filterType)) {
+      $table->where(['type' => $this->filterType]);
     }
-    return view('livewire.collectors', [
-      'table' => $table->paginate(10, pageName: 'collector-page'),
+    return view('livewire.services', [
+      'table' => $table->paginate(10, pageName: 'services-page'),
     ]);
   }
 
@@ -37,15 +37,19 @@ class Collectors extends Component
     $this->navigate('add');
     $this->id = null;
     $this->name = '';
-    $this->status = 'aktif';
+    $this->info = '';
+    $this->type = 'tv';
+    $this->price = 0;
   }
 
   public function create()
   {
     $this->validateRule();
-    Collector::create([
+    Service::create([
       'name' => $this->name,
-      'status' => $this->status,
+      'info' => $this->info,
+      'type' => $this->type,
+      'price' => $this->price,
     ]);
     session()->flash('message', $this->title . ' baru berhasil ditambahkan');
     $this->navigate('table');
@@ -54,18 +58,22 @@ class Collectors extends Component
   public function edit($id)
   {
     $this->navigate('edit');
-    $data = Collector::find($id);
+    $data = Service::find($id);
     $this->id = $data->id;
     $this->name = $data->name;
-    $this->status = $data->status;
+    $this->info = $data->info;
+    $this->type = $data->type;
+    $this->price = $data->price;
   }
 
   public function update()
   {
     $this->validateRule();
-    Collector::where('id', $this->id)->update([
+    Service::where('id', $this->id)->update([
       'name' => $this->name,
-      'status' => $this->status,
+      'info' => $this->info,
+      'type' => $this->type,
+      'price' => $this->price,
     ]);
     session()->flash('message', $this->title . ' berhasil diubah');
     $this->navigate('table');
@@ -75,8 +83,12 @@ class Collectors extends Component
   {
     $this->validate([
       'name' => 'required',
+      'info' => 'required',
+      'price' => 'required',
     ], [
       'name.required' => 'Nama wajib diisi',
+      'info.required' => 'Keterangan wajib diisi',
+      'price.required' => 'Harga wajib diisi',
     ]);
   }
 }

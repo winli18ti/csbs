@@ -36,8 +36,8 @@ class Marketers extends Component
   {
     $this->navigate('add');
     $this->id = null;
-    $this->name = null;
-    $this->status = null;
+    $this->name = '';
+    $this->status = 'aktif';
   }
 
   public function create()

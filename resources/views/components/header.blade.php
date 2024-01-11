@@ -135,6 +135,7 @@
                                 <li><a href="/marketers" class="dropdown-item">Data sales marketing</a></li>
                                 <li><a href="/officers" class="dropdown-item">Data teknisi</a></li>
                                 <li><a href="/users" class="dropdown-item">Data user</a></li>
+                                <li><a href="/services" class="dropdown-item">Data layanan</a></li>
                                 </ul>
                             </div>
                         </div>
