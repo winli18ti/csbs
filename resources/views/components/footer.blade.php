@@ -6,7 +6,6 @@
     </div>
   </footer>
 @endif
-  <livewire:scripts />
   @livewireChartsScripts
   @livewireScripts
   <script src="{{ URL::asset('js/bootstrap.bundle.min.js') }}"></script>

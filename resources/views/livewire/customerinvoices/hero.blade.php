@@ -89,8 +89,8 @@
                 </tr>
               @endforeach
             @else
-              <tr>
-                <td colspan="11">Data tidak ditemukan</td>
+              <tr class="text-center fst-italic">
+                <td colspan="11">Data tidak ada</td>
               </tr>
             @endif
           </tbody>
