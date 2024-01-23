@@ -36,14 +36,20 @@ class Spks extends Component
   public function render()
   {
     $table = Spk::orderby('id', 'desc')->select('*');
+    if (!empty($this->searchTerm)) {
+      $customers = Customer::orderby('id', 'desc')->select('id')
+        ->where('name', 'like', "%" . $this->searchTerm . "%")
+        ->get();
+
+      foreach($customers as $customer) {
+        $table->orWhere('customerid', $customer->id);
+      }
+    }
     if (!empty($this->filterStatus)) {
       $table->where(['status' => $this->filterStatus]);
     }
     if (!empty($this->filterCategory)) {
       $table->where(['category' => $this->filterCategory]);
-    }
-    if (!empty($this->searchTerm)) {
-      
     }
     $this->setData();
     return view('livewire.spks', [

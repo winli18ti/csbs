@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Customer;
 use App\Models\Invoice;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -19,6 +20,15 @@ class Invoices extends Component
   public function render()
   {
     $table = Invoice::orderby('id', 'desc')->select('*');
+    if (!empty($this->searchTerm)) {
+      $customers = Customer::orderby('id', 'desc')->select('id')
+        ->where('name', 'like', "%" . $this->searchTerm . "%")
+        ->get();
+
+      foreach($customers as $customer) {
+        $table->orWhere('customerid', $customer->id);
+      }
+    }
     if (!empty($this->filterType)) {
       $table->where(['type' => $this->filterType]);
     }
@@ -32,12 +42,13 @@ class Invoices extends Component
       $table->where(['status' => $this->filterStatus]);
     }
     if (!empty($this->filterDay)) {
+      $table->whereDay('billdate', $this->filterDay);
     }
     if (!empty($this->filterMonth)) {
+      $table->whereMonth('billdate', $this->filterMonth);
     }
     if (!empty($this->filterYear)) {
-    }
-    if (!empty($this->searchTerm)) {
+      $table->whereYear('billdate', $this->filterYear);
     }
     return view('livewire.invoices', [
       'table' => $table->paginate(10, pageName: 'invoice-page'),

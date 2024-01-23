@@ -162,7 +162,7 @@
               </tr>
             @endforeach
           @else
-            <tr>
+            <tr class="text-center fst-italic">
               <td colspan="11">Data tidak ditemukan</td>
             </tr>
           @endif
