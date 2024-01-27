@@ -63,7 +63,7 @@ class InvoiceSeeder extends Seeder
           [
             'billnumber' => '230800001',
             'type' => 'reguler',
-            'servicetype' => 'tv & inet',
+            'servicetype' => 'tv & internet',
             'paytype' => 'pembayaran ke kantor',
             'subsperiod' => 1,
             'bill' => 210000,
@@ -80,7 +80,7 @@ class InvoiceSeeder extends Seeder
           [
             'billnumber' => '230900002',
             'type' => 'reguler',
-            'servicetype' => 'tv & inet',
+            'servicetype' => 'tv & internet',
             'paytype' => 'pembayaran ke kantor',
             'subsperiod' => 1,
             'bill' => 210000,
@@ -97,7 +97,7 @@ class InvoiceSeeder extends Seeder
           [
             'billnumber' => '231000002',
             'type' => 'reguler',
-            'servicetype' => 'tv & inet',
+            'servicetype' => 'tv & internet',
             'paytype' => 'pembayaran ke kantor',
             'subsperiod' => 1,
             'bill' => 200000,

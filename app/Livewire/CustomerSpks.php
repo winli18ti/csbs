@@ -4,6 +4,8 @@ namespace App\Livewire;
 
 use App\Models\Customer;
 use App\Models\Internet;
+use App\Models\Invoice;
+use App\Models\InvoiceDetail;
 use App\Models\Node;
 use App\Models\Officer;
 use App\Models\Spk;
@@ -30,7 +32,7 @@ class CustomerSpks extends Component
     // $serialnumber, $smartcard, 
     $modemnumber, $modemmac, $modemip, $cpemac, $cpeip, $cpegateway,
     $inputdate, $statusnow, $startdate, $officerid1, $officerid2, $nodeid, $enddate,
-    $reason, $solution;
+    $reason, $solution, $customerserviceid;
 
   public $cartData, $serial_number, $smart_card;
 
@@ -92,6 +94,8 @@ class CustomerSpks extends Component
     $this->enddate = $data->enddate;
     $this->reason = $data->reason;
     $this->solution = $data->solution;
+    $this->customerserviceid = $data->customerserviceid;
+
     // if($data->servicetype === 'tv'){
     if(!empty($data->tvdigital)){
       $this->tvdigital = json_decode($data->tvdigital, true);
@@ -199,6 +203,40 @@ class CustomerSpks extends Component
           'customerid' => $this->customerid,
         ]);
       }
+
+      $date = Carbon::now();
+      $substr = substr(str_replace('-', '', $date->toDateString()), 2, 4);
+      $number = (Invoice::where('billnumber', 'like', $substr . '%')->get()->count()) + 1;
+      $billnumber = $substr . str_pad($number, 5, "0", STR_PAD_LEFT);
+
+      $custData = Customer::find($this->customerid);
+
+      $bill = 0;
+
+      $invoiceData = Invoice::create([
+        'billnumber' => $billnumber,
+        'type' => 'reguler',
+        'servicetype' => $this->servicetype,
+        'paytype' => $custData->paytype,
+        'subsperiod' => $custData->subsperiod,
+        'bill' => $bill,
+        'billdate' => $date,
+        // 'duedate' => keknya akhir bulan
+        'serviceid' => $this->customerserviceid,
+        'customerid' => $this->customerid,
+      ]);
+
+      //Loop tabel item
+      // InvoiceDetail::create([
+      //   'type' => 'biaya layanan',
+      //   'info' => 'Biaya aktivasi Layanan ',
+      //   'price' => 0,
+      //   'invoiceid' => $invoiceData->id,
+      // ]);
+
+      Customer::where('id', $this->customerid)->update([
+        'status' => 'active',
+      ]);
 
     } else if ($this->statusnow === 'selesai') {
       Spk::where('id', $this->id)->update([

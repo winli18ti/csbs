@@ -97,7 +97,7 @@ class Customers extends Component
 
   public function createData(){
     $this->validateRule();
-    $date = Carbon::create($this->statusdate);
+    $date = Carbon::now();
     $substr = substr(str_replace('-', '', $date->toDateString()), 2, 4);
     $number = (Customer::where('member', 'like', $substr . '%')->get()->count()) + 1;
     $member = $substr . str_pad($number, 3, "0", STR_PAD_LEFT);

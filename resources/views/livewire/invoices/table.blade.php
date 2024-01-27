@@ -24,8 +24,8 @@
           wire:model.live="filterService">
           <option value="">Semua</option>
           <option value="tv">TV only</option>
-          <option value="inet">Inet only</option>
-          <option value="tv & inet">TV & Inet</option>
+          <option value="internet">Inet only</option>
+          <option value="tv & internet">TV & Inet</option>
           <option value="nonbiasa">Nonbiasa</option>
           <option value="analog">Analog only</option>
         </select>
