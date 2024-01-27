@@ -3,9 +3,12 @@
 namespace App\Livewire;
 
 use App\Models\Customer;
+use App\Models\Internet;
 use App\Models\Node;
 use App\Models\Officer;
 use App\Models\Spk;
+use App\Models\TvAnalog;
+use App\Models\TvDigital;
 use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -52,7 +55,7 @@ class CustomerSpks extends Component
     $this->member = $data->member;
     $this->name = $data->name;
     $this->address = $data->address;
-    $this->officerData = Officer::get();
+    $this->officerData = Officer::select('*')->where(['status' => 'aktif'])->get();
     $this->nodesData = Node::get();
     $this->cartData = \Cart::session($this->customerid.'-customerspkstvdigital')->getContent();
   }
@@ -112,26 +115,104 @@ class CustomerSpks extends Component
   }
 
   public function update(){
-    Spk::where('id', $this->id)->update([
-      'tvanalog' => $this->tvanalog,
-      'tvdigital' => (!empty($this->cartData) ? json_encode($this->cartData) : ''),
-      // 'serialnumber' => $this->serialnumber,
-      // 'smartcard' => $this->smartcard,
-      'modemnumber' => $this->modemnumber,
-      'modemmac' => $this->modemmac,
-      'modemip' => $this->modemip,
-      'cpemac' => $this->cpemac,
-      'cpeip' => $this->cpeip,
-      'cpegateway' => $this->cpegateway,
-      'status' => $this->statusnow,
-      'startdate' => $this->startdate,
-      'officerid1' => $this->officerid1,
-      'officerid2' => $this->officerid2,
-      'nodeid' => $this->nodeid,
-      'enddate' => $this->enddate,
-      'reason' => $this->reason,
-      'solution' => $this->solution,
-    ]);
+    if ($this->statusnow === 'blm proses') {
+      Spk::where('id', $this->id)->update([
+        'tvanalog' => $this->tvanalog,
+        'tvdigital' => (!empty($this->cartData) ? json_encode($this->cartData) : ''),
+        'modemnumber' => $this->modemnumber,
+        'modemmac' => $this->modemmac,
+        'modemip' => $this->modemip,
+        'cpemac' => $this->cpemac,
+        'cpeip' => $this->cpeip,
+        'cpegateway' => $this->cpegateway,
+        'status' => $this->statusnow,
+        'startdate' => $this->startdate,
+        'officerid1' => $this->officerid1,
+        'officerid2' => $this->officerid2,
+        'nodeid' => $this->nodeid,
+        'enddate' => $this->enddate,
+        'reason' => $this->reason,
+        'solution' => $this->solution,
+      ]);
+    } else if ($this->statusnow === 'pengerjaan') {
+      Spk::where('id', $this->id)->update([
+        'tvanalog' => $this->tvanalog,
+        'tvdigital' => (!empty($this->cartData) ? json_encode($this->cartData) : ''),
+        'modemnumber' => $this->modemnumber,
+        'modemmac' => $this->modemmac,
+        'modemip' => $this->modemip,
+        'cpemac' => $this->cpemac,
+        'cpeip' => $this->cpeip,
+        'cpegateway' => $this->cpegateway,
+        'status' => $this->statusnow,
+        'startdate' => $this->startdate,
+        'officerid1' => $this->officerid1,
+        'officerid2' => $this->officerid2,
+        'nodeid' => $this->nodeid,
+        'enddate' => $this->enddate,
+        'reason' => $this->reason,
+        'solution' => $this->solution,
+      ]);
+    } else if ($this->statusnow === 'aktivasi') {
+      Spk::where('id', $this->id)->update([
+        'tvanalog' => $this->tvanalog,
+        'tvdigital' => (!empty($this->cartData) ? json_encode($this->cartData) : ''),
+        'modemnumber' => $this->modemnumber,
+        'modemmac' => $this->modemmac,
+        'modemip' => $this->modemip,
+        'cpemac' => $this->cpemac,
+        'cpeip' => $this->cpeip,
+        'cpegateway' => $this->cpegateway,
+        'status' => $this->statusnow,
+        'startdate' => $this->startdate,
+        'officerid1' => $this->officerid1,
+        'officerid2' => $this->officerid2,
+        'nodeid' => $this->nodeid,
+        'enddate' => $this->enddate,
+        'reason' => $this->reason,
+        'solution' => $this->solution,
+      ]);
+
+      if (str_contains($this->servicetype, 'tv')) {
+        if (!empty($this->tvanalog)) {
+          TvAnalog::create([
+            'count' => $this->tvanalog,
+            'customerid' => $this->customerid,
+          ]);
+        }
+
+        if (!empty($this->tvdigital)) {
+          // Looping isi JSON
+          // TvDigital::create([
+          //   'customerid' => $this->customerid,
+          // ]);
+        }
+      }
+      if (str_contains($this->servicetype, 'internet')) {
+        Internet::create([
+          'modemnumber' => $this->modemnumber,
+          'modemmac' => $this->modemmac,
+          'modemip' => $this->modemip,
+          'cpemac' => $this->cpemac,
+          'cpeip' => $this->cpeip,
+          'cpegateway' => $this->cpegateway,
+          'customerid' => $this->customerid,
+        ]);
+      }
+
+    } else if ($this->statusnow === 'selesai') {
+      Spk::where('id', $this->id)->update([
+        'status' => $this->statusnow,
+        'startdate' => $this->startdate,
+        'officerid1' => $this->officerid1,
+        'officerid2' => $this->officerid2,
+        'nodeid' => $this->nodeid,
+        'enddate' => $this->enddate,
+        'reason' => $this->reason,
+        'solution' => $this->solution,
+      ]);
+    }
+
     session()->flash('message', $this->title . ' berhasil diubah');
     $this->navigate('hero');
   }

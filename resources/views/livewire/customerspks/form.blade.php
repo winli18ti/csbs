@@ -80,7 +80,7 @@
 
     <div class="row mt-2">
       <div class="col-sm-9 col-md-7 col-lg-6 col-xl-5">
-        {{-- @if(str_contains($servicetype, 'tv')) --}}
+        @if(str_contains($servicetype, 'tv'))
           <fieldset class="border border-2 border-danger-subtle rounded-3 px-3 pb-3 my-2">
             <legend class="fs-6 float-none w-auto">TV Analog</legend>
     
@@ -157,7 +157,7 @@
               </div>
             </div> --}}
           </fieldset>
-        {{-- @endif --}}
+        @endif
   
         @if(str_contains($servicetype, 'internet'))
           <fieldset class="border border-2 border-danger-subtle rounded-3 px-3 pb-3 my-2">
@@ -274,7 +274,8 @@
               <label for="officerid1" class="col-form-label">Petugas 1</label>
             </div>
             <div class="col-7 col-md-8">
-              <select id="officerid1" class="form-select form-select-sm" wire:model="officerid1">
+              <select id="officerid1" class="form-select form-select-sm" wire:model="officerid1" @if($status === 'blm proses') disabled @endif>
+                <option value="">--- PILIH PETUGAS ---</option>
                 @foreach($officerData as $data)
                   <option value="{{$data->id}}">{{$data->name}}</option>
                 @endforeach
@@ -287,7 +288,8 @@
               <label for="officerid2" class="col-form-label">Petugas 2</label>
             </div>
             <div class="col-7 col-md-8">
-              <select id="officerid2" class="form-select form-select-sm" wire:model="officerid2">
+              <select id="officerid2" class="form-select form-select-sm" wire:model="officerid2" @if($status === 'blm proses') disabled @endif>
+                <option value="">--- PILIH PETUGAS ---</option>
                 @foreach($officerData as $data)
                   <option value="{{$data->id}}">{{$data->name}}</option>
                 @endforeach

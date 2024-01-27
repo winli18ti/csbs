@@ -127,6 +127,17 @@
 
                                 <button class="btn btn-danger btn-sm mt-1" 
                                 data-bs-toggle="dropdown">
+                                SMS Center
+                                </button>
+
+                                <ul class="dropdown-menu">
+                                <li><a href="/sms_send" class="dropdown-item">Kirim SMS</a></li>
+                                <li><a href="/sms_inbox" class="dropdown-item">SMS Masuk</a></li>
+                                <li><a href="/sms_outbox" class="dropdown-item">SMS Keluar</a></li>
+                                </ul>
+
+                                <button class="btn btn-danger btn-sm mt-1" 
+                                data-bs-toggle="dropdown">
                                 Setup
                                 </button>
 

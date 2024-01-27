@@ -144,7 +144,7 @@
               <input type="text" id="cellphone" class="form-control form-control-sm"
                 wire:model="cellphone">
               <div class="form-text">
-                <a href="#">Kirim SMS</a>
+                <a href="/sms_send">Kirim SMS</a>
               </div>
             </div>
           </div>

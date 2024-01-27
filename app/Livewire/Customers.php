@@ -109,9 +109,9 @@ class Customers extends Component
       'identity' => $this->identity, 'address' => $this->address, 
       'cellphone' => $this->cellphone, 'homephone' => $this->homephone, 
       'email' => $this->email, 'paytype' => $this->paytype, 'vip' => 0,
-      'status' => 'registration',
+      'status' => 'registration', 'subsperiod' => $this->subsperiod,
+      'servicetype' => $this->servicetype,
     ]);
-    Log::info('1 : '.$custData);
     if ($this->servicetype === 'reguler') {
       $this->custserv_id = CustomerService::create([
         'name' => $service_data->name,  'info' => $service_data->info, 
@@ -120,7 +120,6 @@ class Customers extends Component
         'subsperiod' => $this->subsperiod, 'setmain' => 1,
         'customerid' => $custData->id, 'serviceid' => $service_data->id
       ]);
-      Log::info('2 : '.$this->custserv_id);
     } else if ($this->servicetype === 'special') {
       $this->custserv_id = CustomerService::create([
         'name' => $this->specialname,  'info' => null, 
@@ -129,11 +128,15 @@ class Customers extends Component
         'date' => Carbon::now(),  'subsperiod' => 1,
         'setmain' => 1, 'customerid' => $custData->id, 'serviceid' => null
       ]);
-      Log::info('3 : '.$this->custserv_id);
     }
+
+    $substr2 = substr(str_replace('-', '', $date->toDateString()), 0, 6);
+    $number2 = (Spk::where('spknumber', 'like', $substr2 . '%')->get()->count()) + 1;
+    $spknumber = $substr2 . str_pad($number2, 3, "0", STR_PAD_LEFT);
+
     $spk_data = Spk::create([
       'category' => 'Registrasi',
-      'spknumber' => substr(str_replace('-', '', $date->toDateString()), 0, 6),
+      'spknumber' => $spknumber,
       'service' => $service_data->name.' - '.$service_data->info,
       'servicetype' => $service_data->type,
       'status' => 'blm proses',
@@ -141,12 +144,8 @@ class Customers extends Component
       'customerid' => $custData->id,
       'customerserviceid' => $this->custserv_id->id,
     ]);
-    Log::info('4 : '.$spk_data);
-    // session()->flash('message', $this->title . ' baru berhasil ditambah');
     $this->emptyValue();
-    Log::info('5');
-    Log::info('6');
-    // return redirect('/customer_detail/' . $custData->id);
+    return redirect('/customer_detail/' . $custData->id);
   }
 
   public function validateRule()

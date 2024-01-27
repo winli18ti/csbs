@@ -80,7 +80,7 @@
 
     <div class="row mt-2">
       <div class="col-sm-9 col-md-7 col-lg-6 col-xl-5">
-        {{-- @if(str_contains($servicetype, 'tv')) --}}
+        @if(str_contains($servicetype, 'tv'))
           <fieldset class="border border-2 border-danger-subtle rounded-3 px-3 pb-3 my-2">
             <legend class="fs-6 float-none w-auto">TV Analog</legend>
     
@@ -157,7 +157,7 @@
               </div>
             </div> --}}
           </fieldset>
-        {{-- @endif --}}
+        @endif
   
         @if(str_contains($servicetype, 'internet'))
           <fieldset class="border border-2 border-danger-subtle rounded-3 px-3 pb-3 my-2">

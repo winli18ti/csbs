@@ -18,6 +18,7 @@ use App\Livewire\Noc;
 use App\Livewire\Summary;
 use App\Livewire\Report;
 use App\Livewire\Services;
+use App\Livewire\Sms;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,6 +65,10 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/report_selling', Report::class);
     Route::get('/report_dismantle_date', Report::class);
     Route::get('/report_dismantle_regs', Report::class);
+
+    Route::get('/sms_send', Sms::class);
+    Route::get('/sms_inbox', Sms::class);
+    Route::get('/sms_outbox', Sms::class);
 
     Route::get('/noc_tools', Noc::class);
 

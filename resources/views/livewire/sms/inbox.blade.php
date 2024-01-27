@@ -39,17 +39,20 @@
           @foreach($table as $data)
           <tr>
             <td class="text-center">{{ $table->firstItem() + $loop->index }}</td>
-            <td class="text-center">R</td>
-            <td class="text-center"></td>
-            <td>{{$data->number}}</td>
-            <td>{{$data->message}}</td>
+            <td class="text-center">{{$data->status}}</td>
+            <td class="text-center">{{ date('d M Y H:i:s', strtotime($data->inboxdate)) }}</td>
+            <td>{{$data->sender}}</td>
+            <td class="text-wrap" style="word-wrap: break-word;min-width: 24rem;max-width: 24rem;">{{$data->message}}</td>
             <td class="text-center text-uppercase">
-              @if($data->status === 'false')
-                <span class="badge text-bg-warning">{{$data->status}}</span>
+              @if($data->processed === 'false')
+                <span class="badge text-bg-warning">{{$data->processed}}</span>
               @endif
             </td>
             <td class="text-center">
-              
+              <a class="btn btn-outline-warning btn-sm" 
+                href="/sms_send">
+                Balas
+              </a>
             </td>
           </tr>
           @endforeach

@@ -39,11 +39,11 @@
           @foreach($table as $data)
           <tr>
             <td class="text-center">{{ $table->firstItem() + $loop->index }}</td>
-            <td class="text-center"></td>
-            <td>{{$data->number}}</td>
-            <td>{{$data->message}}</td>
+            <td class="text-center">{{ date('d M Y H:i:s', strtotime($data->outboxdate)) }}</td>
+            <td>{{$data->receiver}}</td>
+            <td class="text-wrap" style="word-wrap: break-word;min-width: 24rem;max-width: 24rem;">{{$data->message}}</td>
             <td>{{$data->modemid}}</td>
-            <td class="text-center">{{$data->status}}</td>
+            <td>{{$data->status}}</td>
             <td class="text-center">
               
             </td>
